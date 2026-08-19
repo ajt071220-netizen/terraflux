@@ -212,13 +212,11 @@ onLangChange(() => {
 startGame(UI.readConfig(), UI.readPlayers());
 
 // 探测后端：纯静态托管（GitHub Pages）降级为人类/启发式，不启动训练监控
-window.__tcBoot = 'top-level-reached';
 detectBackend().then((ok) => {
-  window.__tcBoot = 'detected:' + ok;
   if (ok) {
     initTrainingMonitor();
   } else {
     UI.setStaticMode(true);
     setTrainVisible(false);
   }
-}).catch((e) => { window.__tcBoot = 'threw:' + e.message; });
+});
