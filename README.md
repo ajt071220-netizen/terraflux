@@ -1,78 +1,99 @@
-# 地形棋 · Terrain Chess
+# Terrain Chess · 地形棋
 
-一个原创动态地形棋类的 3D 可玩模拟器（Three.js，零 npm 运行时依赖）。
-棋盘本身是对局的主角：每一步落子都会改写周围地形——隆起、下陷、填平——
-追捕与逃脱的胜负就藏在地形的高度差里。
+**An original board game with a living board — and a reinforcement-learning study of what "fair rules" even mean.**
 
-## 运行
+Every move rewrites the terrain under the pieces: pillars rise, sink, and fill in.
+The pursuer (black) can only capture from a height advantage, so the whole game is a fight
+over the *shape of the board itself*. This repo contains a playable 3D simulator (Three.js),
+three kinds of agents (heuristic / PPO self-play / LLM), and a set of experiments on
+rule fairness, reward shaping, and self-play training dynamics.
+
+## Research highlights
+
+**1. Fairness is strength-conditional.** The "balanced" opening (duel, gap 3, black first)
+shows a perfect monotone ladder — 0% → 20% → 34% → 46% white win rate as the policy gets
+stronger, converging toward 50% only for the strongest agent. A rule set cannot be called
+fair or unfair without specifying *who is playing*. Heuristic-based playtesting would have
+declared this layout hopeless for white; converged PPO self-play shows it is nearly balanced.
+
+![Strength-conditional fairness](experiments/fig_strength_fairness.png)
+
+**2. Reward shaping: accelerator, not ceiling-raiser — and log win-rates lie.**
+An ablation pair (50k-step rolling window, 500k steps each, identical except for a
+−0.002/step penalty) shows shaping speeds up early learning by ~24% (59k vs 73k steps to
+55% win rate). Training logs suggest both converge to the same strength (0.716 vs 0.709) —
+but a direct round-robin match exposes that as an artifact of self-play relative win rates:
+the shaped agent crushes the sparse one **66.0% : 14.5%**.
+
+![Reward shaping ablation](experiments/fig_ablation.png)
+
+**3. Self-play dynamics: oscillation is the signature, not a bug.**
+Mid-training win rate oscillates persistently because the opponent pool is made of the
+learner's own snapshots — both sides improve together. Explained variance climbs 0.2 → 0.8
+but never saturates: the environment is permanently non-stationary.
+
+![Training dynamics](experiments/fig_training_dynamics.png)
+
+**4. Board size does not move fairness** (for weak policies, 15×15–27×27 is a flat line),
+while policy strength moves it decisively — size is the wrong knob, strength is the right lens.
+
+![Size scan](experiments/fig_size_fairness.png)
+
+Full experiment write-up with all numbers, confidence intervals, and limitations:
+[experiments/REPORT_DATA.md](experiments/REPORT_DATA.md)
+
+## Run it
 
 ```bash
-node server.js
+node server.js        # then open http://localhost:5173
 ```
 
-浏览器打开 http://localhost:5173（或直接双击 `启动地形棋.bat`）。
-> 首次使用需按 `lib/下载说明.txt` 下载两个 Three.js 库文件（浏览器能打开网页即可）。
+Zero npm runtime dependencies — Three.js is vendored in `lib/`.
+White and Black can each be set to **Human / Heuristic / LLM / PPO** in the settings panel
+(gear icon, top right). UI is bilingual (中文 / English toggle in the top bar).
 
-## 智能体对战（LLM / PPO）
+- **PPO agent**: train with `python/train_ppo.py` (MaskablePPO self-play, Gymnasium),
+  serve with `python/serve_ppo.py` — see [python/README.md](python/README.md).
+- **LLM agent**: copy `config.example.json` → `config.json`, fill in any OpenAI-compatible
+  endpoint (developed against Qwen). The server builds a prompt with per-move outcome
+  previews; the engine vets unsafe LLM moves (hybrid propose-and-veto architecture).
 
-对局面板顶部可以为**白方/黑方分别选择**：人类 / 内置AI / LLM / PPO。
-两边都选 AI 即为自动观战；每局棋谱自动存入 `replays/`。
+## How the game works
 
-- **LLM**：复制 `config.example.json` 为 `config.json`，填入 OpenAI 兼容接口的
-  `baseURL` / `apiKey` / `model`。服务器会把局面转成带"每步后果预览"的文本
-  提示词，要求模型输出 JSON 落点（非法落点自动兜底）。
-- **PPO**：进入 `python/` 目录按 `python/README.md` 训练
-  （`python train_ppo.py`），然后 `python serve_ppo.py` 起模型服务，
-  页面里选 PPO 即可与其对弈。
+- 25×25 board of pillars, each with a dimple "seat". White escapes, black pursues.
+- Moving to any of 8 neighbors triggers a terrain mutation around the landing cell,
+  alternating between two phases: **cross** (N rises, S sinks, E/W fill) and
+  **X** (NE/NW rise, SE/SW sink). Filled cells become impassable.
+- Capture: adjacent + black **higher** than white. White wins by reaching the goal edge
+  alive; simultaneous capture-and-escape is a draw.
 
-## 玩法速览
-
-- 棋盘：25×25（可切 21×21）共数百根方柱，每根柱顶中央有半球凹槽，是球的"座位"
-- 白球 = 逃离者，黑球 = 追捕者；轮流行动，每步移动到相邻 8 格之一（被填平的格子不可进入）
-- 落子触发地形变化（相位循环，双方同步）：
-  - **十字相位**（第 1、3、5… 步）：落点北邻升高、南邻降低、东西两邻填平（此路不通）
-  - **X 相位**（第 2、4、6… 步）：落点东北/西北邻升高，东南/西南邻降低（不填平）
-  - 地形变化是**覆盖式**：升高/降低会解除填平；填平格再次被填平则保持填平
-  - 对方球若正站在受影响的柱子上，会随柱子一起升降（或被填平到脚下）
-- 胜负（落定 → 地形变化 → 判定）：
-  - 两球相邻（8 方向）且黑高度高于白 → **黑胜**（可选"同高即捕"）
-  - 白球踏上胜利边且未被擒 → **白胜**；踏上胜利边的同一刻恰好被擒 → **平局**
-
-## 规则旋钮（右侧面板）
-
-| 旋钮 | 说明 |
-| --- | --- |
-| 开局布局 | 堵截式（黑镇中央、白三选一）/ 经典式（白居中、黑八选一） |
-| 胜利边 | 北/南/东/西任意组合；注意方向自带地势：北逃走高地、南逃走低地、东西中立 |
-| 抓捕条件 | 严格高于（>）/ 同高即捕（≥）——地形深度的总开关 |
-| 相位循环 | 十字·X 同步交替 / 恒定十字 / 每步八向 |
-| 先手 / 间距 / 停步 / 重复判和 | 常规平衡旋钮 |
-
-面板下方的"自动对局"会用当前配置让两个启发式 AI 互相厮杀成百上千局，
-直接输出双方胜率——这是给规则调平衡用的实测工具，不是最终结论
-（AI 是贪心策略，胜率是路标，手感以真人对局为准）。
-
-## 设计笔记
-
-- 棋子极简（两个球、统一走法），复杂度全部交给棋盘——围棋一脉的血统，
-  也是这个游戏可被数学分析、可被调到公平的前提
-- 四胜利边 + 等速追逐已被证明是逃离者必胜（距离不变量），
-  所以默认配置是"南边单胜利线 + 黑镇中央堵截 + 严格高度抓捕"
-- 预留的扩展方向：柱子横向平移（整行/整列循环滑动）、棋子能力变化——
-  两者都会显著改变学习曲线，待基础版平衡收敛后再加
-
-## 代码结构
+## Repository layout
 
 ```
-src/
-  engine.js   纯规则引擎（状态机/相位/判定/全部旋钮），无渲染依赖
-  scene.js    Three.js 场景（实例化柱子、凹槽、球、高亮、拾取、动画）
-  ai.js       启发式 AI（两层极小化 + 噪声）
-  batch.js    批量自动对局与胜率统计
-  agent.js    智能体调度（本地启发式 / 服务器 LLM·PPO）
-  ui.js       面板、HUD、结算横幅
-  main.js     入口、交互编排与 AI 自动走子
-server.js     静态服务 + /api/agent 决策 + /api/replay 棋谱
-python/       PPO 训练管线（引擎复写 / Gym 环境 / 训练 / 模型服务）
-replays/      棋谱（每局自动保存）
+src/engine.js     pure rule engine (no rendering deps) — single source of truth
+src/scene.js      Three.js rendering (instanced pillars, raycast picking)
+src/ai.js         heuristic agent (2-ply greedy + noise)
+server.js         static server + /api/agent (LLM proxy, PPO bridge) + replay storage
+python/           engine port, Gymnasium env, MaskablePPO self-play training,
+                  model serving, and the experiment scripts behind every figure above
+experiments/      REPORT_DATA.md + figures + raw logs (the evidence chain)
 ```
+
+---
+
+<details>
+<summary>中文版（精简）</summary>
+
+地形棋是一个原创动态地形棋类游戏：每一步落子都会改写周围地形（隆起/下陷/填平），
+黑白两球在高度差里分出胜负。本仓库包含：
+
+- **3D 可玩模拟器**（Three.js，零 npm 依赖）：`node server.js` 后打开 http://localhost:5173
+- **三类智能体**：启发式 / PPO 自我对弈（MaskablePPO）/ 大语言模型（OpenAI 兼容接口）
+- **强化学习实验**：奖励整形消融、自我对弈训练动态解剖、规则公平性的强度条件化研究——
+  全部数据与图表见 [experiments/REPORT_DATA.md](experiments/REPORT_DATA.md)
+
+核心发现：规则公平性是策略强度条件化的——同一开局布局，白胜率随策略强度从 0% 单调
+收敛至 46%；奖励整形加速学习约 24%，且自我对弈的日志胜率会掩盖真实强度差（循环赛
+66:14.5）；棋盘尺寸对公平性几乎无影响。
+
+</details>
