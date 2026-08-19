@@ -25,7 +25,7 @@
 
 > [Abstract to be written]
 
-## 1. The Game, and the Question
+## 1. Introduction — The Game and the Question
 
 <!-- 【你来写】约 350–400 词。结构建议：
 1) 开头 1 句讲发明动机（为什么想设计一个"地形会动"的棋）。
@@ -45,7 +45,7 @@
      截图命名为 report/fig_screenshot.png 并替换上面的路径。
      图注可改为：Figure 1. The playable 3D simulator (Three.js). -->
 
-## 2. From a Game to an RL Testbed
+## 2. Methods — From a Game to an RL Testbed
 
 <!-- 【你来写】约 300–350 词。三个要点（各 1 段）：
 1) 系统：游戏引擎用 JS 写一遍、Python 逐行移植一遍（双实现互验），
@@ -61,7 +61,7 @@
 
 > [Section 2 to be written]
 
-## 3. Three Findings
+## 3. Results — Three Findings
 
 ### 3.1 Reward shaping speeds learning — and self-play logs lie
 
@@ -139,7 +139,7 @@ duel 布局（黑镇中央、白正北隔三格、黑先）下，四种强度策
 
 > [3.3 narrative to be written]
 
-## 4. Limitations, and What I Would Do Next
+## 4. Discussion — Limitations and Future Work
 
 <!-- 以下四条来自实验记录，直接用英文改写（每条 1–2 句）即可：
 1) 消融为单随机种子；±6% 量级差异需多 seed 复核；
@@ -152,7 +152,7 @@ duel 布局（黑镇中央、白正北隔三格、黑先）下，四种强度策
 
 > [Section 4 to be written]
 
-## 5. Links and References
+## 5. References and Links
 
 - **Code & full experiment data**: [github.com/ajt071220-netizen/terraflux](https://github.com/ajt071220-netizen/terraflux)
 - **Playable 3D demo (bilingual, with narrated tutorial game)**: [ajt071220-netizen.github.io/terraflux](https://ajt071220-netizen.github.io/terraflux/)
