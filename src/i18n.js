@@ -231,7 +231,7 @@ const DICTS = {
   },
 };
 
-let lang = localStorage.getItem('tc-lang') || 'zh';
+let lang = localStorage.getItem('tc-lang') || 'en';
 const listeners = [];
 
 export function getLang() { return lang; }

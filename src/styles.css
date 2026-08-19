@@ -69,7 +69,7 @@ body {
 }
 #hud-turn.black .dot { background: #2b2320; border-color: var(--accent-dim); }
 
-#lang-toggle, #panel-toggle, #panel-close {
+#lang-toggle {
   flex: none;
   background: transparent;
   border: 1px solid var(--line-strong);
@@ -81,18 +81,9 @@ body {
   font-family: var(--sans);
   display: inline-flex; align-items: center; justify-content: center;
 }
-#panel-toggle { padding: 5px 8px; }
-#lang-toggle:hover, #panel-toggle:hover, #panel-close:hover { background: rgba(201, 168, 106, 0.1); }
+#lang-toggle:hover { background: rgba(201, 168, 106, 0.1); }
 
-/* ---------- 右侧抽屉式面板 ---------- */
-#panel-scrim {
-  position: fixed; inset: 0; z-index: 8;
-  background: rgba(10, 8, 5, 0.35);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.25s ease;
-}
-body.panel-open #panel-scrim { opacity: 1; pointer-events: auto; }
-
+/* ---------- 右侧常驻面板 ---------- */
 #panel {
   position: fixed; top: 0; right: 0; bottom: 0; z-index: 9;
   width: 300px;
@@ -101,17 +92,8 @@ body.panel-open #panel-scrim { opacity: 1; pointer-events: auto; }
   border: none;
   border-left: 1px solid var(--line);
   border-radius: 0;
-  padding: 0 20px 20px;
-  transform: translateX(102%);
-  transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  padding: 8px 20px 20px;
 }
-body.panel-open #panel { transform: translateX(0); }
-
-#panel-head {
-  display: flex; justify-content: flex-end;
-  padding: 14px 0 0;
-}
-#panel-close { padding: 5px 7px; }
 #panel section {
   padding: 14px 0 14px;
   border-bottom: 1px solid var(--line);

@@ -42,10 +42,6 @@ export function aiToast(text, opts = {}) {
   }
 }
 
-export function setPanelOpen(open) {
-  document.body.classList.toggle('panel-open', open);
-}
-
 // 纯静态托管（GitHub Pages）降级：禁用依赖后端的 LLM/PPO 选项
 export function setStaticMode(on) {
   for (const id of ['cfg-player-white', 'cfg-player-black']) {
@@ -60,10 +56,7 @@ export function setStaticMode(on) {
 }
 
 export function initUI(handlers) {
-  $('btn-new').addEventListener('click', () => {
-    handlers.onNewGame(readConfig());
-    setPanelOpen(false); // 开局后收起抽屉，棋盘是主角
-  });
+  $('btn-new').addEventListener('click', () => handlers.onNewGame(readConfig()));
   $('btn-again').addEventListener('click', () => handlers.onNewGame(readConfig()));
   $('btn-pass').addEventListener('click', () => handlers.onPass());
   $('btn-batch').addEventListener('click', () => {
@@ -71,9 +64,6 @@ export function initUI(handlers) {
     handlers.onBatch(readConfig(), games);
   });
   $('lang-toggle').addEventListener('click', () => handlers.onToggleLang());
-  $('panel-toggle').addEventListener('click', () => setPanelOpen(true));
-  $('panel-close').addEventListener('click', () => setPanelOpen(false));
-  $('panel-scrim').addEventListener('click', () => setPanelOpen(false));
 }
 
 export function updateHUD(state) {
