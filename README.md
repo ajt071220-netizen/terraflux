@@ -52,6 +52,11 @@ Zero npm runtime dependencies — Three.js is vendored in `lib/`.
 White and Black can each be set to **Human / Heuristic / LLM / PPO** in the settings panel
 (gear icon, top right). UI is bilingual (中文 / English toggle in the top bar).
 
+New visitors get an interactive tutorial: three illustrated rule cards, then an optional
+**narrated demo game** — two heuristic agents play a full match on the 3D board while a
+caption bar explains the goal, terrain phases, and height-based capture as they happen
+(works fully offline on the static Pages build).
+
 - **PPO agent**: train with `python/train_ppo.py` (MaskablePPO self-play, Gymnasium),
   serve with `python/serve_ppo.py` — see [python/README.md](python/README.md).
 - **LLM agent**: copy `config.example.json` → `config.json`, fill in any OpenAI-compatible

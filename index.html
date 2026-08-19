@@ -77,6 +77,7 @@
             <option value="black" selected data-i18n="setup.firstBlack">追捕者（黑）先行</option>
           </select>
         </label>
+        <button id="btn-demo" class="ghost-btn" data-i18n="tut.again">再看一遍演示</button>
       </section>
 
       <section>
@@ -158,6 +159,73 @@
 
     <div id="hint"></div>
     <div id="ai-toast" class="hidden"></div>
+
+    <!-- 演示对局解说条 -->
+    <div id="demo-caption" class="hidden">
+      <span class="demo-dot"></span>
+      <span id="demo-caption-text"></span>
+      <button id="demo-exit" data-i18n="demo.exit">退出演示</button>
+    </div>
+
+    <!-- 首访教学卡 -->
+    <div id="welcome-overlay" class="hidden">
+      <div class="welcome-card">
+        <h1><span data-i18n="app.title">地形棋</span><span class="sub" data-i18n="app.subtitle">TERRAIN CHESS</span></h1>
+        <p class="tagline" data-i18n="tut.tagline">在一方会自我改写的棋盘上追捕与逃脱。</p>
+        <div class="rules-grid">
+          <div class="rule-card">
+            <svg viewBox="0 0 120 84" aria-hidden="true">
+              <rect x="22" y="6" width="76" height="60" rx="3" fill="none" stroke="rgba(201,168,106,0.4)"/>
+              <rect x="22" y="54" width="76" height="12" fill="rgba(201,168,106,0.55)"/>
+              <circle cx="60" cy="20" r="5" fill="#ece4d4"/>
+              <circle cx="44" cy="16" r="5" fill="#2b2320" stroke="#8a744a"/>
+              <path d="M60 28 v18" stroke="#ece4d4" stroke-width="2" stroke-dasharray="3 3"/>
+              <path d="M56 42 l4 6 4-6 z" fill="#ece4d4"/>
+            </svg>
+            <h3 data-i18n="tut.goal.title">目标</h3>
+            <p data-i18n="tut.goal.body">白球逃到金色南边线即胜；黑球要在相邻格、且站得更高才能抓捕。</p>
+          </div>
+          <div class="rule-card">
+            <svg viewBox="0 0 120 84" aria-hidden="true">
+              <g stroke="rgba(236,228,212,0.25)">
+                <rect x="36" y="12" width="16" height="16" fill="rgba(201,168,106,0.5)"/>
+                <rect x="52" y="12" width="16" height="16" fill="none"/>
+                <rect x="68" y="12" width="16" height="16" fill="none"/>
+                <rect x="36" y="28" width="16" height="16" fill="rgba(90,98,112,0.55)"/>
+                <rect x="52" y="28" width="16" height="16" fill="rgba(236,228,212,0.14)"/>
+                <rect x="68" y="28" width="16" height="16" fill="rgba(90,98,112,0.55)"/>
+                <rect x="36" y="44" width="16" height="16" fill="none"/>
+                <rect x="52" y="44" width="16" height="16" fill="rgba(90,106,128,0.5)"/>
+                <rect x="68" y="44" width="16" height="16" fill="none"/>
+              </g>
+              <text x="44" y="24" text-anchor="middle" font-size="9" fill="#1e1a14">↑</text>
+              <text x="44" y="42" text-anchor="middle" font-size="9" fill="#ece4d4">✕</text>
+              <text x="76" y="42" text-anchor="middle" font-size="9" fill="#ece4d4">✕</text>
+              <text x="60" y="58" text-anchor="middle" font-size="9" fill="#c8d4e8">↓</text>
+              <circle cx="60" cy="36" r="4.5" fill="#ece4d4"/>
+            </svg>
+            <h3 data-i18n="tut.terrain.title">活体地形</h3>
+            <p data-i18n="tut.terrain.body">每步落子改写落点周围：北邻隆起、南邻下陷、东西填平——与斜向相位交替。</p>
+          </div>
+          <div class="rule-card">
+            <svg viewBox="0 0 120 84" aria-hidden="true">
+              <rect x="30" y="30" width="18" height="38" fill="rgba(201,168,106,0.45)"/>
+              <rect x="66" y="48" width="18" height="20" fill="rgba(201,168,106,0.2)" stroke="rgba(201,168,106,0.35)"/>
+              <circle cx="39" cy="24" r="6" fill="#2b2320" stroke="#8a744a"/>
+              <circle cx="75" cy="42" r="6" fill="#ece4d4"/>
+              <path d="M52 20 l5 5 9-11" fill="none" stroke="#c9a86a" stroke-width="2.5"/>
+              <text x="90" y="30" font-size="9" fill="#a29885">H&gt;</text>
+            </svg>
+            <h3 data-i18n="tut.capture.title">高度法则</h3>
+            <p data-i18n="tut.capture.body">棋子随柱子升降。抓捕的唯一条件：黑严格高于白。同高不算。</p>
+          </div>
+        </div>
+        <div class="welcome-actions">
+          <button id="btn-watch-demo" class="primary" data-i18n="tut.watch">▶ 观看演示对局</button>
+          <button id="btn-play-now" class="ghost-btn" data-i18n="tut.play">直接开玩</button>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="./src/main.js"></script>
   </body>

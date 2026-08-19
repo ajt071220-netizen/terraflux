@@ -7,6 +7,7 @@ import { runBatch } from './batch.js';
 import { requestMove, chooseSetup, saveReplay, formatMeta, detectBackend } from './agent.js';
 import { initTrainingMonitor, setTrainVisible } from './training.js';
 import { t, toggleLang, applyStatic, onLangChange } from './i18n.js';
+import * as Tut from './tutorial.js';
 
 const scene = new BoardScene(document.getElementById('viewport'));
 
@@ -67,6 +68,11 @@ function refresh() {
   scene.showHints([]);
   UI.setPassVisible(false);
   UI.setHint(t('hint.over'));
+  if (Tut.isDemo()) {
+    // 演示局：结局由解说条呈现，不弹横幅、不存档
+    UI.hideBanner();
+    return;
+  }
   UI.showBanner(state);
   saveReplay({
     config: currentConfig,
@@ -103,10 +109,11 @@ async function maybeAI() {
   const kind = players[state.turn];
   if (kind === 'human') return;
 
+  const demo = Tut.isDemo();
   aiBusy = true;
   const color = state.turn;
   const whoTag = `<span class="who">${sideName(color)} · ${kindLabel(kind)}</span>`;
-  UI.aiToast(`${whoTag}<span class="thinking">${t('toast.thinking')}</span>`, { sticky: true });
+  if (!demo) UI.aiToast(`${whoTag}<span class="thinking">${t('toast.thinking')}</span>`, { sticky: true });
 
   await sleep(kind === 'heuristic' ? 350 : 150); // 让上一手动画落地
   if (!state || state.status !== 'playing' || state.turn !== color) { aiBusy = false; return; }
@@ -116,29 +123,35 @@ async function maybeAI() {
 
   let move;
   if (result.error) {
-    UI.aiToast(`${whoTag}<span class="err">${result.error} — ${t('toast.fallback')}</span>`);
+    if (!demo) UI.aiToast(`${whoTag}<span class="err">${result.error} — ${t('toast.fallback')}</span>`);
     const legal = E.legalMoves(state, color);
     move = legal.length ? legal[Math.floor(Math.random() * legal.length)] : null;
   } else {
     move = result.move;
     const note = formatMeta(result.meta);
-    UI.aiToast(`${whoTag}${note ? ' · ' + note : t('toast.moved')}`);
+    if (!demo) UI.aiToast(`${whoTag}${note ? ' · ' + note : t('toast.moved')}`);
   }
 
+  const phase = E.phaseFor(state, color); // 本手落子触发的相位
   E.applyMove(state, color, move);
   replayMoves.push({ color, move: move ? { r: move.r, c: move.c } : null, agent: kind });
+  if (demo) {
+    const wh = E.pillarHeight(state, state.white.r, state.white.c);
+    const bh = E.pillarHeight(state, state.black.r, state.black.c);
+    Tut.narrate(state, { phase, heightLead: bh > wh ? 'black' : 'white' }, color);
+  }
   scene.syncState(state);
   aiBusy = false;
   refresh();
 
-  // 观战/人机链式推进：下一手仍是 AI 则继续
-  await sleep(600);
+  // 观战/人机链式推进：下一手仍是 AI 则继续（演示模式放慢供阅读解说）
+  await sleep(demo ? 1500 : 600);
   maybeAI();
 }
 
 // ---------- 交互 ----------
 scene.onCellClick((r, c) => {
-  if (!state || aiBusy) return;
+  if (!state || aiBusy || Tut.isDemo()) return;
   if (state.status === 'setup') {
     if (players[state.setupChooser] !== 'human') return;
     if (E.chooseStart(state, r, c)) {
@@ -209,6 +222,20 @@ onLangChange(() => {
   if (state) refresh();
 });
 
+// ---------- 演示对局 ----------
+function startDemo() {
+  startGame(UI.readConfig(), { white: 'heuristic', black: 'heuristic' });
+  Tut.setDemo(true, stopDemo);
+}
+
+function stopDemo() {
+  Tut.setDemo(false);
+  startGame(UI.readConfig(), UI.readPlayers());
+}
+
+document.getElementById('btn-demo').addEventListener('click', startDemo);
+Tut.bindWelcome(startDemo);
+
 startGame(UI.readConfig(), UI.readPlayers());
 
 // 探测后端：纯静态托管（GitHub Pages）降级为人类/启发式，不启动训练监控
@@ -219,4 +246,6 @@ detectBackend().then((ok) => {
     UI.setStaticMode(true);
     setTrainVisible(false);
   }
+  // 首访教学卡：等后端探测完再弹，避免与降级提示堆叠
+  Tut.maybeWelcome();
 });

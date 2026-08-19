@@ -114,6 +114,32 @@ const DICTS = {
     'toast.fallback': '本手随机落子',
 
     'lang.switch': 'EN',
+
+    // ---- 教学引导 ----
+    'tut.tagline': '在一方会自我改写的棋盘上追捕与逃脱。',
+    'tut.goal.title': '目标',
+    'tut.goal.body': '白球逃到金色南边线即胜；黑球要在相邻格、且站得更高才能抓捕。',
+    'tut.terrain.title': '活体地形',
+    'tut.terrain.body': '每步落子改写落点周围：北邻隆起、南邻下陷、东西填平——与斜向相位交替。',
+    'tut.capture.title': '高度法则',
+    'tut.capture.body': '棋子随柱子升降。抓捕的唯一条件：黑严格高于白。同高不算。',
+    'tut.watch': '▶ 观看演示对局',
+    'tut.play': '直接开玩',
+    'tut.again': '再看一遍演示',
+
+    'demo.intro': '白球要逃到金线，黑球要追捕——但抓捕需要站在更高处。注意看：地形随每一步流动。',
+    'demo.cross': '十字相位：落点北邻隆起、南邻下陷、东西两邻被填平（不可通行）。',
+    'demo.xphase': '斜向相位：东北/西北隆起、东南/西北下陷——本相位不填平。',
+    'demo.heightBlack': '黑方登顶成功！黑高 > 白高，抓捕条件已满足。',
+    'demo.heightWhite': '白方抢到了高地——黑方此刻无法抓捕。',
+    'demo.close': '黑方逼近到两格之内，白方危险了！',
+    'demo.escape': '白方离金色胜利线只剩几步……',
+    'demo.endWhite': '白球踏上金线——逃脱成功！',
+    'demo.endBlack': '抓捕！黑方在相邻格站得更高。',
+    'demo.endDraw': '逃脱与抓捕同一瞬间发生——平局。',
+    'demo.exit': '退出演示',
+    'demo.done': '演示结束。轮到你上手了——',
+    'demo.playNow': '开始我的对局',
   },
 
   en: {
@@ -228,6 +254,32 @@ const DICTS = {
     'toast.fallback': 'random move instead',
 
     'lang.switch': '中文',
+
+    // ---- Tutorial ----
+    'tut.tagline': 'A hunt on a board that rewrites itself.',
+    'tut.goal.title': 'The Goal',
+    'tut.goal.body': 'White wins by escaping to the golden south edge. Black captures — only from adjacent, higher ground.',
+    'tut.terrain.title': 'Living Terrain',
+    'tut.terrain.body': 'Every move reshapes the landing cell\u2019s neighbors: north rises, south sinks, east & west fill — alternating with a diagonal phase.',
+    'tut.capture.title': 'Height Rules',
+    'tut.capture.body': 'Pieces ride the pillars up and down. Capture requires black strictly higher than white. Equal height is not enough.',
+    'tut.watch': '▶ Watch a Demo Game',
+    'tut.play': 'Play Now',
+    'tut.again': 'Watch Demo Again',
+
+    'demo.intro': 'White runs for the golden edge; black hunts — but capture needs higher ground. Watch the terrain flow with every move.',
+    'demo.cross': 'Cross phase: north neighbor rises, south sinks, east & west fill in (impassable).',
+    'demo.xphase': 'Diagonal phase: NE/NW rise, SE/SW sink — nothing fills this phase.',
+    'demo.heightBlack': 'Black has the high ground — capture is now possible!',
+    'demo.heightWhite': 'White took the high ground — black cannot capture right now.',
+    'demo.close': 'Black closes to within two cells — danger for white!',
+    'demo.escape': 'White is only a few steps from the golden edge…',
+    'demo.endWhite': 'White reached the golden edge — escape succeeds!',
+    'demo.endBlack': 'Capture! Black stood higher on adjacent ground.',
+    'demo.endDraw': 'Escape and capture in the same instant — a draw.',
+    'demo.exit': 'Exit demo',
+    'demo.done': 'Demo over. Your turn —',
+    'demo.playNow': 'Start My Game',
   },
 };
 
