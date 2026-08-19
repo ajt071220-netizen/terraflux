@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>地形棋 · Terrain Chess</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/lib/three.module.js",
+          "three/addons/": "/lib/addons/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="viewport"></div>
+
+    <header id="topbar">
+      <h1><span data-i18n="app.title">地形棋</span><span class="sub" data-i18n="app.subtitle">TERRAIN CHESS</span></h1>
+      <div id="hud">
+        <div class="hud-item" id="hud-turn"><i class="dot"></i><span>—</span></div>
+        <div class="hud-item"><em data-i18n="hud.round">轮次</em> <b id="hud-round">1</b></div>
+        <div class="hud-item"><em data-i18n="hud.phase">相位</em> <b id="hud-phase">十字</b></div>
+        <div class="hud-item" id="hud-heights">—</div>
+        <button id="lang-toggle" title="Switch language / 切换语言">EN</button>
+        <button id="panel-toggle" title="Settings / 设置" aria-label="settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div id="panel-scrim"></div>
+    <aside id="panel">
+      <div id="panel-head">
+        <button id="panel-close" aria-label="close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <section>
+        <h2 data-i18n="setup.title">对局设置</h2>
+        <div class="players-row">
+          <div class="player-col">
+            <span class="side-tag white-tag" data-i18n="setup.white">白 · 逃离者</span>
+            <select id="cfg-player-white">
+              <option value="human" selected data-i18n="agent.human">人类</option>
+              <option value="heuristic" data-i18n="agent.heuristic">内置 AI</option>
+              <option value="llm" data-i18n="agent.llm">LLM</option>
+              <option value="ppo" data-i18n="agent.ppo">PPO</option>
+            </select>
+          </div>
+          <div class="player-col">
+            <span class="side-tag black-tag" data-i18n="setup.black">黑 · 追捕者</span>
+            <select id="cfg-player-black">
+              <option value="human" selected data-i18n="agent.human">人类</option>
+              <option value="heuristic" data-i18n="agent.heuristic">内置 AI</option>
+              <option value="llm" data-i18n="agent.llm">LLM</option>
+              <option value="ppo" data-i18n="agent.ppo">PPO</option>
+            </select>
+          </div>
+        </div>
+        <label><span data-i18n="setup.size">棋盘尺寸</span>
+          <select id="cfg-size">
+            <option value="25" selected>25 × 25</option>
+            <option value="21">21 × 21</option>
+          </select>
+        </label>
+        <label><span data-i18n="setup.layout">开局布局</span>
+          <select id="cfg-layout">
+            <option value="duel" selected data-i18n="setup.layout.duel">对垒式 · 黑镇中央，白正北对峙（实测最平衡）</option>
+            <option value="blockade" data-i18n="setup.layout.blockade">堵截式 · 黑镇中央，白后方选择</option>
+            <option value="classic" data-i18n="setup.layout.classic">经典式 · 白居中央，黑八向选择</option>
+          </select>
+        </label>
+        <label><span data-i18n="setup.gap">开局间距</span>
+          <select id="cfg-gap">
+            <option value="2" data-i18n="setup.gap2">隔一格（距离 2）</option>
+            <option value="3" selected data-i18n="setup.gap3">隔两格（距离 3）</option>
+          </select>
+        </label>
+        <label><span data-i18n="setup.first">先手</span>
+          <select id="cfg-first">
+            <option value="white" data-i18n="setup.firstWhite">逃离者（白）先行</option>
+            <option value="black" selected data-i18n="setup.firstBlack">追捕者（黑）先行</option>
+          </select>
+        </label>
+      </section>
+
+      <section>
+        <h2 data-i18n="rules.title">规则旋钮</h2>
+        <fieldset id="cfg-goal">
+          <legend data-i18n="rules.goal">逃离胜利边（可多选）</legend>
+          <label><input type="checkbox" value="N" /> <span data-i18n="rules.edgeN">北（第 1 行）</span></label>
+          <label><input type="checkbox" value="S" checked /> <span data-i18n="rules.edgeS">南（最后一行）</span></label>
+          <label><input type="checkbox" value="W" /> <span data-i18n="rules.edgeW">西（第 1 列）</span></label>
+          <label><input type="checkbox" value="E" /> <span data-i18n="rules.edgeE">东（最后一列）</span></label>
+        </fieldset>
+        <label><span data-i18n="rules.capture">抓捕条件</span>
+          <select id="cfg-capture">
+            <option value="gt" selected data-i18n="rules.captureGt">严格高于（黑高 &gt; 白高）</option>
+            <option value="gte" data-i18n="rules.captureGte">同高即捕（黑高 ≥ 白高）</option>
+          </select>
+        </label>
+        <label><span data-i18n="rules.phase">相位循环</span>
+          <select id="cfg-phase">
+            <option value="sync" selected data-i18n="rules.phaseSync">十字 / X 双方同步交替</option>
+            <option value="off" data-i18n="rules.phaseOff">恒定十字（原版）</option>
+            <option value="all8" data-i18n="rules.phaseAll8">每步八向齐变</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" id="cfg-pass" /> <span data-i18n="rules.pass">允许停步（放弃移动）</span></label>
+        <label class="check"><input type="checkbox" id="cfg-repetition" checked /> <span data-i18n="rules.repetition">局面三次重复判和</span></label>
+      </section>
+
+      <section class="actions">
+        <button id="btn-new" class="primary" data-i18n="action.new">开始新对局</button>
+        <button id="btn-pass" class="hidden" data-i18n="action.pass">停步</button>
+      </section>
+
+      <section>
+        <h2><span data-i18n="train.title">训练监控</span> <span id="train-badge" class="badge hidden" data-i18n="train.live">训练中</span></h2>
+        <div id="train-stats" class="train-stats">
+          <div class="ts-row"><span data-i18n="train.status">状态</span><b id="ts-status">—</b></div>
+          <div class="ts-row"><span data-i18n="train.progress">进度</span><b id="ts-steps">—</b></div>
+          <div class="ts-row"><span data-i18n="train.speed">速度</span><b id="ts-fps">—</b></div>
+          <div class="ts-row"><span data-i18n="train.eta">预计剩余</span><b id="ts-eta">—</b></div>
+          <div class="ts-row"><span data-i18n="train.winrate">近100局胜率</span><b id="ts-win">—</b></div>
+        </div>
+        <div class="train-charts">
+          <canvas id="chart-rew" height="64"></canvas>
+          <canvas id="chart-win" height="64"></canvas>
+          <canvas id="chart-loss" height="64"></canvas>
+        </div>
+        <div class="train-legend">
+          <span data-i18n="train.legendRew">回报曲线</span><span data-i18n="train.legendWin">胜率(绿)/平局(灰)</span><span data-i18n="train.legendLoss">价值损失</span>
+        </div>
+        <a class="tb-link" href="http://127.0.0.1:6006" target="_blank" rel="noopener" data-i18n="train.tb">
+          打开专业训练面板（TensorBoard）↗
+        </a>
+        <div class="tb-note" data-i18n="train.tbNote">完整指标：奖励/损失/熵/KL/自定义胜率（terrain/*）</div>
+      </section>
+
+      <section>
+        <h2 data-i18n="batch.title">自动对局 · 胜率测试</h2>
+        <label><span data-i18n="batch.games">对局数</span>
+          <select id="batch-games">
+            <option value="200">200</option>
+            <option value="1000" selected>1000</option>
+            <option value="5000">5000</option>
+          </select>
+        </label>
+        <button id="btn-batch" data-i18n="batch.run">用当前配置跑胜率</button>
+        <div id="batch-progress" class="hidden"><i></i></div>
+        <div id="batch-result"></div>
+      </section>
+    </aside>
+
+    <div id="banner" class="hidden">
+      <div class="card">
+        <h2 id="banner-title"></h2>
+        <p id="banner-reason"></p>
+        <button id="btn-again" class="primary" data-i18n="action.again">再来一局</button>
+      </div>
+    </div>
+
+    <div id="hint"></div>
+    <div id="ai-toast" class="hidden"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

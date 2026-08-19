@@ -1,0 +1,20 @@
+Three.js 本地库文件清单（已全部就位，无需再下载）
+=====================================================
+
+本目录需要以下 3 个文件（新版 three.js 拆分为两个文件，缺一不可）：
+
+  lib\three.module.js                      ← build/three.module.js
+  lib\three.core.js                        ← build/three.core.js（module 的实际依赖）
+  lib\addons\controls\OrbitControls.js     ← examples/jsm/controls/OrbitControls.js
+
+下载源（任选一个，浏览器直接打开另存即可）：
+
+  淘宝镜像：
+    https://registry.npmmirror.com/three/latest/files/build/three.module.js
+    https://registry.npmmirror.com/three/latest/files/build/three.core.js
+    https://registry.npmmirror.com/three/latest/files/examples/jsm/controls/OrbitControls.js
+
+  jsDelivr：
+    https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js
+    https://cdn.jsdelivr.net/npm/three@latest/build/three.core.js
+    https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/controls/OrbitControls.js

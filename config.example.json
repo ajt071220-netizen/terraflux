@@ -1,0 +1,11 @@
+{
+  "llm": {
+    "baseURL": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "apiKey": "sk-在此填入你的KEY",
+    "model": "qwen3.8-max",
+    "extraBody": { "enable_thinking": false }
+  },
+  "ppo": {
+    "url": "http://127.0.0.1:8765"
+  }
+}

@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>地形棋 · 单机版（免安装免联网）</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0e17; --panel: rgba(18,24,38,0.88); --line: rgba(255,255,255,0.09);
+  --text: #e8ecf4; --dim: #9aa3b8; --accent: #7dffb0; --gold: #ffd479;
+}
+html, body { height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: "PingFang SC","Microsoft YaHei","Segoe UI",sans-serif; font-size: 14px; }
+#cv { position: fixed; inset: 0; display: block; }
+#topbar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; pointer-events: none; }
+#topbar h1 { font-size: 20px; letter-spacing: 2px; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+#topbar h1 span { font-size: 12px; color: var(--dim); letter-spacing: 4px; margin-left: 8px; }
+#hud { display: flex; gap: 10px; pointer-events: auto; }
+.hud-item { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.hud-item b { color: var(--gold); }
+#hud-turn .dot { width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #fff; }
+#hud-turn.black .dot { background: #2a2140; box-shadow: 0 0 8px #8a6cff; }
+#panel { position: fixed; top: 64px; right: 14px; bottom: 14px; width: 300px; overflow-y: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; backdrop-filter: blur(14px); padding: 16px; }
+#panel section { margin-bottom: 18px; }
+#panel h2 { font-size: 12px; color: var(--dim); letter-spacing: 2px; margin-bottom: 10px; }
+#panel label { display: block; margin-bottom: 10px; color: var(--dim); }
+#panel label.check { display: flex; align-items: center; gap: 8px; color: var(--text); }
+#panel select { width: 100%; margin-top: 5px; background: #0e1422; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; font-size: 13px; outline: none; }
+#panel fieldset { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px 4px; margin-bottom: 10px; }
+#panel fieldset legend { color: var(--dim); padding: 0 6px; }
+#panel fieldset label { display: flex; align-items: center; gap: 8px; color: var(--text); margin-bottom: 6px; }
+#panel input[type="checkbox"] { accent-color: var(--accent); }
+.actions { display: flex; gap: 8px; }
+button { flex: 1; background: #1b2438; color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; cursor: pointer; }
+button:hover { background: #25304a; }
+button.primary { background: linear-gradient(135deg,#2e9e68,#1f7a4e); border-color: rgba(125,255,176,0.4); font-weight: 600; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+#batch-progress { height: 6px; border-radius: 3px; margin-top: 10px; background: #0e1422; overflow: hidden; }
+#batch-progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg,#4a7dff,#7dffb0); }
+#batch-result { margin-top: 12px; font-size: 13px; }
+#batch-result .bar { display: flex; height: 18px; border-radius: 9px; overflow: hidden; margin: 8px 0; background: #0e1422; }
+#batch-result .bar i { display: block; height: 100%; }
+#batch-result .bar .w { background: #e8ecf4; } #batch-result .bar .b { background: #6a4fd0; } #batch-result .bar .d { background: #4a5164; }
+#batch-result .row { display: flex; justify-content: space-between; color: var(--dim); margin-top: 4px; }
+#banner { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; background: rgba(5,8,14,0.55); backdrop-filter: blur(4px); }
+#banner .card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 36px 48px; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.5); }
+#banner h2 { font-size: 28px; margin-bottom: 10px; }
+#banner p { color: var(--dim); margin-bottom: 22px; }
+#banner button { min-width: 160px; }
+#hint { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px; color: var(--dim); font-size: 13px; backdrop-filter: blur(10px); pointer-events: none; white-space: nowrap; }
+.hidden { display: none !important; }
+#panel::-webkit-scrollbar { width: 6px; } #panel::-webkit-scrollbar-thumb { background: #2a3350; border-radius: 3px; }
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<header id="topbar">
+  <h1>地形棋 <span>单机版 · 免联网</span></h1>
+  <div id="hud">
+    <div class="hud-item" id="hud-turn"><i class="dot"></i><span>—</span></div>
+    <div class="hud-item">第 <b id="hud-round">1</b> 轮</div>
+    <div class="hud-item">相位 <b id="hud-phase">十字</b></div>
+    <div class="hud-item" id="hud-heights">高度 白 0 / 黑 0</div>
+  </div>
+</header>
+
+<aside id="panel">
+  <section>
+    <h2>对局设置</h2>
+    <label>棋盘尺寸
+      <select id="cfg-size">
+        <option value="25" selected>25 × 25</option>
+        <option value="21">21 × 21</option>
+      </select>
+    </label>
+    <label>开局布局
+      <select id="cfg-layout">
+        <option value="blockade" selected>堵截式 · 黑镇中央，白后方三选一</option>
+        <option value="classic">经典式 · 白居中央，黑八向选一</option>
+      </select>
+    </label>
+    <label>开局间距
+      <select id="cfg-gap">
+        <option value="2" selected>隔一格（距离 2）</option>
+        <option value="3">隔两格（距离 3）</option>
+      </select>
+    </label>
+    <label>先手
+      <select id="cfg-first">
+        <option value="white" selected>逃离者（白）先行</option>
+        <option value="black">追捕者（黑）先行</option>
+      </select>
+    </label>
+  </section>
+  <section>
+    <h2>规则旋钮</h2>
+    <fieldset id="cfg-goal">
+      <legend>逃离胜利边（可多选）</legend>
+      <label><input type="checkbox" value="N" /> 北（第 1 行）</label>
+      <label><input type="checkbox" value="S" checked /> 南（最后一行）</label>
+      <label><input type="checkbox" value="W" /> 西（第 1 列）</label>
+      <label><input type="checkbox" value="E" /> 东（最后一列）</label>
+    </fieldset>
+    <label>抓捕条件
+      <select id="cfg-capture">
+        <option value="gt" selected>严格高于（黑高度 &gt; 白高度）</option>
+        <option value="gte">同高即捕（黑高度 ≥ 白高度）</option>
+      </select>
+    </label>
+    <label>相位循环
+      <select id="cfg-phase">
+        <option value="sync" selected>十字 / X 双方同步交替</option>
+        <option value="off">恒定十字（原版）</option>
+        <option value="all8">每步八向齐变</option>
+      </select>
+    </label>
+    <label class="check"><input type="checkbox" id="cfg-pass" /> 允许停步（放弃移动）</label>
+    <label class="check"><input type="checkbox" id="cfg-repetition" checked /> 局面三次重复判和</label>
+  </section>
+  <section class="actions">
+    <button id="btn-new" class="primary">开始新对局</button>
+    <button id="btn-pass" class="hidden">停步</button>
+  </section>
+  <section>
+    <h2>自动对局 · 胜率测试</h2>
+    <label>对局数
+      <select id="batch-games">
+        <option value="200">200</option>
+        <option value="1000" selected>1000</option>
+        <option value="5000">5000</option>
+      </select>
+    </label>
+    <button id="btn-batch">用当前配置跑胜率</button>
+    <div id="batch-progress" class="hidden"><i></i></div>
+    <div id="batch-result"></div>
+  </section>
+</aside>
+
+<div id="banner" class="hidden">
+  <div class="card">
+    <h2 id="banner-title"></h2>
+    <p id="banner-reason"></p>
+    <button id="btn-again" class="primary">再来一局</button>
+  </div>
+</div>
+
+<div id="hint"></div>
+
+<script>
+'use strict';
+/* ==================== 规则引擎（与 engine.js 完全一致） ==================== */
+const T = { NORMAL: 0, RAISED: 1, LOWERED: 2, FILLED: 3 };
+const HEIGHT = [0, 1, -1, 0];
+const DEFAULT_CONFIG = {
+  size: 25, goalEdges: ['S'], captureRule: 'gt', firstPlayer: 'white',
+  phaseMode: 'sync', startLayout: 'blockade', gap: 2,
+  passAllowed: false, stalemateLoses: true, repetitionDraw: true,
+};
+const REASON_TEXT = {
+  capture: '追捕成功', escape: '成功抵达边界', 'border-capture': '抵达边界的同时被追上',
+  stalemate: '无棋可走', repetition: '局面三次重复', 'mutual-pass': '双方连续停步',
+};
+const mid = (size) => (size + 1) >> 1;
+const inBounds = (size, r, c) => r >= 1 && r <= size && c >= 1 && c <= size;
+const idxOf = (state, r, c) => (r - 1) * state.size + (c - 1);
+const pillarHeight = (state, r, c) => HEIGHT[state.pillars[idxOf(state, r, c)]];
+
+function startOptions(config) {
+  const m = mid(config.size), g = config.gap;
+  if (config.startLayout === 'blockade') {
+    return {
+      fixed: { color: 'black', r: m, c: m }, chooser: 'white',
+      options: [{ r: m - g, c: m }, { r: m - g, c: m - g }, { r: m - g, c: m + g }],
+    };
+  }
+  return {
+    fixed: { color: 'white', r: m, c: m }, chooser: 'black',
+    options: [
+      { r: m - g, c: m }, { r: m + g, c: m }, { r: m, c: m - g }, { r: m, c: m + g },
+      { r: m - g, c: m - g }, { r: m - g, c: m + g }, { r: m + g, c: m - g }, { r: m + g, c: m + g },
+    ],
+  };
+}
+
+function createGame(config = {}) {
+  const cfg = { ...DEFAULT_CONFIG, ...config };
+  const setup = startOptions(cfg);
+  const state = {
+    config: cfg, size: cfg.size, pillars: new Uint8Array(cfg.size * cfg.size),
+    white: null, black: null, turn: cfg.firstPlayer,
+    moveCount: { white: 0, black: 0 }, passes: 0,
+    status: 'setup', winner: null, winReason: null,
+    setupOptions: setup.options, setupChooser: setup.chooser, repetition: new Map(),
+  };
+  if (setup.fixed.color === 'black') state.black = { r: setup.fixed.r, c: setup.fixed.c };
+  else state.white = { r: setup.fixed.r, c: setup.fixed.c };
+  return state;
+}
+
+function chooseStart(state, r, c) {
+  if (state.status !== 'setup') return false;
+  if (!state.setupOptions.some((o) => o.r === r && o.c === c)) return false;
+  if (state.setupChooser === 'white') state.white = { r, c };
+  else state.black = { r, c };
+  state.status = 'playing';
+  state.setupOptions = null;
+  recordRepetition(state);
+  return true;
+}
+
+function phaseFor(state, color) {
+  const mode = state.config.phaseMode;
+  if (mode === 'off') return 'cross';
+  if (mode === 'all8') return 'all8';
+  return (state.moveCount[color] + 1) % 2 === 1 ? 'cross' : 'x';
+}
+
+function affectedCells(state, r, c, phase) {
+  const cells = [];
+  const push = (rr, cc, to) => { if (inBounds(state.size, rr, cc)) cells.push({ r: rr, c: cc, to }); };
+  if (phase === 'cross' || phase === 'all8') {
+    push(r - 1, c, T.RAISED); push(r + 1, c, T.LOWERED);
+    push(r, c - 1, T.FILLED); push(r, c + 1, T.FILLED);
+  }
+  if (phase === 'x' || phase === 'all8') {
+    push(r - 1, c - 1, T.RAISED); push(r - 1, c + 1, T.RAISED);
+    push(r + 1, c - 1, T.LOWERED); push(r + 1, c + 1, T.LOWERED);
+  }
+  return cells;
+}
+
+function legalMoves(state, color) {
+  if (state.status !== 'playing') return [];
+  const me = state[color];
+  const opp = state[color === 'white' ? 'black' : 'white'];
+  const moves = [];
+  for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
+    if (dr === 0 && dc === 0) continue;
+    const r = me.r + dr, c = me.c + dc;
+    if (!inBounds(state.size, r, c)) continue;
+    if (opp && opp.r === r && opp.c === c) continue;
+    if (state.pillars[idxOf(state, r, c)] === T.FILLED) continue;
+    moves.push({ r, c });
+  }
+  return moves;
+}
+
+function isOnGoal(state, pos) {
+  const g = state.config.goalEdges, s = state.size;
+  return (g.includes('N') && pos.r === 1) || (g.includes('S') && pos.r === s)
+      || (g.includes('W') && pos.c === 1) || (g.includes('E') && pos.c === s);
+}
+
+function judge(state, justMoved) {
+  const w = state.white, b = state.black;
+  const dist = Math.max(Math.abs(w.r - b.r), Math.abs(w.c - b.c));
+  const wh = pillarHeight(state, w.r, w.c);
+  const bh = pillarHeight(state, b.r, b.c);
+  const captureOk = state.config.captureRule === 'gte' ? bh >= wh : bh > wh;
+  if (dist === 1 && captureOk) {
+    if (justMoved === 'white' && isOnGoal(state, w)) return { winner: 'draw', reason: 'border-capture' };
+    return { winner: 'black', reason: 'capture' };
+  }
+  if (justMoved === 'white' && isOnGoal(state, w)) return { winner: 'white', reason: 'escape' };
+  return null;
+}
+
+function snapshot(state) {
+  let s = state.turn + '|' + state.white.r + ',' + state.white.c + '|' + state.black.r + ',' + state.black.c + '|';
+  for (let i = 0; i < state.pillars.length; i++) s += state.pillars[i];
+  return s;
+}
+
+function recordRepetition(state) {
+  if (!state.config.repetitionDraw) return false;
+  const key = snapshot(state);
+  const n = (state.repetition.get(key) || 0) + 1;
+  state.repetition.set(key, n);
+  return n >= 3;
+}
+
+function applyMove(state, color, move) {
+  if (state.status !== 'playing' || state.turn !== color) return null;
+  const events = { color, moved: null, passed: false, phase: null, changes: [], result: null };
+  if (move === null) {
+    if (!state.config.passAllowed) return null;
+    events.passed = true;
+    state.passes += 1;
+  } else {
+    if (!legalMoves(state, color).some((m) => m.r === move.r && m.c === move.c)) return null;
+    const phase = phaseFor(state, color);
+    state[color].r = move.r; state[color].c = move.c;
+    events.moved = { r: move.r, c: move.c };
+    events.phase = phase;
+    state.passes = 0;
+    for (const cell of affectedCells(state, move.r, move.c, phase)) {
+      const i = idxOf(state, cell.r, cell.c);
+      const from = state.pillars[i];
+      if (from !== cell.to) {
+        state.pillars[i] = cell.to;
+        events.changes.push({ r: cell.r, c: cell.c, from, to: cell.to });
+      }
+    }
+  }
+  state.moveCount[color] += 1;
+  const result = judge(state, color);
+  if (result) {
+    state.status = 'over'; state.winner = result.winner; state.winReason = result.reason;
+    events.result = result; return events;
+  }
+  if (state.config.passAllowed && state.passes >= 2) {
+    state.status = 'over'; state.winner = 'draw'; state.winReason = 'mutual-pass';
+    events.result = { winner: 'draw', reason: 'mutual-pass' }; return events;
+  }
+  state.turn = color === 'white' ? 'black' : 'white';
+  if (recordRepetition(state)) {
+    state.status = 'over'; state.winner = 'draw'; state.winReason = 'repetition';
+    events.result = { winner: 'draw', reason: 'repetition' }; return events;
+  }
+  if (!state.config.passAllowed && legalMoves(state, state.turn).length === 0) {
+    state.status = 'over';
+    state.winner = state.config.stalemateLoses ? color : 'draw';
+    state.winReason = 'stalemate';
+    events.result = { winner: state.winner, reason: 'stalemate' };
+    return events;
+  }
+  return events;
+}
+
+function cloneState(state) {
+  return {
+    ...state, pillars: state.pillars.slice(),
+    white: { ...state.white }, black: { ...state.black },
+    moveCount: { ...state.moveCount }, repetition: new Map(),
+  };
+}
+
+/* ==================== AI（与 ai.js 一致） ==================== */
+function distanceToGoal(state, pos) {
+  const s = state.size, g = state.config.goalEdges;
+  let d = Infinity;
+  if (g.includes('S')) d = Math.min(d, s - pos.r);
+  if (g.includes('N')) d = Math.min(d, pos.r - 1);
+  if (g.includes('E')) d = Math.min(d, s - pos.c);
+  if (g.includes('W')) d = Math.min(d, pos.c - 1);
+  return d;
+}
+
+function evaluate(state, color) {
+  if (state.status === 'over') {
+    if (state.winner === color) return 100000;
+    if (state.winner === 'draw') return 0;
+    return -100000;
+  }
+  const w = state.white, b = state.black;
+  const dist = Math.max(Math.abs(w.r - b.r), Math.abs(w.c - b.c));
+  const wh = pillarHeight(state, w.r, w.c), bh = pillarHeight(state, b.r, b.c);
+  const goalDist = distanceToGoal(state, w);
+  const whiteScore = -goalDist * 12 + dist * 6 + (wh - bh) * 8;
+  const blackScore = goalDist * 12 - dist * 6 + (bh - wh) * 8;
+  return color === 'white' ? whiteScore : blackScore;
+}
+
+function chooseMoveAI(state, color, noise = 0) {
+  const moves = legalMoves(state, color);
+  if (moves.length === 0) return undefined;
+  const opp = color === 'white' ? 'black' : 'white';
+  let best = null, bestScore = -Infinity;
+  for (const m of moves) {
+    const s2 = cloneState(state);
+    applyMove(s2, color, m);
+    let score;
+    if (s2.status === 'over') {
+      score = evaluate(s2, color);
+    } else {
+      const oppMoves = legalMoves(s2, opp);
+      let worst = Infinity;
+      for (const om of oppMoves) {
+        const s3 = cloneState(s2);
+        applyMove(s3, opp, om);
+        worst = Math.min(worst, evaluate(s3, color));
+      }
+      score = oppMoves.length === 0 ? evaluate(s2, color) : worst;
+    }
+    if (noise > 0) score += (Math.random() - 0.5) * noise * 20;
+    if (score > bestScore) { bestScore = score; best = m; }
+  }
+  return best;
+}
+
+/* ==================== 批量模拟 ==================== */
+function runBatch(config, totalGames, onProgress) {
+  return new Promise((resolve) => {
+    const stats = { white: 0, black: 0, draw: 0, turns: 0, done: 0, total: totalGames };
+    function step() {
+      for (let i = 0; i < 20 && stats.done < totalGames; i++) {
+        const state = createGame(config);
+        const opt = state.setupOptions[Math.floor(Math.random() * state.setupOptions.length)];
+        chooseStart(state, opt.r, opt.c);
+        let safety = 4000;
+        while (state.status === 'playing' && safety-- > 0) {
+          const color = state.turn;
+          const m = chooseMoveAI(state, color, 1.0);
+          if (m === undefined) {
+            if (state.config.passAllowed) applyMove(state, color, null);
+            else break;
+          } else applyMove(state, color, m);
+        }
+        if (state.status === 'over' && state.winner === 'white') stats.white++;
+        else if (state.status === 'over' && state.winner === 'black') stats.black++;
+        else stats.draw++;
+        stats.turns += state.moveCount.white + state.moveCount.black;
+        stats.done++;
+      }
+      onProgress(stats);
+      if (stats.done < totalGames) setTimeout(step, 0);
+      else resolve(stats);
+    }
+    step();
+  });
+}
+
+/* ==================== Canvas 2.5D 等轴测渲染 ==================== */
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const TILE_W = 46, TILE_H = 23, RISE_PX = 13, PILLAR_PX = 24;
+const cam = { x: 0, y: 0, zoom: 1 };
+
+const COLORS = {
+  [T.NORMAL]: { top: '#98a0b2', left: '#6b7183', right: '#7c8294' },
+  [T.RAISED]: { top: '#e5c077', left: '#a8894e', right: '#c2a25c' },
+  [T.LOWERED]: { top: '#6d8ed4', left: '#4a5f8f', right: '#5872a8' },
+  [T.FILLED]: { top: '#484e5c', left: '#313642', right: '#3a404c' },
+};
+const PREVIEW = {
+  [T.NORMAL]: '#aab3c6', [T.RAISED]: '#ffe08a', [T.LOWERED]: '#86a8ff', [T.FILLED]: '#5a6172',
+};
+
+let board = null; // { size, offsets, offsetTargets, dimples, dimpleTargets, rings }
+let previewMap = null;
+
+function resize() {
+  cv.width = window.innerWidth * devicePixelRatio;
+  cv.height = window.innerHeight * devicePixelRatio;
+  cv.style.width = window.innerWidth + 'px';
+  cv.style.height = window.innerHeight + 'px';
+}
+window.addEventListener('resize', resize);
+resize();
+
+function initBoard(size) {
+  const n = size * size;
+  board = {
+    size,
+    offsets: new Float32Array(n), offsetTargets: new Float32Array(n),
+    dimples: new Float32Array(n).fill(1), dimpleTargets: new Float32Array(n).fill(1),
+  };
+  cam.zoom = Math.min(window.innerWidth / (size * TILE_W + 320), window.innerHeight / (size * TILE_H + 220));
+  cam.x = window.innerWidth / 2 - 170 * cam.zoom;
+  cam.y = window.innerHeight / 2 - 40 * cam.zoom;
+}
+
+function cellWorld(r, c) {
+  const m = mid(board.size);
+  return { x: (c - r) * TILE_W / 2, y: (c + r) * TILE_H / 2 - m * TILE_H };
+}
+function w2s(wx, wy) { return { x: cam.x + wx * cam.zoom, y: cam.y + wy * cam.zoom }; }
+
+function drawFrame() {
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  // 背景
+  const g = ctx.createRadialGradient(innerWidth / 2, innerHeight * 0.35, 60, innerWidth / 2, innerHeight / 2, innerHeight);
+  g.addColorStop(0, '#111a2e'); g.addColorStop(1, '#070a12');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, innerWidth, innerHeight);
+  if (!board || !state) { requestAnimationFrame(drawFrame); return; }
+
+  // 动画插值
+  const n = board.size * board.size;
+  for (let i = 0; i < n; i++) {
+    board.offsets[i] += (board.offsetTargets[i] - board.offsets[i]) * 0.18;
+    board.dimples[i] += (board.dimpleTargets[i] - board.dimples[i]) * 0.2;
+  }
+
+  const s = board.size;
+  const hw = TILE_W / 2 * 0.88, hh = TILE_H / 2 * 0.88;
+
+  // 画家算法：r 外层 c 内层，远处（r+c 小）的先画
+  for (let r = 1; r <= s; r++) {
+    for (let c = 1; c <= s; c++) {
+      const i = (r - 1) * s + (c - 1);
+      const t = state.pillars[i];
+      const w = cellWorld(r, c);
+      const lift = board.offsets[i]; // 正=升高（向上）
+      const p = w2s(w.x, w.y - lift);
+      const col = COLORS[t];
+      const zhw = hw * cam.zoom, zhh = hh * cam.zoom;
+      const zh = PILLAR_PX * cam.zoom;
+      // 顶面四点
+      const tp = { x: p.x, y: p.y - zhh }, rp = { x: p.x + zhw, y: p.y };
+      const bp = { x: p.x, y: p.y + zhh }, lp = { x: p.x - zhw, y: p.y };
+      // 左侧面
+      ctx.fillStyle = col.left;
+      ctx.beginPath();
+      ctx.moveTo(lp.x, lp.y); ctx.lineTo(bp.x, bp.y);
+      ctx.lineTo(bp.x, bp.y + zh); ctx.lineTo(lp.x, lp.y + zh);
+      ctx.closePath(); ctx.fill();
+      // 右侧面
+      ctx.fillStyle = col.right;
+      ctx.beginPath();
+      ctx.moveTo(bp.x, bp.y); ctx.lineTo(rp.x, rp.y);
+      ctx.lineTo(rp.x, rp.y + zh); ctx.lineTo(bp.x, bp.y + zh);
+      ctx.closePath(); ctx.fill();
+      // 顶面
+      ctx.fillStyle = previewMap && previewMap.has(i) ? PREVIEW[previewMap.get(i)] : col.top;
+      ctx.beginPath();
+      ctx.moveTo(tp.x, tp.y); ctx.lineTo(rp.x, rp.y);
+      ctx.lineTo(bp.x, bp.y); ctx.lineTo(lp.x, lp.y);
+      ctx.closePath(); ctx.fill();
+      // 凹槽（顶面中心暗椭圆）
+      const ds = board.dimples[i];
+      if (ds > 0.05) {
+        ctx.fillStyle = '#12151d';
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, zhw * 0.52 * ds, zhh * 0.52 * ds, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.06)';
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y - 1, zhw * 0.34 * ds, zhh * 0.34 * ds, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      // 胜利边描光
+      if (isGoalEdgeCell(r, c)) {
+        ctx.strokeStyle = 'rgba(84,255,158,0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(tp.x, tp.y); ctx.lineTo(rp.x, rp.y);
+        ctx.lineTo(bp.x, bp.y); ctx.lineTo(lp.x, lp.y);
+        ctx.closePath(); ctx.stroke();
+      }
+      // 高亮圈
+      if (ringSet && ringSet.has(i)) {
+        ctx.strokeStyle = ringColor;
+        ctx.lineWidth = 2.4;
+        ctx.globalAlpha = 0.55 + 0.3 * Math.sin(performance.now() / 240);
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, zhw * 0.72, zhh * 0.72, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+      // 球（随格绘制，保证遮挡顺序）
+      if (state.white && state.white.r === r && state.white.c === c) drawBall(p, '#fff6e6', '#ffe9c0', lift);
+      if (state.black && state.black.r === r && state.black.c === c) drawBall(p, '#241c38', '#7a58e8', lift);
+    }
+  }
+  requestAnimationFrame(drawFrame);
+}
+
+function drawBall(p, base, glow, lift) {
+  const r = 9.5 * cam.zoom;
+  ctx.save();
+  ctx.shadowColor = glow;
+  ctx.shadowBlur = 16 * cam.zoom;
+  const g = ctx.createRadialGradient(p.x - r * 0.3, p.y - r * 0.4, r * 0.2, p.x, p.y, r);
+  g.addColorStop(0, base === '#fff6e6' ? '#ffffff' : '#4a3a7a');
+  g.addColorStop(1, base);
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.arc(p.x, p.y - r * 0.35, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function isGoalEdgeCell(r, c) {
+  const g = state.config.goalEdges, s = board.size;
+  return (g.includes('N') && r === 1) || (g.includes('S') && r === s)
+      || (g.includes('W') && c === 1) || (g.includes('E') && c === s);
+}
+
+// 屏幕坐标 → 格子（找柱顶中心最近的格）
+function screenToCell(sx, sy) {
+  if (!board) return null;
+  let best = null, bestD = Infinity;
+  const s = board.size;
+  for (let r = 1; r <= s; r++) for (let c = 1; c <= s; c++) {
+    const w = cellWorld(r, c);
+    const i = (r - 1) * s + (c - 1);
+    const p = w2s(w.x, w.y - board.offsets[i]);
+    const d = (p.x - sx) ** 2 + (p.y - sy) ** 2;
+    if (d < bestD) { bestD = d; best = { r, c }; }
+  }
+  const threshold = (TILE_W * 0.62 * cam.zoom) ** 2;
+  return bestD <= threshold ? best : null;
+}
+
+/* ==================== 交互与 UI ==================== */
+const $ = (id) => document.getElementById(id);
+let state = null;
+let ringSet = null, ringColor = '#7dffb0';
+let currentConfig = null;
+
+function readConfig() {
+  const goalEdges = [...document.querySelectorAll('#cfg-goal input:checked')].map((i) => i.value);
+  return {
+    size: parseInt($('cfg-size').value, 10),
+    startLayout: $('cfg-layout').value,
+    gap: parseInt($('cfg-gap').value, 10),
+    firstPlayer: $('cfg-first').value,
+    goalEdges: goalEdges.length > 0 ? goalEdges : ['S'],
+    captureRule: $('cfg-capture').value,
+    phaseMode: $('cfg-phase').value,
+    passAllowed: $('cfg-pass').checked,
+    repetitionDraw: $('cfg-repetition').checked,
+    stalemateLoses: true,
+  };
+}
+
+function startGame(config) {
+  currentConfig = config;
+  state = createGame(config);
+  initBoard(config.size);
+  syncBoardTargets();
+  $('banner').classList.add('hidden');
+  refresh();
+}
+
+function syncBoardTargets() {
+  const s = state.size;
+  for (let r = 1; r <= s; r++) for (let c = 1; c <= s; c++) {
+    const i = (r - 1) * s + (c - 1);
+    const t = state.pillars[i];
+    board.offsetTargets[i] = t === T.RAISED ? RISE_PX : t === T.LOWERED ? -RISE_PX : 0;
+    board.dimpleTargets[i] = t === T.FILLED ? 0 : 1;
+  }
+}
+
+function refresh() {
+  updateHUD();
+  if (state.status === 'setup') {
+    setRings(state.setupOptions, '#ffd479');
+    setHint(state.setupChooser === 'white'
+      ? '白方（逃离者）：点击金色圆圈选择起始位置'
+      : '黑方（追捕者）：点击金色圆圈选择起始位置');
+    $('btn-pass').classList.add('hidden');
+    return;
+  }
+  if (state.status === 'playing') {
+    setRings(legalMoves(state, state.turn), state.turn === 'white' ? '#7dffb0' : '#b89cff');
+    const phase = phaseFor(state, state.turn);
+    const pt = phase === 'cross' ? '十字相位（北升·南降·东西填平）'
+      : phase === 'x' ? 'X 相位（东北/西北升·东南/西南降）' : '八向齐变';
+    setHint((state.turn === 'white' ? '白方行动：' : '黑方行动：') + '点击发光圆圈移动 —— ' + pt);
+    $('btn-pass').classList.toggle('hidden', !state.config.passAllowed);
+    return;
+  }
+  setRings([], '#7dffb0');
+  $('btn-pass').classList.add('hidden');
+  setHint('对局结束');
+  $('banner-title').textContent = state.winner === 'white' ? '逃离者胜利' : state.winner === 'black' ? '追捕者胜利' : '平局';
+  $('banner-reason').textContent = REASON_TEXT[state.winReason] || '';
+  $('banner').classList.remove('hidden');
+}
+
+function setRings(cells, color) {
+  ringColor = color;
+  ringSet = new Set(cells.map((m) => (m.r - 1) * state.size + (m.c - 1)));
+}
+
+function updateHUD() {
+  const turnEl = $('hud-turn');
+  $('hud-round').textContent = Math.floor((state.moveCount.white + state.moveCount.black) / 2) + 1;
+  if (state.status === 'setup') {
+    turnEl.className = 'hud-item ' + state.setupChooser;
+    turnEl.querySelector('span').textContent = state.setupChooser === 'white' ? '布置：白方选起点' : '布置：黑方选起点';
+    $('hud-phase').textContent = '—';
+    $('hud-heights').textContent = '高度 —';
+    return;
+  }
+  turnEl.className = 'hud-item ' + state.turn;
+  turnEl.querySelector('span').textContent = state.status === 'over' ? '对局结束'
+    : state.turn === 'white' ? '白方行动 · 逃离者' : '黑方行动 · 追捕者';
+  if (state.status === 'over') $('hud-phase').textContent = '—';
+  else {
+    const phase = phaseFor(state, state.turn);
+    $('hud-phase').textContent = phase === 'cross' ? '十字' : phase === 'x' ? 'X' : '八向';
+  }
+  if (state.white && state.black) {
+    const wh = pillarHeight(state, state.white.r, state.white.c);
+    const bh = pillarHeight(state, state.black.r, state.black.c);
+    $('hud-heights').textContent = `高度 白 ${wh > 0 ? '+' + wh : wh} / 黑 ${bh > 0 ? '+' + bh : bh}`;
+  }
+}
+
+function setHint(t) { $('hint').textContent = t; }
+
+// 鼠标交互：拖拽平移 / 滚轮缩放 / 点击落子 / 悬停预览
+let dragging = false, dragMoved = false, lastX = 0, lastY = 0;
+cv.addEventListener('pointerdown', (e) => { dragging = true; dragMoved = false; lastX = e.clientX; lastY = e.clientY; });
+cv.addEventListener('pointermove', (e) => {
+  if (dragging) {
+    const dx = e.clientX - lastX, dy = e.clientY - lastY;
+    if (Math.abs(dx) + Math.abs(dy) > 3) dragMoved = true;
+    cam.x += dx; cam.y += dy;
+    lastX = e.clientX; lastY = e.clientY;
+    return;
+  }
+  // 悬停预览
+  if (!state || state.status !== 'playing') return;
+  const cell = screenToCell(e.clientX, e.clientY);
+  previewMap = null;
+  if (!cell) return;
+  const legal = legalMoves(state, state.turn).some((m) => m.r === cell.r && m.c === cell.c);
+  if (!legal) return;
+  const phase = phaseFor(state, state.turn);
+  previewMap = new Map();
+  for (const a of affectedCells(state, cell.r, cell.c, phase)) {
+    previewMap.set((a.r - 1) * state.size + (a.c - 1), a.to);
+  }
+});
+cv.addEventListener('pointerup', (e) => {
+  dragging = false;
+  if (dragMoved || !state) return;
+  const cell = screenToCell(e.clientX, e.clientY);
+  if (!cell) return;
+  if (state.status === 'setup') {
+    if (chooseStart(state, cell.r, cell.c)) { syncBoardTargets(); refresh(); }
+    return;
+  }
+  if (state.status === 'playing') {
+    const events = applyMove(state, state.turn, cell);
+    if (events) { previewMap = null; syncBoardTargets(); refresh(); }
+  }
+});
+cv.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const k = e.deltaY < 0 ? 1.1 : 0.9;
+  const nx = cam.zoom * k;
+  if (nx < 0.15 || nx > 3) return;
+  // 以鼠标为中心缩放
+  cam.x = e.clientX - (e.clientX - cam.x) * k;
+  cam.y = e.clientY - (e.clientY - cam.y) * k;
+  cam.zoom = nx;
+}, { passive: false });
+
+$('btn-new').addEventListener('click', () => startGame(readConfig()));
+$('btn-again').addEventListener('click', () => startGame(readConfig()));
+$('btn-pass').addEventListener('click', () => {
+  if (state && state.status === 'playing' && state.config.passAllowed) {
+    applyMove(state, state.turn, null);
+    syncBoardTargets(); refresh();
+  }
+});
+$('btn-batch').addEventListener('click', () => {
+  const games = parseInt($('batch-games').value, 10);
+  const btn = $('btn-batch');
+  btn.disabled = true; btn.textContent = '模拟中……';
+  $('batch-progress').classList.remove('hidden');
+  const config = readConfig();
+  setTimeout(() => {
+    runBatch(config, games, (stats) => {
+      $('batch-progress').querySelector('i').style.width = ((stats.done / stats.total) * 100).toFixed(1) + '%';
+    }).then((stats) => {
+      btn.disabled = false; btn.textContent = '用当前配置跑胜率';
+      $('batch-progress').classList.add('hidden');
+      $('batch-progress').querySelector('i').style.width = '0%';
+      const pct = (x) => ((x / stats.done) * 100).toFixed(1);
+      $('batch-result').innerHTML = `
+        <div class="bar"><i class="w" style="width:${pct(stats.white)}%"></i><i class="b" style="width:${pct(stats.black)}%"></i><i class="d" style="width:${pct(stats.draw)}%"></i></div>
+        <div class="row"><span>白（逃离） ${pct(stats.white)}%</span><span>${stats.white} 局</span></div>
+        <div class="row"><span>黑（追捕） ${pct(stats.black)}%</span><span>${stats.black} 局</span></div>
+        <div class="row"><span>平局 ${pct(stats.draw)}%</span><span>${stats.draw} 局</span></div>
+        <div class="row"><span>平均回合数</span><span>${(stats.turns / stats.done).toFixed(1)}</span></div>`;
+    });
+  }, 30);
+});
+
+startGame(readConfig());
+requestAnimationFrame(drawFrame);
+</script>
+</body>
+</html>

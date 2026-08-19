@@ -1,0 +1,18 @@
+{
+  "name": "terrain-chess",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "地形棋（Terrain Chess）—— 动态地形双人棋类的 3D 可玩模拟器",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "latest"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}

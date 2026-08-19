@@ -1,0 +1,31 @@
+node_modules
+dist
+.DS_Store
+
+# 密钥与本地配置
+config.json
+test-llm.mjs
+test-prompt.mjs
+
+# 运行产物
+replays/
+checkpoints/
+checkpoints_21/
+runs/
+models/
+experiments/*.zip
+smoke_test.zip
+# training_log*.jsonl 与 experiments/ 的图表是实验证据，保留进库
+
+# 私人/无关目录
+chat-archive/
+cmom-revision/
+_chat_restore_backup/
+_recovered_chat/
+_recovered_*
+manuscript_extracted.txt
+
+# Python
+.venv-py312/
+__pycache__/
+*.pyc
