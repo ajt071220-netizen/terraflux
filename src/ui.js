@@ -46,6 +46,19 @@ export function setPanelOpen(open) {
   document.body.classList.toggle('panel-open', open);
 }
 
+// 纯静态托管（GitHub Pages）降级：禁用依赖后端的 LLM/PPO 选项
+export function setStaticMode(on) {
+  for (const id of ['cfg-player-white', 'cfg-player-black']) {
+    const sel = $(id);
+    for (const opt of sel.options) {
+      if (opt.value === 'llm' || opt.value === 'ppo') opt.disabled = on;
+    }
+    if (on && (sel.value === 'llm' || sel.value === 'ppo')) sel.value = 'heuristic';
+  }
+  const note = $('offline-note');
+  if (note) note.classList.toggle('hidden', !on);
+}
+
 export function initUI(handlers) {
   $('btn-new').addEventListener('click', () => {
     handlers.onNewGame(readConfig());

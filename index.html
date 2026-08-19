@@ -60,6 +60,7 @@
             </select>
           </div>
         </div>
+        <p id="offline-note" class="offline-note hidden" data-i18n="setup.offline">在线版仅含内置 AI —— LLM / PPO 对局请按 README 本地运行</p>
         <label><span data-i18n="setup.size">棋盘尺寸</span>
           <select id="cfg-size">
             <option value="25" selected>25 × 25</option>
@@ -118,7 +119,7 @@
         <button id="btn-pass" class="hidden" data-i18n="action.pass">停步</button>
       </section>
 
-      <section>
+      <section id="train-section">
         <h2><span data-i18n="train.title">训练监控</span> <span id="train-badge" class="badge hidden" data-i18n="train.live">训练中</span></h2>
         <div id="train-stats" class="train-stats">
           <div class="ts-row"><span data-i18n="train.status">状态</span><b id="ts-status">—</b></div>

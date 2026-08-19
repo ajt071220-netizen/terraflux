@@ -4,8 +4,8 @@ import * as E from './engine.js';
 import { BoardScene } from './scene.js';
 import * as UI from './ui.js';
 import { runBatch } from './batch.js';
-import { requestMove, chooseSetup, saveReplay, formatMeta } from './agent.js';
-import { initTrainingMonitor } from './training.js';
+import { requestMove, chooseSetup, saveReplay, formatMeta, detectBackend } from './agent.js';
+import { initTrainingMonitor, setTrainVisible } from './training.js';
 import { t, toggleLang, applyStatic, onLangChange } from './i18n.js';
 
 const scene = new BoardScene(document.getElementById('viewport'));
@@ -210,4 +210,13 @@ onLangChange(() => {
 });
 
 startGame(UI.readConfig(), UI.readPlayers());
-initTrainingMonitor();
+
+// 探测后端：纯静态托管（GitHub Pages）降级为人类/启发式，不启动训练监控
+detectBackend().then((ok) => {
+  if (ok) {
+    initTrainingMonitor();
+  } else {
+    UI.setStaticMode(true);
+    setTrainVisible(false);
+  }
+});

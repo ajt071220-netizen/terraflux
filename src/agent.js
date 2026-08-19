@@ -9,6 +9,27 @@ export const AGENT_KINDS = [
   { id: 'ppo' },
 ];
 
+// 后端探测：GitHub Pages 等纯静态托管上没有 /api/*，降级为人类/启发式
+let backendOk = null;
+
+export async function detectBackend() {
+  if (backendOk !== null) return backendOk;
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 3000);
+    const resp = await fetch('/api/health', { signal: ctrl.signal });
+    clearTimeout(timer);
+    backendOk = resp.ok;
+  } catch {
+    backendOk = false;
+  }
+  return backendOk;
+}
+
+export function isBackendOk() {
+  return backendOk !== false;
+}
+
 export function serializeState(state) {
   return {
     config: state.config,

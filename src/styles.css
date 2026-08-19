@@ -175,6 +175,14 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .players-row { display: flex; gap: 8px; margin-bottom: 12px; }
 .player-col { flex: 1; display: flex; flex-direction: column; gap: 5px; }
 .player-col select { width: 100%; }
+.offline-note {
+  font-size: 11px; color: var(--faint);
+  border-left: 2px solid var(--accent-dim);
+  padding: 4px 8px; margin: -4px 0 12px;
+  line-height: 1.5;
+}
+.offline-note.hidden, #train-section.hidden { display: none; }
+select option:disabled { color: var(--faint); }
 .side-tag {
   font-size: 11px; letter-spacing: 1px;
   padding: 3px 0;

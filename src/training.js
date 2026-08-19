@@ -87,13 +87,28 @@ function fmtSteps(steps, total, pct) {
 
 let timer = null;
 
+export function setTrainVisible(visible) {
+  const sec = $('train-section');
+  if (sec) sec.classList.toggle('hidden', !visible);
+  if (!visible && timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+}
+
 export async function pollTraining() {
   let data;
   try {
     const resp = await fetch('/api/training');
+    if (!resp.ok) throw new Error('no backend');
     data = await resp.json();
   } catch {
-    $('ts-status').textContent = t('train.unreachable');
+    // 纯静态托管：整个监控区隐藏并停止轮询
+    if (document.getElementById('train-section')) {
+      setTrainVisible(false);
+    } else {
+      $('ts-status').textContent = t('train.unreachable');
+    }
     return;
   }
   const rows = data.rows || [];

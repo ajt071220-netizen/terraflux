@@ -36,6 +36,7 @@ const DICTS = {
     'setup.first': '先手',
     'setup.firstWhite': '逃离者（白）先行',
     'setup.firstBlack': '追捕者（黑）先行',
+    'setup.offline': '在线版仅含内置 AI —— LLM / PPO 对局请按 README 本地运行',
 
     'rules.title': '规则旋钮',
     'rules.goal': '逃离胜利边（可多选）',
@@ -149,6 +150,7 @@ const DICTS = {
     'setup.first': 'First Move',
     'setup.firstWhite': 'Runner (White) first',
     'setup.firstBlack': 'Chaser (Black) first',
+    'setup.offline': 'Online build: heuristic AI only — run locally (see README) for LLM / PPO play',
 
     'rules.title': 'Rule Knobs',
     'rules.goal': 'Escape Edges (multi-select)',
