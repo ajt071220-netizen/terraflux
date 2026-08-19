@@ -1,4 +1,4 @@
-"""engine.py —— 地形棋规则引擎（Python 版，与 src/engine.js 逐条对稿）
+"""engine.py —— 涌陆（Terraflux）规则引擎（Python 版，与 src/engine.js 逐条对稿）
 
 用于 PPO 训练。所有函数为纯逻辑，状态用 dict 表示，坐标 1-indexed 与 JS 版一致。
 地形状态：0 正常 / 1 升高(+1) / 2 降低(-1) / 3 填平(不可进入)

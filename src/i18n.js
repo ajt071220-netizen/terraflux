@@ -3,8 +3,8 @@
 
 const DICTS = {
   zh: {
-    'app.title': '地形棋',
-    'app.subtitle': 'TERRAIN CHESS',
+    'app.title': '涌陆',
+    'app.subtitle': 'TERRAFLUX',
 
     'hud.round': '轮次',
     'hud.phase': '相位',
@@ -143,8 +143,8 @@ const DICTS = {
   },
 
   en: {
-    'app.title': 'Terrain Chess',
-    'app.subtitle': '地形棋',
+    'app.title': 'Terraflux',
+    'app.subtitle': '涌陆',
 
     'hud.round': 'Round',
     'hud.phase': 'Phase',
@@ -298,7 +298,7 @@ export function applyStatic() {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     el.textContent = t(el.dataset.i18n);
   });
-  document.title = lang === 'zh' ? '地形棋 · Terrain Chess' : 'Terrain Chess · 地形棋';
+  document.title = lang === 'zh' ? '涌陆 · Terraflux' : 'Terraflux · 涌陆';
 }
 
 export function setLang(next) {

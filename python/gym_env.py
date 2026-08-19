@@ -1,4 +1,4 @@
-"""gym_env.py —— 地形棋 Gymnasium 环境（self-play PPO 用）
+"""gym_env.py —— 涌陆（Terraflux）Gymnasium 环境（self-play PPO 用）
 
 - 观测：Dict
     board: (size, size, 4) float32  —— 地形 one-hot（正常/升高/降低/填平）

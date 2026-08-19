@@ -1,6 +1,7 @@
-# Terrain Chess · 地形棋
+# Terraflux · 涌陆
 
-**An original board game with a living board — and a reinforcement-learning study of what "fair rules" even mean.**
+**A pursuit-evasion board game on a self-modifying board — and a reinforcement-learning study of what "fair rules" even mean.**
+*(formerly "Terrain Chess")*
 
 Every move rewrites the terrain under the pieces: pillars rise, sink, and fill in.
 The pursuer (black) can only capture from a height advantage, so the whole game is a fight
@@ -89,8 +90,8 @@ experiments/      REPORT_DATA.md + figures + raw logs (the evidence chain)
 <details>
 <summary>中文版（精简）</summary>
 
-地形棋是一个原创动态地形棋类游戏：每一步落子都会改写周围地形（隆起/下陷/填平），
-黑白两球在高度差里分出胜负。本仓库包含：
+涌陆（Terraflux，原名"地形棋"）是一个原创动态地形追逃棋：每一步落子都会改写周围
+地形（隆起/下陷/填平），黑白两球在高度差里分出胜负。本仓库包含：
 
 - **3D 可玩模拟器**（Three.js，零 npm 依赖）：`node server.js` 后打开 http://localhost:5173
 - **三类智能体**：启发式 / PPO 自我对弈（MaskablePPO）/ 大语言模型（OpenAI 兼容接口）

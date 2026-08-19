@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 cd /d "%~dp0"
-title 地形棋 Terrain Chess
+title 涌陆 Terraflux
 
 where node >nul 2>nul
 if errorlevel 1 (
@@ -24,7 +24,7 @@ if not exist lib\three.module.js (
   exit /b 1
 )
 
-echo  正在启动地形棋服务……
+echo  正在启动涌陆（Terraflux）服务……
 echo  浏览器稍后会自动打开。若页面显示"无法连接"，以本窗口里
 echo  显示的地址为准，手动复制到浏览器打开。
 echo.

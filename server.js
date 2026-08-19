@@ -1,4 +1,4 @@
-// server.js —— 地形棋服务器：静态文件 + 智能体决策 API + 棋谱保存
+// server.js —— 涌陆（Terraflux）服务器：静态文件 + 智能体决策 API + 棋谱保存
 // 零 npm 依赖（只用 Node 内置模块）。用法：node server.js
 //
 // API:
@@ -163,7 +163,7 @@ export function buildLLMPrompt(state, color) {
   const safetyMap = new Map(moves.map((m) => [m.r + ',' + m.c, moveSafety(state, color, m)]));
   const edgesCN = state.config.goalEdges.map((e) => `${e}=${EDGE_NAME[e]}`).join('、');
   const lines = [
-    `你正在下一盘"地形棋"，你执${role}。`,
+    `你正在下一盘"涌陆"（Terraflux），你执${role}。`,
     ``,
     `【坐标系】棋盘 ${state.size}×${state.size}。位置写作 (行,列)：行号从北边 1 递增到南边 ${state.size}，列号从西边 1 递增到东边 ${state.size}。`,
     `方向与坐标的关系：北=行-1，南=行+1，西=列-1，东=列+1，东北=(行-1,列+1)，以此类推。胜利边方位：${edgesCN}。`,
@@ -199,7 +199,7 @@ async function llmMove(state) {
   const body = {
     model: LLM_CFG.model || 'gpt-4o',
     messages: [
-      { role: 'system', content: '你是一名地形棋棋手。只输出 JSON，不要输出任何其他内容。' },
+      { role: 'system', content: '你是一名涌陆（Terraflux）棋手。只输出 JSON，不要输出任何其他内容。' },
       { role: 'user', content: prompt },
     ],
     temperature: 0.4,
@@ -382,7 +382,7 @@ const server = http.createServer(async (req, res) => {
 const PORT = process.env.PORT || 5173;
 server.listen(PORT, () => {
   console.log('');
-  console.log('  地形棋已启动：  http://localhost:' + PORT);
+  console.log('  涌陆（Terraflux）已启动：  http://localhost:' + PORT);
   console.log('  LLM 智能体：  ' + (LLM_CFG && LLM_CFG.apiKey ? '已配置（' + (LLM_CFG.model || 'gpt-4o') + '）' : '未配置（复制 config.example.json 为 config.json 并填入 apiKey）'));
   console.log('  PPO 服务地址：' + PPO_URL + '（训练后运行 python/serve_ppo.py）');
   console.log('');
