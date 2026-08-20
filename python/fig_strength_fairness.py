@@ -31,11 +31,10 @@ colors = ['#8a8578', '#5a6a80', '#e07020', '#a04030']
 ax1.bar(x, WHITE_WR, color=colors, width=0.58)
 for i, (wr, n) in enumerate(zip(WHITE_WR, N_GAMES)):
     se = 100 * (wr / 100 * (1 - wr / 100) / n) ** 0.5 * 1.96
-    ax1.errorbar(i, wr, yerr=se, fmt='none', ecolor='#333', capsize=4, lw=1.2)
     if wr >= 15:
         ax1.text(i, wr - 5.0, f'{wr:.0f}%', ha='center', fontsize=10, color='white', fontweight='bold')
     else:
-        ax1.text(i, wr + se + 1.2, f'{wr:.0f}%', ha='center', fontsize=10)
+        ax1.text(i, wr + 1.2, f'{wr:.0f}%', ha='center', fontsize=10)
 ax1.axhline(50, color='#888', ls='--', lw=1, alpha=0.6)
 ax1.text(3, 59.5, 'perfectly balanced (50%)', fontsize=8, color='#666', ha='center')
 ax1.set_xticks(x)
