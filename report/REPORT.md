@@ -21,7 +21,9 @@ Each break raises a question no traditional board game has ever had to answer. O
 
 Terraflux is played on a 25×25 board of **pillars** (位柱) — the standing columns whose heights the terrain continually rewrites. White starts from the northern half and wins by reaching the designated victory edge in the south; Black wins by capture — standing adjacent to White on a strictly higher pillar. Players alternate turns, with Black moving first by default. Every move rewrites the terrain around its landing cell: on odd-numbered rounds the cross phase fires (the pillar to the north rises, the one to the south sinks, and those to the east and west are filled solid, becoming impassable); on even-numbered rounds the X phase fires, raising and lowering pillars along the diagonals, and so the cycle continues. Pillars cycle through three states — raised, lowered, filled — and filling is never final: a later phase can always reactivate a filled pillar. Beyond winning and losing there is a third outcome: a draw, triggered when both sides satisfy their respective winning conditions at the same instant. (Other terminal cases — threefold repetition, and a player left with no legal move being declared the loser — are documented in the repository.) The project ships with three kinds of AI agents — a heuristic, an LLM hybrid, and a PPO policy — and a bilingual (Chinese/English) 3D online simulator, in which visitors can watch a narrated demo game in the browser.
 
-![Figure 1. Board size is not the fairness variable: white win rate stays flat across seven board sizes from 15×15 to 27×27 (heuristic self-play, duel gap=3)](../experiments/fig_size_fairness.png)
+![Figure 1](../experiments/fig_size_fairness.png)
+
+*Figure 1. Board size is not the fairness variable: white win rate stays flat across seven board sizes from 15×15 to 27×27 (heuristic self-play, duel gap=3).*
 
 **Table 1. Terraflux in the design space of classic abstract games**
 
@@ -50,7 +52,9 @@ In the overwhelming majority of board games worldwide, the board does not partic
 | Mid | 167k–331k | 0.672 | −0.850 | 25.8 |
 | Late | 333k–501k | 0.712 | −0.757 | 20.0 |
 
-![Figure 2. Training dynamics: win rate, entropy, episode length, explained variance](../experiments/fig_training_dynamics.png)
+![Figure 2](../experiments/fig_training_dynamics.png)
+
+*Figure 2. Training dynamics: win rate, entropy, episode length, explained variance.*
 
 ## 5. Break II — The Terrain Owns the Height
 
@@ -60,7 +64,7 @@ In the vast majority of traditional board games, height is an attribute of the p
 
 Answer one: sparse-reward training is viable — just not as fast. To reach a 55% rolling win rate, the pure sparse group needed 73k steps, while the step-penalty group needed only 59k — the former about 24% slower; at the 65% threshold, 18% slower.
 
-Answer two is the more important one: the win rates written into self-play logs are not to be taken at face value. At the end of training, the two groups' logged win rates were nearly identical — 71.6% versus 70.9%. But in actual head-to-head play between the two trained models, the result was 66% : 14.5%, a clear advantage for the step-penalty group. This shows that a logged win rate is a relative tally recorded against a particular opponent pool, not a universal, absolute measure of strength.
+Answer two is the more important one: the win rates written into self-play logs are not to be taken at face value. At the end of training, the two groups' logged win rates were nearly identical — 71.6% versus 70.9%. But in actual head-to-head play between the two trained models, the result was 66%:14.5%, a clear advantage for the step-penalty group. This shows that a logged win rate is a relative tally recorded against a particular opponent pool, not a universal, absolute measure of strength.
 
 **Table 3. Sparse reward suffices — but self-play logs lie**
 
@@ -72,7 +76,9 @@ Answer two is the more important one: the win rates written into self-play logs 
 | **Head-to-head round robin** | **66.0%** | 14.5% (19.5% draws) |
 | Mean game length (late stage) | 28.8 | 29.2 |
 
-![Figure 3. Reward shaping ablation: win rate / episode length / policy entropy](../experiments/fig_ablation.png)
+![Figure 3](../experiments/fig_ablation.png)
+
+*Figure 3. Reward shaping ablation: win rate / episode length / policy entropy.*
 
 ## 6. Break III — Asymmetric Goals, Rotating Phases, and the Same-Instant Draw
 
@@ -99,7 +105,9 @@ Therefore, the fairness of a game admits no answer detached from its players. Fa
 | PPO shaped | 2 | **34%** (±6.5%) | 75 |
 | PPO main (500k steps) | 1 (strongest) | **46%** (±6.9%) | 54 |
 
-![Figure 4. Left: white win rate rises monotonically with policy strength toward 50%. Right: round-robin strength matrix](../experiments/fig_strength_fairness.png)
+![Figure 4](../experiments/fig_strength_fairness.png)
+
+*Figure 4. Left: white win rate rises monotonically with policy strength toward 50%. Right: round-robin strength matrix.*
 
 ## 7. Discussion — The Mirror-Value Test, Limitations, and Future Mechanisms
 
