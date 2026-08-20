@@ -36,12 +36,12 @@ for i, (wr, n) in enumerate(zip(WHITE_WR, N_GAMES)):
     else:
         ax1.text(i, wr + 1.2, f'{wr:.0f}%', ha='center', fontsize=10)
 ax1.axhline(50, color='#888', ls='--', lw=1, alpha=0.6)
-ax1.text(3, 59.5, 'perfectly balanced (50%)', fontsize=8, color='#666', ha='center')
+ax1.text(1.5, 51.0, 'perfectly balanced (50%)', fontsize=8, color='#666', ha='center')
 ax1.set_xticks(x)
 ax1.set_xticklabels(NAMES, fontsize=9)
 ax1.set_ylabel('White win rate in duel self-play (%)')
 ax1.set_title('Fairness is strength-conditional\n(duel gap=3, black first; ordered by round-robin strength →)', fontsize=10)
-ax1.set_ylim(0, 68)
+ax1.set_ylim(0, 62)
 ax1.grid(axis='y', alpha=0.25)
 
 # 右：对局矩阵热图
