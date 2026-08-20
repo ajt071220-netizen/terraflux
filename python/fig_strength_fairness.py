@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 实测数据（200 局自对弈 / 循环赛各 200 局）
-NAMES = ['Heuristic', 'PPO sparse', 'PPO shaped', 'PPO blockade']
+NAMES = ['Heuristic', 'PPO sparse', 'PPO shaped', 'PPO main']
 WHITE_WR = [0.0, 20.0, 34.0, 46.0]          # duel 自对弈白胜率 %
 N_GAMES = [300, 200, 200, 200]
 
