@@ -22,8 +22,8 @@ I designed Terraflux, an asymmetric board game in which the board itself takes p
 
 | v1 claim | Status in v2 | Evidence |
 |---|---|---|
-| The win rate never converges on a fluid board, and the value function never saturates. | **Partly supported.** Rolling win rate oscillates in every dynamic run (SD after 150k steps: 0.07–0.18). Explained variance plateaus at 0.57–0.77 after 150k steps. | Table 3; Figure 2. The static-board contrast is confounded (§4.2). |
-| The oscillation is caused by terrain rewriting, and the opponent pool. | **Not established.** Static-board runs oscillate less (SD 0.05–0.12; p ≈ 0.007, uncorrected), which is consistent with a terrain effect, but the static game is degenerate, so the comparison cannot isolate a mechanism. | §4.2 |
+| The win rate never converges on a fluid board, and the value function never saturates. | **Partly supported.** Rolling win rate oscillates in every dynamic run (SD after 150k steps: 0.07–0.18). Explained variance plateaus at 0.57–0.77 after 150k steps. | Table 3; Figures 2 and 3. The static-board contrast is confounded (§4.2). |
+| The oscillation is caused by terrain rewriting, and the opponent pool. | **Not established.** Static-board runs oscillate less (SD 0.05–0.12; p ≈ 0.007, uncorrected), which is consistent with a terrain effect, but the static game is degenerate and the largest swing in the dynamic runs coincides with the first snapshot entering the opponent pool (Figure 3), so the comparison cannot isolate a mechanism. | §4.2 |
 | Sparse rewards are viable, but about 24% slower than shaped rewards. | **Withdrawn.** The comparison used identical rewards because of the bug. With the fix and ten sparse runs, the difference in speed is not significant (p ≈ 0.43). | §5 |
 | Logged self-play win rates lie; a 66%:14.5% head-to-head reveals the truth. | **Withdrawn as a reward effect.** An identical-reward pair produced 66.0%:21.0%. The pattern is run-to-run variance. | §5.2 |
 | Fairness rises monotonically with policy strength (0% → 20% → 34% → 46%). | **Not supported.** Replicates with identical settings span 9%–84%, and the correlation with round-robin strength is weak (ρ = 0.23). | §6 |
@@ -111,7 +111,7 @@ With that caveat, the comparison against the thirteen shaped-configuration runs 
 - **Explained variance** (mean after 150k): static 0.98 vs shaped-configuration 0.66, p < 0.001. This is what one would expect if the outcomes of the static game are almost deterministic, so it does not show that the terrain prevents saturation.
 - **Entropy jumps** (1.8 vs 2.1; p ≈ 0.89) and **draw rates** (0.063 vs 0.111; p ≈ 0.09): no meaningful difference.
 
-Conclusion for Break I: the training curves are noisy and vary from run to run, and the dynamic runs oscillate more than the static ones. That pattern is consistent with the terrain contributing to the oscillation, but the static control changes the game's balance, so the v1 claim that the terrain *causes* the non-convergence is **not established**. A proper test needs a static control that is balanced in its own right, or a different control, such as a terrain that changes slowly.
+Conclusion for Break I: the training curves are noisy and vary from run to run. The dynamic runs oscillate more than the static ones, but the largest swing in the dynamic runs coincides with the first snapshot entering the opponent pool (Figure 3), and the static curves are flat because their outcome is decided by colour. The comparison therefore cannot attribute the oscillation to the terrain, and the v1 claim that the terrain *causes* the non-convergence is **not established**. A proper test needs a static control that is balanced in its own right, or a different control, such as a terrain that changes slowly.
 
 **Table 3. Training statistics per run (500k steps each; means over the stated window)**
 
@@ -147,11 +147,15 @@ Conclusion for Break I: the training curves are noisy and vary from run to run, 
 | static_s5 | static | 192k | 0.503 | 0.050 | 0.966 | 0 | 1 | 0.113 |
 | static_s6 | static | not reached | 0.456 | 0.119 | 0.987 | 1 | 2 | 0.048 |
 
-*"Late win rate" is the mean over steps ≥333k. "Steps to 55%" uses the 9-point rolling mean of logged win rates; most static runs never held 55% under this smoothing (static_s5 reached it at 192k). Figure 5 plots the explained-variance and win-rate SD columns for all runs.*
+*"Late win rate" is the mean over steps ≥333k. "Steps to 55%" uses the 9-point rolling mean of logged win rates; most static runs never held 55% under this smoothing (static_s5 reached it at 192k). Figure 3 shows the corresponding training curves.*
 
-![Figure 5](../experiments/fig_trainstats.png)
+![Figure 3](../experiments/fig_curves.png)
 
-*Figure 5. Training statistics per run: mean value-function explained variance after 150k steps against the standard deviation of the rolling win rate after 150k steps. Each point is one run, coloured by configuration; the large marker is the group mean. The static-board runs (grey) cluster at high explained variance and low win-rate SD, but those runs are degenerate (§4.2).*
+*Figure 3. Training curves for all twenty-nine runs. (a) Rolling win rate (100-game window, then a 9-point rolling mean) against each run's own opponent pool. (b) Value-function explained variance (9-point rolling mean). Thin lines are single runs; thick lines are the mean over the runs in each configuration. Win rates are measured against each run's own pool, so their levels are not comparable across configurations.*
+
+**What the curves show.** In every dynamic-terrain run the win rate climbs to a peak (about 0.65 for the group mean, up to about 0.9 for single runs) near 100k steps and then falls sharply at about 100–120k steps; explained variance falls at the same time. That is when the first snapshot of the learner enters the opponent pool: snapshots are saved every 100k steps, and before that every opponent is the heuristic. The largest swing in the curves is therefore shared by all dynamic runs and is at least partly produced by the training protocol, not by the terrain. Smaller dips follow the later snapshots (around 200–220k steps).
+
+The static-board curves differ for a degenerate reason. In four of the static runs White wins every self-play game, and the learner's colour is assigned at random, so its win rate against the pool is 50% by construction. The value function can also read the outcome from the colour flag in its input, which is why its explained variance is close to 1. These curves therefore do not show that the static game is learned more stably; they show that its outcome is decided by colour.
 
 ## 5. Break II — Reward Shaping and the Step Penalty
 
@@ -181,7 +185,7 @@ The heuristic opponent, playing against itself on the duel layout with Black mov
 
 ### 6.2 Fairness varies with the training run
 
-Duel self-play White win rates (300 games per run; Wilson 95% intervals) for all twenty-nine runs are plotted in Figure 3, and listed here:
+Duel self-play White win rates (300 games per run; Wilson 95% intervals) for all twenty-nine runs are plotted in Figure 4, and listed here:
 
 - **shaped-configuration runs:** main 46.3%; abl_shaped 32.7%; abl_sparse (same reward as shaped) 22.0%; shaped_s2 26.3%; shaped_s3 **76.0%** [70.9, 80.5]; shaped_s4 41.7%; shaped_s5 47.0%; shaped_s6 13.7%; shaped_s7 25.3%; shaped_s8 **84.0%** [79.4, 87.7]; shaped_s9 39.7%; shaped_s10 44.7%; shaped_s11 31.3%.
 - **sparse runs:** sparse_s1 17.3%; sparse_s2 44.7%; sparse_s3 56.7%; sparse_s4 **8.7%** [6.0, 12.4]; sparse_s5 **62.7%** [57.1, 67.9]; sparse_s6 48.0%; sparse_s7 24.0%; sparse_s8 25.7%; sparse_s9 37.0%; sparse_s10 36.0%.
@@ -189,17 +193,17 @@ Duel self-play White win rates (300 games per run; Wilson 95% intervals) for all
 
 Runs with identical settings disagree by more than the effects v1 claimed. The dynamic-terrain runs range from 9% to 84% with identical rules, and the same policy evaluated twice moved by about four points. Duel self-play therefore cannot certify the layout's balance on its own: the answer depends on which training run is used. The static-board results show that the frozen terrain changes the game in a way that is not comparable with the dynamic one.
 
-![Figure 3](../experiments/fig_selfplay.png)
+![Figure 4](../experiments/fig_selfplay.png)
 
-*Figure 3. White win rate in duel self-play for each of the twenty-nine training runs (300 games per run; bars are 95% Wilson intervals; the dashed line marks 50%). Colour marks the configuration. Static-board runs with a high draw rate are annotated with it. Runs with the same configuration differ by far more than their intervals.*
+*Figure 4. White win rate in duel self-play for each of the twenty-nine training runs (300 games per run; bars are 95% Wilson intervals; the dashed line marks 50%). Colour marks the configuration. Static-board runs with a high draw rate are annotated with it. Runs with the same configuration differ by far more than their intervals.*
 
 ### 6.3 Strength and balance
 
-Figure 4 gives the round-robin results over all twenty-three dynamic runs. Averaged over its twenty-two opponents, the win rates are: sparse_s8 57.3%, sparse_s5 56.1%, shaped_s10 55.0%, sparse_s4 54.1%, abl_shaped 53.9%, shaped_s5 53.4%, sparse_s3 50.8%, sparse_s2 48.9%, shaped_s9 48.2%, shaped_s8 45.6%, sparse_s6 44.8%, shaped_s4 44.5%, shaped_s7 42.8%, shaped_s6 42.0%, shaped_s11 39.0%, sparse_s7 38.8%, main 38.1%, sparse_s1 38.0%, sparse_s9 37.7%, shaped_s3 35.8%, sparse_s10 34.6%, shaped_s2 27.1%, abl_sparse 27.0%. The full values are in `experiments/roundrobin_summary.json`.
+Figure 5 gives the round-robin results over all twenty-three dynamic runs. Averaged over its twenty-two opponents, the win rates are: sparse_s8 57.3%, sparse_s5 56.1%, shaped_s10 55.0%, sparse_s4 54.1%, abl_shaped 53.9%, shaped_s5 53.4%, sparse_s3 50.8%, sparse_s2 48.9%, shaped_s9 48.2%, shaped_s8 45.6%, sparse_s6 44.8%, shaped_s4 44.5%, shaped_s7 42.8%, shaped_s6 42.0%, shaped_s11 39.0%, sparse_s7 38.8%, main 38.1%, sparse_s1 38.0%, sparse_s9 37.7%, shaped_s3 35.8%, sparse_s10 34.6%, shaped_s2 27.1%, abl_sparse 27.0%. The full values are in `experiments/roundrobin_summary.json`.
 
-![Figure 4](../experiments/fig_roundrobin.png)
+![Figure 5](../experiments/fig_roundrobin.png)
 
-*Figure 4. Round robin among the twenty-three dynamic-terrain runs (100 games per colour per pair). Top: each run's mean win rate against the other twenty-two runs (draws are not counted as wins). Bottom: the win rate of the row run against the column run; runs are in the same order on both axes, and the per-pair numbers are in `experiments/replicate_eval.json`. Colour of the labels and bars marks the configuration.*
+*Figure 5. Round robin among the twenty-three dynamic-terrain runs (100 games per colour per pair). Top: each run's mean win rate against the other twenty-two runs (draws are not counted as wins). Bottom: the win rate of the row run against the column run; runs are in the same order on both axes, and the per-pair numbers are in `experiments/replicate_eval.json`. Colour of the labels and bars marks the configuration.*
 
 Two things follow. First, round-robin strength is only weakly related to White's win rate on the duel layout (Spearman ρ = 0.23 over twenty-three runs). Earlier estimates on thirteen runs (ρ = 0.32) and eight runs (ρ = 0.57) did not hold as the sample grew, so I do not claim any monotone relation. Second, the round robin is not transitive: of the 1,771 triples of runs, 181 (about 10%) form a cycle in which each beats the next. The v1 ranking (main first, shaped second, sparse third) was not stable: main ranks eighteenth of twenty-three in v2.
 
@@ -247,7 +251,7 @@ The next steps are concrete. Evaluate each run against a common set of policies,
 - Training: `python/train_ppo.py` (flags `--seed`, `--step-penalty`, `--static-terrain`, `--exp`). The batches are in `python/run_robustness.ps1` (first batch, `-Batch2`, and `-Batch3`). The evaluation pipelines are `python/run_batch2_pipeline.ps1` and `python/run_batch3_pipeline.ps1`.
 - Training statistics: `python/analyze_robustness.py` → `experiments/robustness_training.json` (stdout in `experiments/robustness_stdout.txt`). Figure 2: `python/analyze_collapse.py`.
 - Round robin: `python/run_rr_pipeline.ps1` (extends the round robin to all dynamic runs, sharded) and `python/analyze_roundrobin.py` → `experiments/roundrobin_summary.json`.
-- Evaluation: `python/replicate_eval.py` (supports `--new-only`, `--shard`, `--skip-rr`, `--merge`) → `experiments/replicate_eval.json`. Heuristic baseline: `python/heuristic_duel.py` → `experiments/heuristic_duel.json`. Figure 3: `python/fig_replicates.py`.
+- Evaluation: `python/replicate_eval.py` (supports `--new-only`, `--shard`, `--skip-rr`, `--merge`) → `experiments/replicate_eval.json`. Heuristic baseline: `python/heuristic_duel.py` → `experiments/heuristic_duel.json`. Figures 3–5: `python/fig_replicates.py`.
 - Figure 1: `python/scan_sizes.py` → `experiments/size_scan.json`, plotted by `experiments/fig_size_fairness.png`.
 - Superseded (invalid) outputs are kept in `experiments/superseded/`: the v1 ablation figure (affected by the reward bug) and the v1 strength figure (hand-coded numbers).
 - The v1 training logs for the original runs are unchanged. Their `abl_sparse` run is invalid as a reward comparison and is retained only as a same-configuration replicate.
