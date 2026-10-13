@@ -28,8 +28,8 @@ GROUP_ORDER = ['shaped-config', 'sparse', 'static']
 sp = ev['selfplay']
 sp_sorted = sorted(sp, key=lambda r: (GROUP_ORDER.index(tr['runs'][r['model']]['group']), r['model']))
 
-fig = plt.figure(figsize=(13, 19))
-gs = fig.add_gridspec(3, 1, height_ratios=[1.0, 1.35, 0.95], hspace=0.42)
+fig = plt.figure(figsize=(7.2, 11.5))
+gs = fig.add_gridspec(3, 1, height_ratios=[1.0, 1.45, 0.9], hspace=0.5)
 
 # ---- 上：自对弈白胜率 ----
 ax = fig.add_subplot(gs[0])
@@ -41,14 +41,14 @@ for i, r in enumerate(sp_sorted):
                 fmt='o', color=GROUP_COLOR[g], ecolor=GROUP_COLOR[g], capsize=3, ms=6)
 ax.axhline(50, color='#333', ls='--', lw=0.9)
 ax.set_xticks(range(len(sp_sorted)))
-ax.set_xticklabels([r['model'] for r in sp_sorted], rotation=90, ha='center', fontsize=8)
+ax.set_xticklabels([r['model'] for r in sp_sorted], rotation=90, ha='center', fontsize=6)
 ax.set_xlim(-0.7, len(sp_sorted) - 0.3)
-ax.set_ylabel('White win rate (%)')
+ax.set_ylabel('White win rate (%)', fontsize=7)
 ax.set_ylim(-3, 100)
-ax.set_title('(a) Duel self-play, same layout and reward per configuration, 300 games per run', fontsize=11)
+ax.set_title('(a) Duel self-play, 300 games per run', fontsize=8.5)
 ax.grid(alpha=0.25, axis='y')
 ax.legend(handles=[Line2D([0], [0], marker='o', color='w', markerfacecolor=GROUP_COLOR[g], ms=7, label=g)
-                   for g in GROUP_ORDER], fontsize=9, loc='upper right', ncol=3, frameon=False)
+                   for g in GROUP_ORDER], fontsize=6.5, loc='upper right', ncol=3, frameon=False)
 
 # ---- 中：循环赛矩阵 ----
 ax2 = fig.add_subplot(gs[1])
@@ -66,32 +66,32 @@ for i in range(len(names)):
     for j in range(len(names)):
         if i == j or np.isnan(M[i, j]):
             continue
-        ax2.text(j, i, f'{M[i, j]:.0f}', ha='center', va='center', fontsize=6.5,
+        ax2.text(j, i, f'{M[i, j]:.0f}', ha='center', va='center', fontsize=4.2,
                  color='white' if abs(M[i, j] - 50) > 28 else 'black')
 ax2.set_xticks(range(len(names)))
 ax2.set_yticks(range(len(names)))
-ax2.set_xticklabels(names, rotation=90, ha='center', fontsize=8)
-ax2.set_yticklabels(names, fontsize=8)
+ax2.set_xticklabels(names, rotation=90, ha='center', fontsize=6)
+ax2.set_yticklabels(names, fontsize=6)
 ax2.set_xlabel('opponent (column)')
 ax2.set_ylabel('row model')
-ax2.set_title('(b) Round robin, row model win % (draws excluded; 100 games per colour per pair)', fontsize=11)
+ax2.set_title('(b) Round robin, row model win % (100 games per colour per pair)', fontsize=8.5)
 cb = fig.colorbar(im, ax=ax2, fraction=0.025, pad=0.01)
-cb.set_label('row win %', fontsize=8)
+cb.set_label('row win %', fontsize=6); cb.ax.tick_params(labelsize=6)
 
 # ---- 下：训练统计（无逐点文字，按配置着色） ----
 ax3 = fig.add_subplot(gs[2])
 for n, r in tr['runs'].items():
     ax3.scatter(r['expl_var_mean_after150k'], r['win_sd_after150k'], s=60,
                 color=GROUP_COLOR[r['group']], edgecolor='k', lw=0.4, zorder=3)
-ax3.set_xlabel('explained variance, mean after 150k steps')
+ax3.set_xlabel('explained variance, mean after 150k steps', fontsize=7)
 ax3.set_ylabel('SD of rolling win rate\nafter 150k steps')
-ax3.set_title('(c) Training statistics per run (one point per run, coloured by configuration)', fontsize=11)
+ax3.set_title('(c) Training statistics per run', fontsize=8.5)
 ax3.grid(alpha=0.25)
 ax3.set_xlim(0.45, 1.05)
 ax3.legend(handles=[Line2D([0], [0], marker='o', color='w', markerfacecolor=GROUP_COLOR[g], ms=7, label=g)
-                    for g in GROUP_ORDER], fontsize=9, loc='upper left', frameon=False)
+                    for g in GROUP_ORDER], fontsize=6.5, loc='upper left', frameon=False)
 
-fig.suptitle('Terraflux replicate study: outcomes vary by training run more than by configuration', fontsize=13, y=0.995)
+fig.suptitle('Terraflux replicate study: outcomes vary by training run more than by configuration', fontsize=9, y=0.995)
 out = 'experiments/fig_replicates.png'
 fig.savefig(out, dpi=150, bbox_inches='tight')
 print('written', out)
