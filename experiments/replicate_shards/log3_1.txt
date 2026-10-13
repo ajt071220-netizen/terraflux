@@ -1,0 +1,4 @@
+[自对弈] shaped_s7  白 25.3% [20.7%,30.5%]  黑 64.3%  平 10.3% {'repetition': 26, 'max-moves': 5}  平均 91 步  (70.4s)
+[自对弈] shaped_s11 白 31.3% [26.3%,36.8%]  黑 63.7%  平 5.0% {'repetition': 15}  平均 72 步  (55.2s)
+[自对弈] sparse_s10 白 36.0% [30.8%,41.6%]  黑 51.7%  平 12.3% {'repetition': 24, 'border-capture': 1, 'max-moves': 12}  平均 105 步  (61.9s)
+shard written experiments\replicate_shards\shard_1.json

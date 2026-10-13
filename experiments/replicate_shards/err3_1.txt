@@ -1,0 +1,4 @@
+C:\Users\lecoo\Projects\terrain-chess\python\eval_selfplay.py:1: SyntaxWarning: invalid escape sequence '\.'
+  """eval_selfplay.py —— PPO 自对弈：测量"高手 vs 高手"下的黑白胜率（公平性基线）
+C:\Users\lecoo\Projects\terrain-chess\python\model_vs_model.py:1: SyntaxWarning: invalid escape sequence '\p'
+  """model_vs_model.py —— 两模型对打评估（循环赛强度排名用）

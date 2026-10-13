@@ -20,14 +20,24 @@ sparse_s6   sparse            501k      145k      174k       131k   0.643     0.
 static_s4   static            501k     Nonek     Nonek        22k   0.497     0.500      0.048   0.994  1.000     5      1  0.020
 static_s5   static            501k      192k     Nonek        12k   0.510     0.503      0.050   0.966  0.986     0      1  0.113
 static_s6   static            501k     Nonek     Nonek        14k   0.404     0.456      0.119   0.987  0.999     1      2  0.048
+shaped_s6   shaped-config     501k       75k       77k        65k   0.694     0.620      0.111   0.653  0.867     0      0  0.082
+shaped_s7   shaped-config     501k      167k      200k        59k   0.526     0.564      0.136   0.571  0.806     1      2  0.157
+shaped_s8   shaped-config     501k       90k       94k        77k   0.636     0.650      0.092   0.739  0.892     1      2  0.074
+shaped_s9   shaped-config     501k      198k      208k       186k   0.720     0.709      0.125   0.667  0.931     2      0  0.284
+shaped_s10  shaped-config     501k      143k      153k       122k   0.704     0.600      0.127   0.619  0.828     1      2  0.100
+shaped_s11  shaped-config     501k       59k       63k        51k   0.597     0.600      0.184   0.531  0.861     4      3  0.136
+sparse_s7   sparse            501k       67k       69k        57k   0.742     0.721      0.168   0.669  0.870     1      4  0.098
+sparse_s8   sparse            501k       63k       67k        55k   0.539     0.590      0.100   0.644  0.826     0      3  0.062
+sparse_s9   sparse            501k      227k      231k       219k   0.768     0.769      0.134   0.689  0.913     2      3  0.206
+sparse_s10  sparse            501k      270k      290k        81k   0.558     0.581      0.129   0.583  0.846     0      3  0.110
 
 分组比较（均值差 = A − B；双侧置换检验，10,000 次）
-  sparse (n=6) 104448.000  vs  shaped-config (n=7) 89234.286  diff +15213.714  perm p = 0.541   [steps_to_55_smooth9]
-  sparse (n=6) 89429.333  vs  shaped-config (n=7) 79579.429  diff +9849.905  perm p = 0.685   [steps_to_55_raw]
-  sparse (n=6)     0.622  vs  shaped-config (n=7)     0.698  diff -0.076  perm p = 0.005   [late_win_ge333k]
-  static (n=6)     0.068  vs  shaped-config (n=7)     0.107  diff -0.040  perm p = 0.046   [win_sd_after150k]
-  static (n=6)     0.978  vs  shaped-config (n=7)     0.683  diff +0.295  perm p = 0.001   [expl_var_mean_after150k]
-  static (n=6)     1.833  vs  shaped-config (n=7)     2.571  diff -0.738  perm p = 0.545   [entropy_jumps_gt025]
-  static (n=6)     0.063  vs  shaped-config (n=7)     0.088  diff -0.025  perm p = 0.254   [draw_rate_mean]
+  sparse (n=10) 125542.400  vs  shaped-config (n=13) 104605.538  diff +20936.862  perm p = 0.434   [steps_to_55_smooth9]
+  sparse (n=10) 95027.200  vs  shaped-config (n=13) 86173.538  diff +8853.662  perm p = 0.678   [steps_to_55_raw]
+  sparse (n=10)     0.639  vs  shaped-config (n=13)     0.664  diff -0.024  perm p = 0.336   [late_win_ge333k]
+  static (n=6)     0.068  vs  shaped-config (n=13)     0.117  diff -0.050  perm p = 0.007   [win_sd_after150k]
+  static (n=6)     0.978  vs  shaped-config (n=13)     0.659  diff +0.319  perm p = 0.000   [expl_var_mean_after150k]
+  static (n=6)     1.833  vs  shaped-config (n=13)     2.077  diff -0.244  perm p = 0.886   [entropy_jumps_gt025]
+  static (n=6)     0.063  vs  shaped-config (n=13)     0.111  diff -0.048  perm p = 0.094   [draw_rate_mean]
 
 written experiments/robustness_training.json

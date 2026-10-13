@@ -18,8 +18,8 @@ rule fairness, reward shaping, and self-play training dynamics.
 What the replicates currently support:
 
 1. **Training is noisy.** Rolling win rates oscillate in every dynamic-terrain run, and the value function's explained variance plateaus well below 1. A static-board control does not isolate the cause, because freezing the terrain changes the game's balance.
-2. **Step-penalty effect not established.** Six sparse and seven penalised runs do not differ significantly in learning speed (the late-stage win rate against each run's own pool is lower for the sparse runs, p ≈ 0.005 uncorrected, but that measure depends on the pool).
-3. **Duel balance is not certifiable from one policy.** The White win rate across runs with identical settings ranges from 9% to 76%; round-robin strength is only weakly related to it (Spearman ρ = 0.32, thirteen runs).
+2. **Step-penalty effect not established.** Ten sparse and thirteen penalised runs do not differ significantly in learning speed (p ≈ 0.43) or in late-stage win rate against each run's own pool (p ≈ 0.34).
+3. **Duel balance is not certifiable from one policy.** The White win rate across runs with identical settings ranges from 9% to 84%; round-robin strength is only weakly related to it (Spearman ρ = 0.32, thirteen runs).
 
 ![Replicate study](experiments/fig_replicates.png)
 
@@ -81,7 +81,7 @@ experiments/      REPORT_DATA.md + figures + raw logs (the evidence chain)
   v1 的结论已作废，更正说明见 [report/ERRATUM_v1.md](report/ERRATUM_v1.md)
 
 v2 的结论（多种子复现）：训练曲线在动态地形下持续震荡；奖励整形（步罚）对学习速度的影响
-与运行间随机差异无法区分；同一设置下不同训练运行的白胜率差异很大（约 9%–76%），
+与运行间随机差异无法区分；同一设置下不同训练运行的白胜率差异很大（约 9%–84%），
 因此单个自对弈策略无法证明布局平衡。v1 中"公平性随策略强度单调上升"与"奖励整形加速约 24%"
 均因代码 bug 与单次运行而不成立。
 

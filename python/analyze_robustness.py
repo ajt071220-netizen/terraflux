@@ -42,6 +42,16 @@ RUNS = {
     'static_s4':  ('training_log_static_s4.jsonl',     'static',        '静止棋盘 seed 4（批次二）'),
     'static_s5':  ('training_log_static_s5.jsonl',     'static',        '静止棋盘 seed 5（批次二）'),
     'static_s6':  ('training_log_static_s6.jsonl',     'static',        '静止棋盘 seed 6（批次二）'),
+    'shaped_s6':  ('training_log_shaped_s6.jsonl',     'shaped-config', 'shaped seed 6（批次三）'),
+    'shaped_s7':  ('training_log_shaped_s7.jsonl',     'shaped-config', 'shaped seed 7（批次三）'),
+    'shaped_s8':  ('training_log_shaped_s8.jsonl',     'shaped-config', 'shaped seed 8（批次三）'),
+    'shaped_s9':  ('training_log_shaped_s9.jsonl',     'shaped-config', 'shaped seed 9（批次三）'),
+    'shaped_s10': ('training_log_shaped_s10.jsonl',    'shaped-config', 'shaped seed 10（批次三）'),
+    'shaped_s11': ('training_log_shaped_s11.jsonl',    'shaped-config', 'shaped seed 11（批次三）'),
+    'sparse_s7':  ('training_log_sparse_s7.jsonl',     'sparse',        'sparse seed 7（批次三）'),
+    'sparse_s8':  ('training_log_sparse_s8.jsonl',     'sparse',        'sparse seed 8（批次三）'),
+    'sparse_s9':  ('training_log_sparse_s9.jsonl',     'sparse',        'sparse seed 9（批次三）'),
+    'sparse_s10': ('training_log_sparse_s10.jsonl',    'sparse',        'sparse seed 10（批次三）'),
 }
 
 

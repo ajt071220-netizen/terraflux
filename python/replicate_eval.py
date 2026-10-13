@@ -52,6 +52,17 @@ MODELS = {
     'static_s4': ('models/ppo25_static_s4.zip',         True,  '静止棋盘，seed 4'),
     'static_s5': ('models/ppo25_static_s5.zip',         True,  '静止棋盘，seed 5'),
     'static_s6': ('models/ppo25_static_s6.zip',         True,  '静止棋盘，seed 6'),
+    # 第三批（步罚组补到每组 10 个种子）
+    'shaped_s6':  ('models/ppo25_shaped_s6.zip',        False, 'shaped，seed 6'),
+    'shaped_s7':  ('models/ppo25_shaped_s7.zip',        False, 'shaped，seed 7'),
+    'shaped_s8':  ('models/ppo25_shaped_s8.zip',        False, 'shaped，seed 8'),
+    'shaped_s9':  ('models/ppo25_shaped_s9.zip',        False, 'shaped，seed 9'),
+    'shaped_s10': ('models/ppo25_shaped_s10.zip',       False, 'shaped，seed 10'),
+    'shaped_s11': ('models/ppo25_shaped_s11.zip',       False, 'shaped，seed 11'),
+    'sparse_s7':  ('models/ppo25_sparse_s7.zip',        False, 'sparse（无步罚），seed 7'),
+    'sparse_s8':  ('models/ppo25_sparse_s8.zip',        False, 'sparse（无步罚），seed 8'),
+    'sparse_s9':  ('models/ppo25_sparse_s9.zip',        False, 'sparse（无步罚），seed 9'),
+    'sparse_s10': ('models/ppo25_sparse_s10.zip',       False, 'sparse（无步罚），seed 10'),
 }
 RR_CANDIDATES = [n for n, v in MODELS.items() if not v[1]]   # 只有动态棋盘参与循环赛
 

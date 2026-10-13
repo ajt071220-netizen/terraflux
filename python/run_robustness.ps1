@@ -10,7 +10,7 @@
 # 因此首次运行的 sparse_s2 / sparse_s3 与 shaped 完全相同（逐行一致），已作废并删除，
 # 修复后（train_ppo.py 读取 stepPenalty）重新运行。shaped / static 的步罚即为 0.002，不受影响。
 
-param([string[]]$Only, [switch]$Batch2)
+param([string[]]$Only, [switch]$Batch2, [switch]$Batch3)
 
 $py  = '.\.venv-py312\Scripts\python.exe'
 $log = 'experiments\robust_logs'
@@ -35,6 +35,17 @@ $jobs = @{
   static_s4 = @{ seed = 4; penalty = 0.002; static = $true }
   static_s5 = @{ seed = 5; penalty = 0.002; static = $true }
   static_s6 = @{ seed = 6; penalty = 0.002; static = $true }
+  # 第三批：步罚组补到每组 10 个种子（shaped 2–11，sparse 1–10）
+  shaped_s6  = @{ seed = 6;  penalty = 0.002; static = $false }
+  shaped_s7  = @{ seed = 7;  penalty = 0.002; static = $false }
+  shaped_s8  = @{ seed = 8;  penalty = 0.002; static = $false }
+  shaped_s9  = @{ seed = 9;  penalty = 0.002; static = $false }
+  shaped_s10 = @{ seed = 10; penalty = 0.002; static = $false }
+  shaped_s11 = @{ seed = 11; penalty = 0.002; static = $false }
+  sparse_s7  = @{ seed = 7;  penalty = 0;     static = $false }
+  sparse_s8  = @{ seed = 8;  penalty = 0;     static = $false }
+  sparse_s9  = @{ seed = 9;  penalty = 0;     static = $false }
+  sparse_s10 = @{ seed = 10; penalty = 0;     static = $false }
 }
 
 function Build-Cmd([string]$exp) {
@@ -57,6 +68,15 @@ if ($Only -and $Only.Count -gt 0) {
     @('shaped_s5', 'static_s5'),
     @('sparse_s4', 'static_s6'),
     @('sparse_s5', 'sparse_s6')
+  )
+} elseif ($Batch3) {
+  # 第三批：五条并行流，每流两个任务（共 10 个）
+  $streams = @(
+    @('sparse_s7', 'shaped_s6'),
+    @('sparse_s8', 'shaped_s7'),
+    @('sparse_s9', 'shaped_s8'),
+    @('sparse_s10', 'shaped_s9'),
+    @('shaped_s10', 'shaped_s11')
   )
 } else {
   # 第一批：四条并行流，每流顺序执行若干任务
