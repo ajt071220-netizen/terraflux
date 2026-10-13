@@ -1,0 +1,29 @@
+﻿动态模型 23 个，循环赛 253 对
+model          avgRR  copeland  duelWhite
+sparse_s8      57.3%   20/22        25.7%
+sparse_s5      56.1%   20/22        62.7%
+shaped_s10     55.0%   15/22        44.7%
+sparse_s4      54.1%   17/22         8.7%
+abl_shaped     53.9%   16/22        32.7%
+shaped_s5      53.4%   13/22        47.0%
+sparse_s3      50.8%   16/22        56.7%
+sparse_s2      48.9%   17/22        44.7%
+shaped_s9      48.2%   13/22        39.7%
+shaped_s8      45.6%   11/22        84.0%
+sparse_s6      44.8%    9/22        48.0%
+shaped_s4      44.5%   14/22        41.7%
+shaped_s7      42.8%   12/22        25.3%
+shaped_s6      42.0%    5/22        13.7%
+shaped_s11     39.0%    6/22        31.3%
+sparse_s7      38.8%    9/22        24.0%
+main           38.1%    9/22        46.3%
+sparse_s1      38.0%    7/22        17.3%
+sparse_s9      37.7%    6/22        37.0%
+shaped_s3      35.8%    7/22        76.0%
+sparse_s10     34.6%    7/22        36.0%
+shaped_s2      27.1%    1/22        26.3%
+abl_sparse     27.0%    2/22        22.0%
+Spearman(avg RR, duel white) = 0.23  (n=23)
+成环三元组 181 / 1771
+同奖励对 n=78：mean|win-50| = 15.1；跨奖励对 n=130：mean|win-50| = 12.6
+written experiments/roundrobin_summary.json
