@@ -40,6 +40,8 @@ def main():
                     help='每步奖励整形惩罚（消融实验设 0）')
     ap.add_argument('--exp', type=str, default='',
                     help='实验标签：隔离日志/快照/TensorBoard 产物（消融对照组用）')
+    ap.add_argument('--seed', type=int, default=None, help='随机种子（多种子复现实验用）')
+    ap.add_argument('--static-terrain', action='store_true', help='消融对照：关闭地形改写（棋盘静止）')
     args = ap.parse_args()
 
     try:
@@ -61,7 +63,7 @@ def main():
         print(f'[续训] 预载对手池 {len(snapshots)} 个历史快照')
     SelfPlayEnv.model_cls = MaskablePPO
 
-    config = dict(size=args.size, stepPenalty=args.step_penalty)
+    config = dict(size=args.size, stepPenalty=args.step_penalty, staticTerrain=args.static_terrain)
 
     # 对手策略：优先从快照池采样（只用最近 5 个，早期弱快照价值低且省内存），否则启发式
     def make_opponent(get_model):
@@ -81,7 +83,7 @@ def main():
         return opponent
 
     # 说明：环境里的"学习方"每步走完后由对手回应；学习方颜色每局随机
-    env = SelfPlayEnv(config, make_opponent)
+    env = SelfPlayEnv(config, make_opponent, seed=args.seed)
     if USE_MASK:
         env = ActionMasker(env, lambda e: e.unwrapped.action_mask())
 
@@ -119,7 +121,7 @@ def main():
         print(f'[续训] 从 {args.resume} 继续')
     else:
         model = MaskablePPO('MultiInputPolicy', env, verbose=1,
-                            learning_rate=3e-4, n_steps=2048, batch_size=256,
+                            learning_rate=3e-4, n_steps=2048, batch_size=256, seed=args.seed,
                             policy_kwargs=policy_kwargs, **tb_kwargs)
 
     # 周期快照回调（_on_rollout_end 在 n_steps 边界触发，不依赖逐步取模的巧合）
@@ -270,7 +272,7 @@ class SelfPlayEnv(TerrainChessEnv):
 
     model_cls = None  # 由 main() 注入（MaskablePPO 或 PPO），供加载快照用
 
-    def __init__(self, config, make_opponent_fn):
+    def __init__(self, config, make_opponent_fn, seed=None):
         self._make_opponent = make_opponent_fn
         self._model_cache = {}
 
@@ -282,7 +284,7 @@ class SelfPlayEnv(TerrainChessEnv):
             return self._model_cache[path]
 
         self._opponent = make_opponent_fn(get_model)
-        super().__init__(config, opponent_fn=None)
+        super().__init__(config, opponent_fn=None, seed=seed)
         self.learner_color = 'white'
 
     def reset(self, *, seed=None, options=None):
@@ -335,7 +337,8 @@ class SelfPlayEnv(TerrainChessEnv):
                 reward = 1.0
             elif st['winner'] != 'draw':
                 reward = -1.0
-        reward -= 0.002
+        # 修复：原先此处硬编码 -0.002，导致 --step-penalty 在训练中无效（消融的 sparse 组实际也带步罚）
+        reward -= self.config.get('stepPenalty', 0.002)
         if invalid:
             reward -= 0.05
         info = {'winner': st['winner'], 'reason': st.get('winReason'), 'learner': self.learner_color}

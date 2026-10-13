@@ -19,6 +19,9 @@ rows = [json.loads(l) for l in open(LOG, encoding='utf-8')]
 steps = [r['steps'] / 1000 for r in rows]
 
 def col(k):
+    # 日志中 entropy 字段记录的是 SB3 的 train/entropy_loss（= -熵），这里取负还原为正的策略熵
+    if k == 'entropy':
+        return [(-r[k] if r.get(k) is not None else None) for r in rows]
     return [r.get(k) for r in rows]
 
 def rolling(xs, w=7):
@@ -74,7 +77,7 @@ if len(events) > 20:
 third = len(rows) // 3
 for name, seg in [('早期', rows[:third]), ('中期', rows[third:2 * third]), ('后期', rows[2 * third:])]:
     w = [r['win_rate'] for r in seg if r.get('win_rate') is not None]
-    e = [r['entropy'] for r in seg if r.get('entropy') is not None]
+    e = [-r['entropy'] for r in seg if r.get('entropy') is not None]
     l = [r['ep_len'] for r in seg if r.get('ep_len') is not None]
     print(f'[{name}] steps {seg[0]["steps"]//1000}k–{seg[-1]["steps"]//1000}k | '
           f'win {sum(w)/len(w):.3f} | entropy {sum(e)/len(e):.3f} | ep_len {sum(l)/len(l):.1f}')

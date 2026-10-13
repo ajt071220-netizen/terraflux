@@ -1,3 +1,9 @@
+> **勘误（v2，2026-10）**：训练代码中 `SelfPlayEnv.step` 硬编码了 −0.002 的步罚，`--step-penalty` 不生效。
+> 因此本文档"实验①"中的 sparse 组实际与 shaped 组奖励相同，其全部结论（59k/73k 步、0.716/0.709、66.0%:14.5%）
+> 均作废；原 sparse 组的 `experiments/ppo25_duel_sparse.zip` 仅作同配置重复保留。"实验③"的手写数字（`fig_strength_fairness.py`）
+> 同样作废，改由 `replicate_eval.json` 驱动。修正后的复现结果见 `report/REPORT.md`（v2）与 `experiments/robustness_training.json`。
+> 下文原文保留以便追溯，不再作为结论引用。
+
 # 涌陆（Terraflux）RL 实验数据汇总（报告素材库）
 
 > 三个实验全部完成。本文档汇集所有可直接引用的数字、图表与结论。

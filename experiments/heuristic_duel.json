@@ -1,0 +1,14 @@
+{
+ "games": 300,
+ "white": 0,
+ "black": 300,
+ "draw": 0,
+ "white_rate": 0.0,
+ "white_ci": [
+  0.0,
+  0.012643429997735661
+ ],
+ "draw_reasons": {},
+ "mean_len": 10.08,
+ "seed": 20260813
+}

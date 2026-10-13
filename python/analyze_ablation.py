@@ -39,8 +39,11 @@ for ax, key, title in [
     (axes[1], 'ep_len', 'Episode length (moves)'),
     (axes[2], 'entropy', 'Policy entropy (nats)'),
 ]:
-    ax.plot(s_steps, rolling([r.get(key) for r in s_rows]), color='#e07020', lw=1.8, label='shaped (−0.002/step)')
-    ax.plot(p_steps, rolling([r.get(key) for r in p_rows]), color='#5a6a80', lw=1.8, label='sparse (no penalty)')
+    def val(r):
+        # 日志 entropy = -熵（SB3 entropy_loss），画图时取负得到正的策略熵
+        return -r[key] if key == 'entropy' and r.get(key) is not None else r.get(key)
+    ax.plot(s_steps, rolling([val(r) for r in s_rows]), color='#e07020', lw=1.8, label='shaped (−0.002/step)')
+    ax.plot(p_steps, rolling([val(r) for r in p_rows]), color='#5a6a80', lw=1.8, label='sparse (no penalty)')
     ax.set_title(title, fontsize=10)
     ax.set_xlabel('steps (k)')
     ax.grid(alpha=0.25)

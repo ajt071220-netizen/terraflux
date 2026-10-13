@@ -1,0 +1,1446 @@
+{
+ "selfplay": [
+  {
+   "model": "main",
+   "path": "models/ppo_25.zip",
+   "static": false,
+   "games": 300,
+   "white": 139,
+   "black": 151,
+   "draw": 10,
+   "unfinished": 0,
+   "white_rate": 0.4633333333333333,
+   "white_ci": [
+    0.40772488257071904,
+    0.5198689689624482
+   ],
+   "black_rate": 0.5033333333333333,
+   "draw_rate": 0.03333333333333333,
+   "draw_reasons": {
+    "repetition": 6,
+    "max-moves": 4
+   },
+   "mean_len": 51.57333333333333,
+   "seconds": 22.9
+  },
+  {
+   "model": "abl_shaped",
+   "path": "experiments/ppo25_duel_shaped.zip",
+   "static": false,
+   "games": 300,
+   "white": 98,
+   "black": 173,
+   "draw": 29,
+   "unfinished": 0,
+   "white_rate": 0.32666666666666666,
+   "white_ci": [
+    0.27607755922349825,
+    0.38163882984238345
+   ],
+   "black_rate": 0.5766666666666667,
+   "draw_rate": 0.09666666666666666,
+   "draw_reasons": {
+    "repetition": 23,
+    "max-moves": 3,
+    "border-capture": 3
+   },
+   "mean_len": 67.59,
+   "seconds": 30.0
+  },
+  {
+   "model": "abl_sparse",
+   "path": "experiments/ppo25_duel_sparse.zip",
+   "static": false,
+   "games": 300,
+   "white": 66,
+   "black": 210,
+   "draw": 24,
+   "unfinished": 0,
+   "white_rate": 0.22,
+   "white_ci": [
+    0.17682672204095912,
+    0.2702535987577729
+   ],
+   "black_rate": 0.7,
+   "draw_rate": 0.08,
+   "draw_reasons": {
+    "border-capture": 2,
+    "repetition": 20,
+    "max-moves": 2
+   },
+   "mean_len": 67.15333333333334,
+   "seconds": 29.6
+  },
+  {
+   "model": "shaped_s2",
+   "path": "models/ppo25_shaped_s2.zip",
+   "static": false,
+   "games": 300,
+   "white": 79,
+   "black": 199,
+   "draw": 22,
+   "unfinished": 0,
+   "white_rate": 0.2633333333333333,
+   "white_ci": [
+    0.21671070808563797,
+    0.3159405154466235
+   ],
+   "black_rate": 0.6633333333333333,
+   "draw_rate": 0.07333333333333333,
+   "draw_reasons": {
+    "repetition": 22
+   },
+   "mean_len": 63.49333333333333,
+   "seconds": 27.8
+  },
+  {
+   "model": "shaped_s3",
+   "path": "models/ppo25_shaped_s3.zip",
+   "static": false,
+   "games": 300,
+   "white": 228,
+   "black": 65,
+   "draw": 7,
+   "unfinished": 0,
+   "white_rate": 0.76,
+   "white_ci": [
+    0.7085778152541881,
+    0.8048476011469895
+   ],
+   "black_rate": 0.21666666666666667,
+   "draw_rate": 0.023333333333333334,
+   "draw_reasons": {
+    "repetition": 6,
+    "border-capture": 1
+   },
+   "mean_len": 59.026666666666664,
+   "seconds": 26.1
+  },
+  {
+   "model": "sparse_s1",
+   "path": "models/ppo25_sparse_s1.zip",
+   "static": false,
+   "games": 300,
+   "white": 52,
+   "black": 217,
+   "draw": 31,
+   "unfinished": 0,
+   "white_rate": 0.17333333333333334,
+   "white_ci": [
+    0.13469996727082598,
+    0.22022707366102798
+   ],
+   "black_rate": 0.7233333333333334,
+   "draw_rate": 0.10333333333333333,
+   "draw_reasons": {
+    "repetition": 23,
+    "border-capture": 5,
+    "max-moves": 3
+   },
+   "mean_len": 78.02333333333333,
+   "seconds": 34.2
+  },
+  {
+   "model": "sparse_s2",
+   "path": "models/ppo25_sparse_s2.zip",
+   "static": false,
+   "games": 300,
+   "white": 134,
+   "black": 119,
+   "draw": 47,
+   "unfinished": 0,
+   "white_rate": 0.44666666666666666,
+   "white_ci": [
+    0.39143616500447354,
+    0.5032458008619516
+   ],
+   "black_rate": 0.39666666666666667,
+   "draw_rate": 0.15666666666666668,
+   "draw_reasons": {
+    "repetition": 41,
+    "border-capture": 6
+   },
+   "mean_len": 62.16,
+   "seconds": 33.6
+  },
+  {
+   "model": "sparse_s3",
+   "path": "models/ppo25_sparse_s3.zip",
+   "static": false,
+   "games": 300,
+   "white": 170,
+   "black": 119,
+   "draw": 11,
+   "unfinished": 0,
+   "white_rate": 0.5666666666666667,
+   "white_ci": [
+    0.5100978801359048,
+    0.6215496625310637
+   ],
+   "black_rate": 0.39666666666666667,
+   "draw_rate": 0.03666666666666667,
+   "draw_reasons": {
+    "repetition": 4,
+    "border-capture": 7
+   },
+   "mean_len": 60.93,
+   "seconds": 27.0
+  },
+  {
+   "model": "static_s1",
+   "path": "models/ppo25_static_s1.zip",
+   "static": true,
+   "games": 300,
+   "white": 19,
+   "black": 0,
+   "draw": 281,
+   "unfinished": 0,
+   "white_rate": 0.06333333333333334,
+   "white_ci": [
+    0.04091655604878176,
+    0.09679203948257407
+   ],
+   "black_rate": 0.0,
+   "draw_rate": 0.9366666666666666,
+   "draw_reasons": {
+    "repetition": 281
+   },
+   "mean_len": 38.403333333333336,
+   "seconds": 17.0
+  },
+  {
+   "model": "static_s2",
+   "path": "models/ppo25_static_s2.zip",
+   "static": true,
+   "games": 300,
+   "white": 300,
+   "black": 0,
+   "draw": 0,
+   "unfinished": 0,
+   "white_rate": 1.0,
+   "white_ci": [
+    0.9873565700022643,
+    0.9999999999999999
+   ],
+   "black_rate": 0.0,
+   "draw_rate": 0.0,
+   "draw_reasons": {},
+   "mean_len": 30.04,
+   "seconds": 13.1
+  },
+  {
+   "model": "static_s3",
+   "path": "models/ppo25_static_s3.zip",
+   "static": true,
+   "games": 300,
+   "white": 300,
+   "black": 0,
+   "draw": 0,
+   "unfinished": 0,
+   "white_rate": 1.0,
+   "white_ci": [
+    0.9873565700022643,
+    0.9999999999999999
+   ],
+   "black_rate": 0.0,
+   "draw_rate": 0.0,
+   "draw_reasons": {},
+   "mean_len": 30.0,
+   "seconds": 13.1
+  },
+  {
+   "model": "shaped_s4",
+   "path": "models/ppo25_shaped_s4.zip",
+   "static": false,
+   "games": 300,
+   "seed": 2005,
+   "white": 125,
+   "black": 129,
+   "draw": 46,
+   "unfinished": 0,
+   "white_rate": 0.4166666666666667,
+   "white_ci": [
+    0.36227512359534986,
+    0.4731654480709394
+   ],
+   "black_rate": 0.43,
+   "draw_rate": 0.15333333333333332,
+   "draw_reasons": {
+    "max-moves": 18,
+    "border-capture": 8,
+    "repetition": 20
+   },
+   "mean_len": 113.87,
+   "seconds": 54.2
+  },
+  {
+   "model": "sparse_s6",
+   "path": "models/ppo25_sparse_s6.zip",
+   "static": false,
+   "games": 300,
+   "seed": 2012,
+   "white": 144,
+   "black": 146,
+   "draw": 10,
+   "unfinished": 0,
+   "white_rate": 0.48,
+   "white_ci": [
+    0.4240757908015887,
+    0.5364299463983206
+   ],
+   "black_rate": 0.4866666666666667,
+   "draw_rate": 0.03333333333333333,
+   "draw_reasons": {
+    "border-capture": 6,
+    "repetition": 3,
+    "max-moves": 1
+   },
+   "mean_len": 68.21,
+   "seconds": 30.8
+  },
+  {
+   "model": "shaped_s5",
+   "path": "models/ppo25_shaped_s5.zip",
+   "static": false,
+   "games": 300,
+   "seed": 2006,
+   "white": 141,
+   "black": 155,
+   "draw": 4,
+   "unfinished": 0,
+   "white_rate": 0.47,
+   "white_ci": [
+    0.414257807168565,
+    0.5265007986312991
+   ],
+   "black_rate": 0.5166666666666667,
+   "draw_rate": 0.013333333333333334,
+   "draw_reasons": {
+    "repetition": 3,
+    "border-capture": 1
+   },
+   "mean_len": 56.586666666666666,
+   "seconds": 27.2
+  },
+  {
+   "model": "static_s4",
+   "path": "models/ppo25_static_s4.zip",
+   "static": true,
+   "games": 300,
+   "seed": 2016,
+   "white": 300,
+   "black": 0,
+   "draw": 0,
+   "unfinished": 0,
+   "white_rate": 1.0,
+   "white_ci": [
+    0.9873565700022643,
+    0.9999999999999999
+   ],
+   "black_rate": 0.0,
+   "draw_rate": 0.0,
+   "draw_reasons": {},
+   "mean_len": 30.0,
+   "seconds": 14.3
+  },
+  {
+   "model": "sparse_s4",
+   "path": "models/ppo25_sparse_s4.zip",
+   "static": false,
+   "games": 300,
+   "seed": 2010,
+   "white": 26,
+   "black": 244,
+   "draw": 30,
+   "unfinished": 0,
+   "white_rate": 0.08666666666666667,
+   "white_ci": [
+    0.05982848995477098,
+    0.12395674551002385
+   ],
+   "black_rate": 0.8133333333333334,
+   "draw_rate": 0.1,
+   "draw_reasons": {
+    "repetition": 30
+   },
+   "mean_len": 61.12,
+   "seconds": 29.7
+  },
+  {
+   "model": "static_s5",
+   "path": "models/ppo25_static_s5.zip",
+   "static": true,
+   "games": 300,
+   "seed": 2017,
+   "white": 300,
+   "black": 0,
+   "draw": 0,
+   "unfinished": 0,
+   "white_rate": 1.0,
+   "white_ci": [
+    0.9873565700022643,
+    0.9999999999999999
+   ],
+   "black_rate": 0.0,
+   "draw_rate": 0.0,
+   "draw_reasons": {},
+   "mean_len": 30.006666666666668,
+   "seconds": 14.4
+  },
+  {
+   "model": "sparse_s5",
+   "path": "models/ppo25_sparse_s5.zip",
+   "static": false,
+   "games": 300,
+   "seed": 2011,
+   "white": 188,
+   "black": 103,
+   "draw": 9,
+   "unfinished": 0,
+   "white_rate": 0.6266666666666667,
+   "white_ci": [
+    0.5706540867432932,
+    0.6794762443239473
+   ],
+   "black_rate": 0.3433333333333333,
+   "draw_rate": 0.03,
+   "draw_reasons": {
+    "border-capture": 4,
+    "repetition": 5
+   },
+   "mean_len": 49.016666666666666,
+   "seconds": 23.8
+  },
+  {
+   "model": "static_s6",
+   "path": "models/ppo25_static_s6.zip",
+   "static": true,
+   "games": 300,
+   "seed": 2018,
+   "white": 0,
+   "black": 0,
+   "draw": 300,
+   "unfinished": 0,
+   "white_rate": 0.0,
+   "white_ci": [
+    0.0,
+    0.012643429997735661
+   ],
+   "black_rate": 0.0,
+   "draw_rate": 1.0,
+   "draw_reasons": {
+    "repetition": 300
+   },
+   "mean_len": 26.59,
+   "seconds": 12.8
+  }
+ ],
+ "round_robin": [
+  {
+   "a": "main",
+   "b": "abl_shaped",
+   "games": 200,
+   "a_win": 0.565,
+   "b_win": 0.305,
+   "draw": 0.13,
+   "a_wins": 113,
+   "b_wins": 61,
+   "draws": 26
+  },
+  {
+   "a": "main",
+   "b": "abl_sparse",
+   "games": 200,
+   "a_win": 0.44,
+   "b_win": 0.395,
+   "draw": 0.165,
+   "a_wins": 88,
+   "b_wins": 79,
+   "draws": 33
+  },
+  {
+   "a": "main",
+   "b": "shaped_s2",
+   "games": 200,
+   "a_win": 0.385,
+   "b_win": 0.33,
+   "draw": 0.285,
+   "a_wins": 77,
+   "b_wins": 66,
+   "draws": 57
+  },
+  {
+   "a": "main",
+   "b": "shaped_s3",
+   "games": 200,
+   "a_win": 0.54,
+   "b_win": 0.385,
+   "draw": 0.075,
+   "a_wins": 108,
+   "b_wins": 77,
+   "draws": 15
+  },
+  {
+   "a": "main",
+   "b": "sparse_s1",
+   "games": 200,
+   "a_win": 0.42,
+   "b_win": 0.29,
+   "draw": 0.29,
+   "a_wins": 84,
+   "b_wins": 58,
+   "draws": 58
+  },
+  {
+   "a": "main",
+   "b": "sparse_s2",
+   "games": 200,
+   "a_win": 0.385,
+   "b_win": 0.455,
+   "draw": 0.16,
+   "a_wins": 77,
+   "b_wins": 91,
+   "draws": 32
+  },
+  {
+   "a": "main",
+   "b": "sparse_s3",
+   "games": 200,
+   "a_win": 0.215,
+   "b_win": 0.705,
+   "draw": 0.08,
+   "a_wins": 43,
+   "b_wins": 141,
+   "draws": 16
+  },
+  {
+   "a": "abl_shaped",
+   "b": "abl_sparse",
+   "games": 200,
+   "a_win": 0.66,
+   "b_win": 0.21,
+   "draw": 0.13,
+   "a_wins": 132,
+   "b_wins": 42,
+   "draws": 26
+  },
+  {
+   "a": "abl_shaped",
+   "b": "shaped_s2",
+   "games": 200,
+   "a_win": 0.565,
+   "b_win": 0.235,
+   "draw": 0.2,
+   "a_wins": 113,
+   "b_wins": 47,
+   "draws": 40
+  },
+  {
+   "a": "abl_shaped",
+   "b": "shaped_s3",
+   "games": 200,
+   "a_win": 0.63,
+   "b_win": 0.255,
+   "draw": 0.115,
+   "a_wins": 126,
+   "b_wins": 51,
+   "draws": 23
+  },
+  {
+   "a": "abl_shaped",
+   "b": "sparse_s1",
+   "games": 200,
+   "a_win": 0.525,
+   "b_win": 0.195,
+   "draw": 0.28,
+   "a_wins": 105,
+   "b_wins": 39,
+   "draws": 56
+  },
+  {
+   "a": "abl_shaped",
+   "b": "sparse_s2",
+   "games": 200,
+   "a_win": 0.505,
+   "b_win": 0.29,
+   "draw": 0.205,
+   "a_wins": 101,
+   "b_wins": 58,
+   "draws": 41
+  },
+  {
+   "a": "abl_shaped",
+   "b": "sparse_s3",
+   "games": 200,
+   "a_win": 0.335,
+   "b_win": 0.645,
+   "draw": 0.02,
+   "a_wins": 67,
+   "b_wins": 129,
+   "draws": 4
+  },
+  {
+   "a": "abl_sparse",
+   "b": "shaped_s2",
+   "games": 200,
+   "a_win": 0.325,
+   "b_win": 0.28,
+   "draw": 0.395,
+   "a_wins": 65,
+   "b_wins": 56,
+   "draws": 79
+  },
+  {
+   "a": "abl_sparse",
+   "b": "shaped_s3",
+   "games": 200,
+   "a_win": 0.295,
+   "b_win": 0.545,
+   "draw": 0.16,
+   "a_wins": 59,
+   "b_wins": 109,
+   "draws": 32
+  },
+  {
+   "a": "abl_sparse",
+   "b": "sparse_s1",
+   "games": 200,
+   "a_win": 0.395,
+   "b_win": 0.49,
+   "draw": 0.115,
+   "a_wins": 79,
+   "b_wins": 98,
+   "draws": 23
+  },
+  {
+   "a": "abl_sparse",
+   "b": "sparse_s2",
+   "games": 200,
+   "a_win": 0.335,
+   "b_win": 0.58,
+   "draw": 0.085,
+   "a_wins": 67,
+   "b_wins": 116,
+   "draws": 17
+  },
+  {
+   "a": "abl_sparse",
+   "b": "sparse_s3",
+   "games": 200,
+   "a_win": 0.375,
+   "b_win": 0.55,
+   "draw": 0.075,
+   "a_wins": 75,
+   "b_wins": 110,
+   "draws": 15
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s3",
+   "games": 200,
+   "a_win": 0.405,
+   "b_win": 0.455,
+   "draw": 0.14,
+   "a_wins": 81,
+   "b_wins": 91,
+   "draws": 28
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s1",
+   "games": 200,
+   "a_win": 0.485,
+   "b_win": 0.38,
+   "draw": 0.135,
+   "a_wins": 97,
+   "b_wins": 76,
+   "draws": 27
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s2",
+   "games": 200,
+   "a_win": 0.26,
+   "b_win": 0.545,
+   "draw": 0.195,
+   "a_wins": 52,
+   "b_wins": 109,
+   "draws": 39
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s3",
+   "games": 200,
+   "a_win": 0.165,
+   "b_win": 0.68,
+   "draw": 0.155,
+   "a_wins": 33,
+   "b_wins": 136,
+   "draws": 31
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s1",
+   "games": 200,
+   "a_win": 0.345,
+   "b_win": 0.48,
+   "draw": 0.175,
+   "a_wins": 69,
+   "b_wins": 96,
+   "draws": 35
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s2",
+   "games": 200,
+   "a_win": 0.14,
+   "b_win": 0.515,
+   "draw": 0.345,
+   "a_wins": 28,
+   "b_wins": 103,
+   "draws": 69
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s3",
+   "games": 200,
+   "a_win": 0.465,
+   "b_win": 0.49,
+   "draw": 0.045,
+   "a_wins": 93,
+   "b_wins": 98,
+   "draws": 9
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s2",
+   "games": 200,
+   "a_win": 0.38,
+   "b_win": 0.505,
+   "draw": 0.115,
+   "a_wins": 76,
+   "b_wins": 101,
+   "draws": 23
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s3",
+   "games": 200,
+   "a_win": 0.315,
+   "b_win": 0.56,
+   "draw": 0.125,
+   "a_wins": 63,
+   "b_wins": 112,
+   "draws": 25
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s3",
+   "games": 200,
+   "a_win": 0.46,
+   "b_win": 0.5,
+   "draw": 0.04,
+   "a_wins": 92,
+   "b_wins": 100,
+   "draws": 8
+  },
+  {
+   "a": "main",
+   "b": "shaped_s4",
+   "games": 200,
+   "seed": 11,
+   "a_win": 0.415,
+   "b_win": 0.505,
+   "draw": 0.08,
+   "a_wins": 83,
+   "b_wins": 101,
+   "draws": 16
+  },
+  {
+   "a": "main",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 18,
+   "a_win": 0.41,
+   "b_win": 0.54,
+   "draw": 0.05,
+   "a_wins": 82,
+   "b_wins": 108,
+   "draws": 10
+  },
+  {
+   "a": "abl_shaped",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 28,
+   "a_win": 0.475,
+   "b_win": 0.505,
+   "draw": 0.02,
+   "a_wins": 95,
+   "b_wins": 101,
+   "draws": 4
+  },
+  {
+   "a": "abl_sparse",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 37,
+   "a_win": 0.275,
+   "b_win": 0.695,
+   "draw": 0.03,
+   "a_wins": 55,
+   "b_wins": 139,
+   "draws": 6
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s5",
+   "games": 200,
+   "seed": 42,
+   "a_win": 0.21,
+   "b_win": 0.69,
+   "draw": 0.1,
+   "a_wins": 42,
+   "b_wins": 138,
+   "draws": 20
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s4",
+   "games": 200,
+   "seed": 49,
+   "a_win": 0.245,
+   "b_win": 0.605,
+   "draw": 0.15,
+   "a_wins": 49,
+   "b_wins": 121,
+   "draws": 30
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 56,
+   "a_win": 0.465,
+   "b_win": 0.425,
+   "draw": 0.11,
+   "a_wins": 93,
+   "b_wins": 85,
+   "draws": 22
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s3",
+   "games": 200,
+   "seed": 60,
+   "a_win": 0.41,
+   "b_win": 0.535,
+   "draw": 0.055,
+   "a_wins": 82,
+   "b_wins": 107,
+   "draws": 11
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s1",
+   "games": 200,
+   "seed": 64,
+   "a_win": 0.535,
+   "b_win": 0.405,
+   "draw": 0.06,
+   "a_wins": 107,
+   "b_wins": 81,
+   "draws": 12
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 68,
+   "a_win": 0.515,
+   "b_win": 0.45,
+   "draw": 0.035,
+   "a_wins": 103,
+   "b_wins": 90,
+   "draws": 7
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 74,
+   "a_win": 0.49,
+   "b_win": 0.415,
+   "draw": 0.095,
+   "a_wins": 98,
+   "b_wins": 83,
+   "draws": 19
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 79,
+   "a_win": 0.35,
+   "b_win": 0.615,
+   "draw": 0.035,
+   "a_wins": 70,
+   "b_wins": 123,
+   "draws": 7
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 83,
+   "a_win": 0.51,
+   "b_win": 0.37,
+   "draw": 0.12,
+   "a_wins": 102,
+   "b_wins": 74,
+   "draws": 24
+  },
+  {
+   "a": "main",
+   "b": "shaped_s5",
+   "games": 200,
+   "seed": 12,
+   "a_win": 0.355,
+   "b_win": 0.565,
+   "draw": 0.08,
+   "a_wins": 71,
+   "b_wins": 113,
+   "draws": 16
+  },
+  {
+   "a": "abl_shaped",
+   "b": "shaped_s4",
+   "games": 200,
+   "seed": 22,
+   "a_win": 0.58,
+   "b_win": 0.26,
+   "draw": 0.16,
+   "a_wins": 116,
+   "b_wins": 52,
+   "draws": 32
+  },
+  {
+   "a": "abl_shaped",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 29,
+   "a_win": 0.72,
+   "b_win": 0.205,
+   "draw": 0.075,
+   "a_wins": 144,
+   "b_wins": 41,
+   "draws": 15
+  },
+  {
+   "a": "abl_sparse",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 38,
+   "a_win": 0.22,
+   "b_win": 0.625,
+   "draw": 0.155,
+   "a_wins": 44,
+   "b_wins": 125,
+   "draws": 31
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 46,
+   "a_win": 0.19,
+   "b_win": 0.67,
+   "draw": 0.14,
+   "a_wins": 38,
+   "b_wins": 134,
+   "draws": 28
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s5",
+   "games": 200,
+   "seed": 50,
+   "a_win": 0.535,
+   "b_win": 0.365,
+   "draw": 0.1,
+   "a_wins": 107,
+   "b_wins": 73,
+   "draws": 20
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s5",
+   "games": 200,
+   "seed": 57,
+   "a_win": 0.545,
+   "b_win": 0.43,
+   "draw": 0.025,
+   "a_wins": 109,
+   "b_wins": 86,
+   "draws": 5
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 61,
+   "a_win": 0.475,
+   "b_win": 0.465,
+   "draw": 0.06,
+   "a_wins": 95,
+   "b_wins": 93,
+   "draws": 12
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s2",
+   "games": 200,
+   "seed": 65,
+   "a_win": 0.39,
+   "b_win": 0.545,
+   "draw": 0.065,
+   "a_wins": 78,
+   "b_wins": 109,
+   "draws": 13
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 69,
+   "a_win": 0.49,
+   "b_win": 0.49,
+   "draw": 0.02,
+   "a_wins": 98,
+   "b_wins": 98,
+   "draws": 4
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 76,
+   "a_win": 0.49,
+   "b_win": 0.465,
+   "draw": 0.045,
+   "a_wins": 98,
+   "b_wins": 93,
+   "draws": 9
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 80,
+   "a_win": 0.445,
+   "b_win": 0.545,
+   "draw": 0.01,
+   "a_wins": 89,
+   "b_wins": 109,
+   "draws": 2
+  },
+  {
+   "a": "sparse_s5",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 84,
+   "a_win": 0.565,
+   "b_win": 0.415,
+   "draw": 0.02,
+   "a_wins": 113,
+   "b_wins": 83,
+   "draws": 4
+  },
+  {
+   "a": "main",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 16,
+   "a_win": 0.335,
+   "b_win": 0.55,
+   "draw": 0.115,
+   "a_wins": 67,
+   "b_wins": 110,
+   "draws": 23
+  },
+  {
+   "a": "abl_shaped",
+   "b": "shaped_s5",
+   "games": 200,
+   "seed": 23,
+   "a_win": 0.585,
+   "b_win": 0.38,
+   "draw": 0.035,
+   "a_wins": 117,
+   "b_wins": 76,
+   "draws": 7
+  },
+  {
+   "a": "abl_sparse",
+   "b": "shaped_s4",
+   "games": 200,
+   "seed": 32,
+   "a_win": 0.27,
+   "b_win": 0.565,
+   "draw": 0.165,
+   "a_wins": 54,
+   "b_wins": 113,
+   "draws": 33
+  },
+  {
+   "a": "abl_sparse",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 39,
+   "a_win": 0.24,
+   "b_win": 0.505,
+   "draw": 0.255,
+   "a_wins": 48,
+   "b_wins": 101,
+   "draws": 51
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 47,
+   "a_win": 0.35,
+   "b_win": 0.515,
+   "draw": 0.135,
+   "a_wins": 70,
+   "b_wins": 103,
+   "draws": 27
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 54,
+   "a_win": 0.255,
+   "b_win": 0.595,
+   "draw": 0.15,
+   "a_wins": 51,
+   "b_wins": 119,
+   "draws": 30
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s1",
+   "games": 200,
+   "seed": 58,
+   "a_win": 0.545,
+   "b_win": 0.24,
+   "draw": 0.215,
+   "a_wins": 109,
+   "b_wins": 48,
+   "draws": 43
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 62,
+   "a_win": 0.265,
+   "b_win": 0.7,
+   "draw": 0.035,
+   "a_wins": 53,
+   "b_wins": 140,
+   "draws": 7
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s3",
+   "games": 200,
+   "seed": 66,
+   "a_win": 0.49,
+   "b_win": 0.5,
+   "draw": 0.01,
+   "a_wins": 98,
+   "b_wins": 100,
+   "draws": 2
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 72,
+   "a_win": 0.195,
+   "b_win": 0.685,
+   "draw": 0.12,
+   "a_wins": 39,
+   "b_wins": 137,
+   "draws": 24
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 77,
+   "a_win": 0.33,
+   "b_win": 0.535,
+   "draw": 0.135,
+   "a_wins": 66,
+   "b_wins": 107,
+   "draws": 27
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 81,
+   "a_win": 0.505,
+   "b_win": 0.37,
+   "draw": 0.125,
+   "a_wins": 101,
+   "b_wins": 74,
+   "draws": 25
+  },
+  {
+   "a": "main",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 17,
+   "a_win": 0.215,
+   "b_win": 0.71,
+   "draw": 0.075,
+   "a_wins": 43,
+   "b_wins": 142,
+   "draws": 15
+  },
+  {
+   "a": "abl_shaped",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 27,
+   "a_win": 0.515,
+   "b_win": 0.31,
+   "draw": 0.175,
+   "a_wins": 103,
+   "b_wins": 62,
+   "draws": 35
+  },
+  {
+   "a": "abl_sparse",
+   "b": "shaped_s5",
+   "games": 200,
+   "seed": 33,
+   "a_win": 0.29,
+   "b_win": 0.64,
+   "draw": 0.07,
+   "a_wins": 58,
+   "b_wins": 128,
+   "draws": 14
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s4",
+   "games": 200,
+   "seed": 41,
+   "a_win": 0.25,
+   "b_win": 0.515,
+   "draw": 0.235,
+   "a_wins": 50,
+   "b_wins": 103,
+   "draws": 47
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 48,
+   "a_win": 0.36,
+   "b_win": 0.48,
+   "draw": 0.16,
+   "a_wins": 72,
+   "b_wins": 96,
+   "draws": 32
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 55,
+   "a_win": 0.175,
+   "b_win": 0.73,
+   "draw": 0.095,
+   "a_wins": 35,
+   "b_wins": 146,
+   "draws": 19
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s2",
+   "games": 200,
+   "seed": 59,
+   "a_win": 0.5,
+   "b_win": 0.455,
+   "draw": 0.045,
+   "a_wins": 100,
+   "b_wins": 91,
+   "draws": 9
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 63,
+   "a_win": 0.49,
+   "b_win": 0.385,
+   "draw": 0.125,
+   "a_wins": 98,
+   "b_wins": 77,
+   "draws": 25
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 67,
+   "a_win": 0.465,
+   "b_win": 0.505,
+   "draw": 0.03,
+   "a_wins": 93,
+   "b_wins": 101,
+   "draws": 6
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 73,
+   "a_win": 0.405,
+   "b_win": 0.46,
+   "draw": 0.135,
+   "a_wins": 81,
+   "b_wins": 92,
+   "draws": 27
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 78,
+   "a_win": 0.525,
+   "b_win": 0.4,
+   "draw": 0.075,
+   "a_wins": 105,
+   "b_wins": 80,
+   "draws": 15
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 82,
+   "a_win": 0.385,
+   "b_win": 0.545,
+   "draw": 0.07,
+   "a_wins": 77,
+   "b_wins": 109,
+   "draws": 14
+  }
+ ],
+ "missing": [],
+ "models": {
+  "main": {
+   "path": "models/ppo_25.zip",
+   "static": false,
+   "note": "原主模型（shaped 配置，未记录种子）"
+  },
+  "abl_shaped": {
+   "path": "experiments/ppo25_duel_shaped.zip",
+   "static": false,
+   "note": "原消融 shaped（未记录种子）"
+  },
+  "abl_sparse": {
+   "path": "experiments/ppo25_duel_sparse.zip",
+   "static": false,
+   "note": "原消融 sparse：实际与 shaped 奖励相同（硬编码 bug），仅作同配置重复"
+  },
+  "shaped_s2": {
+   "path": "models/ppo25_shaped_s2.zip",
+   "static": false,
+   "note": "shaped，seed 2"
+  },
+  "shaped_s3": {
+   "path": "models/ppo25_shaped_s3.zip",
+   "static": false,
+   "note": "shaped，seed 3"
+  },
+  "shaped_s4": {
+   "path": "models/ppo25_shaped_s4.zip",
+   "static": false,
+   "note": "shaped，seed 4"
+  },
+  "shaped_s5": {
+   "path": "models/ppo25_shaped_s5.zip",
+   "static": false,
+   "note": "shaped，seed 5"
+  },
+  "sparse_s1": {
+   "path": "models/ppo25_sparse_s1.zip",
+   "static": false,
+   "note": "sparse（无步罚），seed 1"
+  },
+  "sparse_s2": {
+   "path": "models/ppo25_sparse_s2.zip",
+   "static": false,
+   "note": "sparse（无步罚），seed 2"
+  },
+  "sparse_s3": {
+   "path": "models/ppo25_sparse_s3.zip",
+   "static": false,
+   "note": "sparse（无步罚），seed 3"
+  },
+  "sparse_s4": {
+   "path": "models/ppo25_sparse_s4.zip",
+   "static": false,
+   "note": "sparse（无步罚），seed 4"
+  },
+  "sparse_s5": {
+   "path": "models/ppo25_sparse_s5.zip",
+   "static": false,
+   "note": "sparse（无步罚），seed 5"
+  },
+  "sparse_s6": {
+   "path": "models/ppo25_sparse_s6.zip",
+   "static": false,
+   "note": "sparse（无步罚），seed 6"
+  },
+  "static_s1": {
+   "path": "models/ppo25_static_s1.zip",
+   "static": true,
+   "note": "静止棋盘，seed 1"
+  },
+  "static_s2": {
+   "path": "models/ppo25_static_s2.zip",
+   "static": true,
+   "note": "静止棋盘，seed 2"
+  },
+  "static_s3": {
+   "path": "models/ppo25_static_s3.zip",
+   "static": true,
+   "note": "静止棋盘，seed 3"
+  },
+  "static_s4": {
+   "path": "models/ppo25_static_s4.zip",
+   "static": true,
+   "note": "静止棋盘，seed 4"
+  },
+  "static_s5": {
+   "path": "models/ppo25_static_s5.zip",
+   "static": true,
+   "note": "静止棋盘，seed 5"
+  },
+  "static_s6": {
+   "path": "models/ppo25_static_s6.zip",
+   "static": true,
+   "note": "静止棋盘，seed 6"
+  }
+ }
+}

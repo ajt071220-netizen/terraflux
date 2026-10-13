@@ -1,0 +1,194 @@
+{
+ "selfplay": [
+  {
+   "model": "sparse_s4",
+   "path": "models/ppo25_sparse_s4.zip",
+   "static": false,
+   "games": 300,
+   "seed": 2010,
+   "white": 26,
+   "black": 244,
+   "draw": 30,
+   "unfinished": 0,
+   "white_rate": 0.08666666666666667,
+   "white_ci": [
+    0.05982848995477098,
+    0.12395674551002385
+   ],
+   "black_rate": 0.8133333333333334,
+   "draw_rate": 0.1,
+   "draw_reasons": {
+    "repetition": 30
+   },
+   "mean_len": 61.12,
+   "seconds": 29.7
+  },
+  {
+   "model": "static_s5",
+   "path": "models/ppo25_static_s5.zip",
+   "static": true,
+   "games": 300,
+   "seed": 2017,
+   "white": 300,
+   "black": 0,
+   "draw": 0,
+   "unfinished": 0,
+   "white_rate": 1.0,
+   "white_ci": [
+    0.9873565700022643,
+    0.9999999999999999
+   ],
+   "black_rate": 0.0,
+   "draw_rate": 0.0,
+   "draw_reasons": {},
+   "mean_len": 30.006666666666668,
+   "seconds": 14.4
+  }
+ ],
+ "round_robin": [
+  {
+   "a": "main",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 16,
+   "a_win": 0.335,
+   "b_win": 0.55,
+   "draw": 0.115,
+   "a_wins": 67,
+   "b_wins": 110,
+   "draws": 23
+  },
+  {
+   "a": "abl_shaped",
+   "b": "shaped_s5",
+   "games": 200,
+   "seed": 23,
+   "a_win": 0.585,
+   "b_win": 0.38,
+   "draw": 0.035,
+   "a_wins": 117,
+   "b_wins": 76,
+   "draws": 7
+  },
+  {
+   "a": "abl_sparse",
+   "b": "shaped_s4",
+   "games": 200,
+   "seed": 32,
+   "a_win": 0.27,
+   "b_win": 0.565,
+   "draw": 0.165,
+   "a_wins": 54,
+   "b_wins": 113,
+   "draws": 33
+  },
+  {
+   "a": "abl_sparse",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 39,
+   "a_win": 0.24,
+   "b_win": 0.505,
+   "draw": 0.255,
+   "a_wins": 48,
+   "b_wins": 101,
+   "draws": 51
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 47,
+   "a_win": 0.35,
+   "b_win": 0.515,
+   "draw": 0.135,
+   "a_wins": 70,
+   "b_wins": 103,
+   "draws": 27
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 54,
+   "a_win": 0.255,
+   "b_win": 0.595,
+   "draw": 0.15,
+   "a_wins": 51,
+   "b_wins": 119,
+   "draws": 30
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s1",
+   "games": 200,
+   "seed": 58,
+   "a_win": 0.545,
+   "b_win": 0.24,
+   "draw": 0.215,
+   "a_wins": 109,
+   "b_wins": 48,
+   "draws": 43
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 62,
+   "a_win": 0.265,
+   "b_win": 0.7,
+   "draw": 0.035,
+   "a_wins": 53,
+   "b_wins": 140,
+   "draws": 7
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s3",
+   "games": 200,
+   "seed": 66,
+   "a_win": 0.49,
+   "b_win": 0.5,
+   "draw": 0.01,
+   "a_wins": 98,
+   "b_wins": 100,
+   "draws": 2
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s4",
+   "games": 200,
+   "seed": 72,
+   "a_win": 0.195,
+   "b_win": 0.685,
+   "draw": 0.12,
+   "a_wins": 39,
+   "b_wins": 137,
+   "draws": 24
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s5",
+   "games": 200,
+   "seed": 77,
+   "a_win": 0.33,
+   "b_win": 0.535,
+   "draw": 0.135,
+   "a_wins": 66,
+   "b_wins": 107,
+   "draws": 27
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s6",
+   "games": 200,
+   "seed": 81,
+   "a_win": 0.505,
+   "b_win": 0.37,
+   "draw": 0.125,
+   "a_wins": 101,
+   "b_wins": 74,
+   "draws": 25
+  }
+ ]
+}

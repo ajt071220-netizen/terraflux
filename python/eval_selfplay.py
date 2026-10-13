@@ -71,6 +71,7 @@ def main():
     ap.add_argument('--phase-mode', type=str, default=None, choices=['off', 'sync', 'all8'])
     ap.add_argument('--setup', type=str, default=None,
                     help='固定布子 "白r,白c:黑r,黑c"，如 "14,13:13,13"（覆盖随机布子）')
+    ap.add_argument('--static-terrain', action='store_true', help='评估静止棋盘模型（与 train_ppo --static-terrain 配对）')
     args = ap.parse_args()
 
     model, use_mask = load_model(args.model)
@@ -78,6 +79,7 @@ def main():
 
     config = {'size': args.size}
     overrides = []
+    if args.static_terrain: config['staticTerrain'] = True; overrides.append('静止棋盘')
     if args.capture_rule: config['captureRule'] = args.capture_rule; overrides.append(f'捕捉={args.capture_rule}')
     if args.gap is not None: config['gap'] = args.gap; overrides.append(f'间距={args.gap}')
     if args.first_player: config['firstPlayer'] = args.first_player; overrides.append(f'先手={args.first_player}')

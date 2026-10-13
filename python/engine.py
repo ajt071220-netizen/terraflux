@@ -206,7 +206,9 @@ def apply_move(state, color, move):
         events['moved'] = move
         events['phase'] = phase
         state['passes'] = 0
-        for (r, c, to) in affected_cells(state, move[0], move[1], phase):
+        # 消融对照：config['staticTerrain']=True 时关闭地形改写（默认 False，不影响正常对局）
+        cells = [] if state['config'].get('staticTerrain') else affected_cells(state, move[0], move[1], phase)
+        for (r, c, to) in cells:
             i = idx(state, r, c)
             frm = state['pillars'][i]
             if frm != to:

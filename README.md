@@ -11,39 +11,19 @@ over the *shape of the board itself*. This repo contains a playable 3D simulator
 three kinds of agents (heuristic / PPO self-play / LLM), and a set of experiments on
 rule fairness, reward shaping, and self-play training dynamics.
 
-## Research highlights
+## Research status (v2 — corrected)
 
-**1. Fairness is strength-conditional.** The "balanced" opening (duel, gap 3, black first)
-shows a perfect monotone ladder — 0% → 20% → 34% → 46% white win rate as the policy gets
-stronger, converging toward 50% only for the strongest agent. A rule set cannot be called
-fair or unfair without specifying *who is playing*. Heuristic-based playtesting would have
-declared this layout hopeless for white; converged PPO self-play shows it is nearly balanced.
+> The first version of the study had a **reward bug**: the training environment hard-coded the step penalty, so the "sparse" arm of the reward-shaping ablation was trained with the same penalty as the "shaped" arm. Conclusions drawn from that comparison are withdrawn. Replicate runs (seeds recorded) show that outcomes vary more across training runs than across the configurations compared. See **[report/REPORT.md](report/REPORT.md)** (v2) for the full revision note; the superseded v1 text is kept in `report/REPORT_v1_superseded.md`.
 
-![Strength-conditional fairness](experiments/fig_strength_fairness.png)
+What the replicates currently support:
 
-**2. Reward shaping: accelerator, not ceiling-raiser — and log win-rates lie.**
-An ablation pair (50k-step rolling window, 500k steps each, identical except for a
-−0.002/step penalty) shows shaping speeds up early learning by ~24% (59k vs 73k steps to
-55% win rate). Training logs suggest both converge to the same strength (0.716 vs 0.709) —
-but a direct round-robin match exposes that as an artifact of self-play relative win rates:
-the shaped agent crushes the sparse one **66.0% : 14.5%**.
+1. **Training is noisy.** Rolling win rates oscillate in every dynamic-terrain run, and the value function's explained variance plateaus well below 1. A static-board control does not isolate the cause, because freezing the terrain changes the game's balance.
+2. **Step-penalty effect not established.** Six sparse and seven penalised runs do not differ significantly in learning speed (the late-stage win rate against each run's own pool is lower for the sparse runs, p ≈ 0.005 uncorrected, but that measure depends on the pool).
+3. **Duel balance is not certifiable from one policy.** The White win rate across runs with identical settings ranges from 9% to 76%; round-robin strength is only weakly related to it (Spearman ρ = 0.32, thirteen runs).
 
-![Reward shaping ablation](experiments/fig_ablation.png)
+![Replicate study](experiments/fig_replicates.png)
 
-**3. Self-play dynamics: oscillation is the signature, not a bug.**
-Mid-training win rate oscillates persistently because the opponent pool is made of the
-learner's own snapshots — both sides improve together. Explained variance climbs 0.2 → 0.8
-but never saturates: the environment is permanently non-stationary.
-
-![Training dynamics](experiments/fig_training_dynamics.png)
-
-**4. Board size does not move fairness** (for weak policies, 15×15–27×27 is a flat line),
-while policy strength moves it decisively — size is the wrong knob, strength is the right lens.
-
-![Size scan](experiments/fig_size_fairness.png)
-
-Full experiment write-up with all numbers, confidence intervals, and limitations:
-[experiments/REPORT_DATA.md](experiments/REPORT_DATA.md)
+Scripts: `python/run_robustness.ps1` (training batch), `python/analyze_robustness.py`, `python/replicate_eval.py`, `python/fig_replicates.py`. Data: `experiments/robustness_training.json`, `experiments/replicate_eval.json`.
 
 ## Run it
 
@@ -97,11 +77,12 @@ experiments/      REPORT_DATA.md + figures + raw logs (the evidence chain)
 
 - **3D 可玩模拟器**（Three.js，零 npm 依赖）：`node server.js` 后打开 http://localhost:5173
 - **三类智能体**：启发式 / PPO 自我对弈（MaskablePPO）/ 大语言模型（OpenAI 兼容接口）
-- **强化学习实验**：奖励整形消融、自我对弈训练动态解剖、规则公平性的强度条件化研究——
-  全部数据与图表见 [experiments/REPORT_DATA.md](experiments/REPORT_DATA.md)
+- **强化学习实验（v2，已修正）**：完整报告见 [report/REPORT.md](report/REPORT.md)；
+  v1 的结论已作废，更正说明见 [report/ERRATUM_v1.md](report/ERRATUM_v1.md)
 
-核心发现：规则公平性是策略强度条件化的——同一开局布局，白胜率随策略强度从 0% 单调
-收敛至 46%；奖励整形加速学习约 24%，且自我对弈的日志胜率会掩盖真实强度差（循环赛
-66:14.5）；棋盘尺寸对公平性几乎无影响。
+v2 的结论（多种子复现）：训练曲线在动态地形下持续震荡；奖励整形（步罚）对学习速度的影响
+与运行间随机差异无法区分；同一设置下不同训练运行的白胜率差异很大（约 9%–76%），
+因此单个自对弈策略无法证明布局平衡。v1 中"公平性随策略强度单调上升"与"奖励整形加速约 24%"
+均因代码 bug 与单次运行而不成立。
 
 </details>
