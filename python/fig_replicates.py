@@ -1,13 +1,14 @@
-﻿"""fig_replicates.py —— 实验④ 数据驱动的汇总图
+﻿"""fig_replicates.py —— 实验④ 数据驱动的三张独立图（按 A4 版心宽度设计，字号以印刷为准）
 
-输入：experiments/replicate_eval.json（自对弈 + 循环赛）、experiments/robustness_training.json（训练统计）
-输出：experiments/fig_replicates.png
-  上：各训练运行的 duel 自对弈白胜率（Wilson 95% CI），按配置分组；50% 虚线
-  中：动态棋盘模型两两循环赛（行模型对列模型的胜率，平局不计入胜率）
-  下：训练后期（150k 步之后）的解释方差均值 与 胜率标准差，按配置着色（不逐点标注，避免重叠）
+输入：experiments/replicate_eval.json、experiments/robustness_training.json
+输出：
+  experiments/fig_selfplay.png   图3：各训练运行的 duel 自对弈白胜率（水平点图，含 Wilson 95% CI）
+  experiments/fig_roundrobin.png 图4：循环赛——上方为各运行平均胜率，下方为 23×23 对战矩阵（无单元格数字，数值见 JSON）
+  experiments/fig_trainstats.png 图5：训练统计散点（解释方差 × 胜率标准差）
 """
 import json
 import os
+import re
 
 import matplotlib
 matplotlib.use('Agg')
@@ -18,80 +19,139 @@ from matplotlib.lines import Line2D
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
+plt.rcParams.update({'font.size': 8, 'axes.titlesize': 9, 'axes.labelsize': 8,
+                     'xtick.labelsize': 7.5, 'ytick.labelsize': 7.5, 'legend.fontsize': 8,
+                     'font.family': 'DejaVu Sans'})
+
 ev = json.load(open('experiments/replicate_eval.json', encoding='utf-8'))
 tr = json.load(open('experiments/robustness_training.json', encoding='utf-8'))
 
-GROUP_COLOR = {'shaped-config': '#e07020', 'sparse': '#5a6a80', 'static': '#8a8578'}
+GROUP_COLOR = {'shaped-config': '#d9701c', 'sparse': '#3f5f8a', 'static': '#7a756a'}
+GROUP_LABEL = {'shaped-config': 'penalised (step penalty −0.002)', 'sparse': 'sparse (no step penalty)',
+               'static': 'static board (terrain frozen)'}
 GROUP_ORDER = ['shaped-config', 'sparse', 'static']
 
-# ---- 数据顺序：按配置分组，组内按名称 ----
-sp = ev['selfplay']
-sp_sorted = sorted(sp, key=lambda r: (GROUP_ORDER.index(tr['runs'][r['model']]['group']), r['model']))
 
-fig = plt.figure(figsize=(7.2, 11.5))
-gs = fig.add_gridspec(3, 1, height_ratios=[1.0, 1.45, 0.9], hspace=0.5)
+def seed_of(name):
+    m = re.search(r'_s(\d+)$', name)
+    return int(m.group(1)) if m else -1
 
-# ---- 上：自对弈白胜率 ----
-ax = fig.add_subplot(gs[0])
-for i, r in enumerate(sp_sorted):
+
+def run_key(name):
+    g = GROUP_ORDER.index(tr['runs'][name]['group'])
+    first = {'main': 0, 'abl_shaped': 1, 'abl_sparse': 2}.get(name, 3)
+    return (g, first, seed_of(name))
+
+
+def legend_handles():
+    return [Line2D([0], [0], marker='o', color='w', markerfacecolor=GROUP_COLOR[g], markersize=7,
+                   label=GROUP_LABEL[g]) for g in GROUP_ORDER]
+
+
+# =============== 图3：自对弈白胜率（水平点图）===============
+sp = sorted(ev['selfplay'], key=lambda r: run_key(r['model']))
+ypos, y = {}, 0
+prev_g = None
+for r in sp:
     g = tr['runs'][r['model']]['group']
-    lo, hi = r['white_ci']
-    ax.errorbar(i, r['white_rate'] * 100,
-                yerr=[[max(0.0, (r['white_rate'] - lo) * 100)], [max(0.0, (hi - r['white_rate']) * 100)]],
-                fmt='o', color=GROUP_COLOR[g], ecolor=GROUP_COLOR[g], capsize=3, ms=6)
-ax.axhline(50, color='#333', ls='--', lw=0.9)
-ax.set_xticks(range(len(sp_sorted)))
-ax.set_xticklabels([r['model'] for r in sp_sorted], rotation=90, ha='center', fontsize=6)
-ax.set_xlim(-0.7, len(sp_sorted) - 0.3)
-ax.set_ylabel('White win rate (%)', fontsize=7)
-ax.set_ylim(-3, 100)
-ax.set_title('(a) Duel self-play, 300 games per run', fontsize=8.5)
-ax.grid(alpha=0.25, axis='y')
-ax.legend(handles=[Line2D([0], [0], marker='o', color='w', markerfacecolor=GROUP_COLOR[g], ms=7, label=g)
-                   for g in GROUP_ORDER], fontsize=6.5, loc='upper right', ncol=3, frameon=False)
+    if prev_g is not None and g != prev_g:
+        y += 0.9                    # 组间空隙
+    ypos[r['model']] = y
+    y += 1
+    prev_g = g
 
-# ---- 中：循环赛矩阵 ----
-ax2 = fig.add_subplot(gs[1])
-_all = sorted({x['a'] for x in ev['round_robin']} | {x['b'] for x in ev['round_robin']})
-_avg = {n: (sum(x['a_win'] for x in ev['round_robin'] if x['a'] == n) + sum(x['b_win'] for x in ev['round_robin'] if x['b'] == n))
-        / max(1, sum(1 for x in ev['round_robin'] if n in (x['a'], x['b']))) for n in _all}
-names = sorted(_all, key=lambda n: -_avg[n])
+fig, ax = plt.subplots(figsize=(6.6, 8.2))
+for r in sp:
+    n = r['model']
+    g = tr['runs'][n]['group']
+    lo, hi = r['white_ci']
+    yy = ypos[n]
+    ax.errorbar(r['white_rate'] * 100, yy,
+                xerr=[[max(0.0, (r['white_rate'] - lo) * 100)], [max(0.0, (hi - r['white_rate']) * 100)]],
+                fmt='o', color=GROUP_COLOR[g], ecolor=GROUP_COLOR[g], capsize=2.5, ms=5, lw=1.2)
+    if r['draw_rate'] >= 0.5:
+        ax.annotate(f"{r['draw_rate']*100:.0f}% draws", (r['white_rate'] * 100, yy),
+                    xytext=(16 if r['white_rate'] < 0.5 else -16, 0), textcoords='offset points',
+                    fontsize=7, color='#444', va='center', ha='left' if r['white_rate'] < 0.5 else 'right')
+ax.axvline(50, color='#333', ls='--', lw=0.9)
+ax.set_yticks([ypos[r['model']] for r in sp])
+ax.set_yticklabels([r['model'] for r in sp])
+ax.invert_yaxis()
+ax.set_xlim(-3, 103)
+ax.set_xlabel('White win rate in duel self-play (%), 300 games per run; bars = 95% Wilson interval')
+ax.grid(axis='x', alpha=0.25)
+ax.set_title('White win rate by training run', loc='left')
+ax.legend(handles=legend_handles(), loc='upper center', bbox_to_anchor=(0.5, -0.075), ncol=3, frameon=False, fontsize=7)
+fig.tight_layout()
+fig.savefig('experiments/fig_selfplay.png', dpi=200, bbox_inches='tight')
+plt.close(fig)
+print('written experiments/fig_selfplay.png')
+
+# =============== 图4：循环赛 ===============
+rr = ev['round_robin']
+allm = sorted({x['a'] for x in rr} | {x['b'] for x in rr})
+avg = {n: (sum(x['a_win'] for x in rr if x['a'] == n) + sum(x['b_win'] for x in rr if x['b'] == n))
+       / max(1, sum(1 for x in rr if n in (x['a'], x['b']))) for n in allm}
+names = sorted(allm, key=lambda n: -avg[n])
 M = np.full((len(names), len(names)), np.nan)
-for x in ev['round_robin']:
+for x in rr:
     i, j = names.index(x['a']), names.index(x['b'])
     M[i, j] = x['a_win'] * 100
     M[j, i] = x['b_win'] * 100
-im = ax2.imshow(M, cmap='RdYlGn', vmin=0, vmax=100, aspect='auto')
-for i in range(len(names)):
-    for j in range(len(names)):
-        if i == j or np.isnan(M[i, j]):
-            continue
-        ax2.text(j, i, f'{M[i, j]:.0f}', ha='center', va='center', fontsize=4.2,
-                 color='white' if abs(M[i, j] - 50) > 28 else 'black')
-ax2.set_xticks(range(len(names)))
-ax2.set_yticks(range(len(names)))
-ax2.set_xticklabels(names, rotation=90, ha='center', fontsize=6)
-ax2.set_yticklabels(names, fontsize=6)
-ax2.set_xlabel('opponent (column)')
-ax2.set_ylabel('row model')
-ax2.set_title('(b) Round robin, row model win % (100 games per colour per pair)', fontsize=8.5)
-cb = fig.colorbar(im, ax=ax2, fraction=0.025, pad=0.01)
-cb.set_label('row win %', fontsize=6); cb.ax.tick_params(labelsize=6)
 
-# ---- 下：训练统计（无逐点文字，按配置着色） ----
-ax3 = fig.add_subplot(gs[2])
-for n, r in tr['runs'].items():
-    ax3.scatter(r['expl_var_mean_after150k'], r['win_sd_after150k'], s=60,
-                color=GROUP_COLOR[r['group']], edgecolor='k', lw=0.4, zorder=3)
-ax3.set_xlabel('explained variance, mean after 150k steps', fontsize=7)
-ax3.set_ylabel('SD of rolling win rate\nafter 150k steps')
-ax3.set_title('(c) Training statistics per run', fontsize=8.5)
-ax3.grid(alpha=0.25)
-ax3.set_xlim(0.45, 1.05)
-ax3.legend(handles=[Line2D([0], [0], marker='o', color='w', markerfacecolor=GROUP_COLOR[g], ms=7, label=g)
-                    for g in GROUP_ORDER], fontsize=6.5, loc='upper left', frameon=False)
+fig = plt.figure(figsize=(6.6, 8.6))
+gs = fig.add_gridspec(2, 2, width_ratios=[40, 1.1], height_ratios=[1.0, 4.6], hspace=0.06, wspace=0.03)
+axb = fig.add_subplot(gs[0, 0])
+axh = fig.add_subplot(gs[1, 0], sharex=axb)
+cax = fig.add_subplot(gs[1, 1])
+fig.add_subplot(gs[0, 1]).axis('off')
 
-fig.suptitle('Terraflux replicate study: outcomes vary by training run more than by configuration', fontsize=9, y=0.995)
-out = 'experiments/fig_replicates.png'
-fig.savefig(out, dpi=150, bbox_inches='tight')
-print('written', out)
+cols = [GROUP_COLOR[tr['runs'][n]['group']] if n in tr['runs'] else '#999' for n in names]
+axb.bar(range(len(names)), [avg[n] * 100 for n in names], color=cols, width=0.8)
+axb.axhline(50, color='#333', ls='--', lw=0.8)
+axb.set_ylim(0, 70)
+axb.set_ylabel('mean win %\nvs all others')
+axb.tick_params(axis='x', labelbottom=False)
+axb.set_title('Round robin among the 23 dynamic-terrain runs (100 games per colour per pair)', loc='left')
+axb.legend(handles=[h for h in legend_handles() if h.get_label().startswith(('penalised', 'sparse'))],
+           loc='upper right', fontsize=7, frameon=False, ncol=2)
+
+im = axh.imshow(M, cmap='RdYlGn', vmin=0, vmax=100, aspect='auto', interpolation='nearest')
+axh.set_xticks(range(len(names)))
+axh.set_yticks(range(len(names)))
+axh.set_xticklabels(names, rotation=90, ha='center', fontsize=7)
+axh.set_yticklabels(names, fontsize=7)
+for lbl, c in zip(axh.get_xticklabels(), cols):
+    lbl.set_color(c)
+for lbl, c in zip(axh.get_yticklabels(), cols):
+    lbl.set_color(c)
+axh.set_xticks(np.arange(-.5, len(names), 1), minor=True)
+axh.set_yticks(np.arange(-.5, len(names), 1), minor=True)
+axh.grid(which='minor', color='white', lw=0.6)
+axh.tick_params(which='minor', length=0)
+axh.set_xlabel('opponent (column)')
+axh.set_ylabel('row run: its win rate against the column run')
+cb = fig.colorbar(im, cax=cax)
+cb.set_label('row run win % (draws not counted)', fontsize=7)
+cb.ax.tick_params(labelsize=7)
+fig.savefig('experiments/fig_roundrobin.png', dpi=200, bbox_inches='tight')
+plt.close(fig)
+print('written experiments/fig_roundrobin.png')
+
+# =============== 图5：训练统计 ===============
+fig, ax = plt.subplots(figsize=(5.6, 3.7))
+for g in GROUP_ORDER:
+    xs = [r['expl_var_mean_after150k'] for n, r in tr['runs'].items() if r['group'] == g]
+    ys = [r['win_sd_after150k'] for n, r in tr['runs'].items() if r['group'] == g]
+    ax.scatter(xs, ys, s=38, color=GROUP_COLOR[g], edgecolor='k', lw=0.4, alpha=0.9, zorder=3, label=GROUP_LABEL[g])
+    ax.scatter([np.mean(xs)], [np.mean(ys)], s=150, marker={'shaped-config': 'X', 'sparse': 'P', 'static': 'X'}[g], color=GROUP_COLOR[g], edgecolor='k', lw=1.0, zorder=4)
+ax.set_xlabel('value-function explained variance (mean after 150k steps)')
+ax.set_ylabel('SD of rolling win rate\n(after 150k steps)')
+ax.set_title('Training statistics per run (large marker = group mean)', loc='left')
+ax.grid(alpha=0.25)
+ax.set_xlim(0.45, 1.05)
+ax.legend(loc='upper right', frameon=True, framealpha=0.95)
+fig.tight_layout()
+fig.savefig('experiments/fig_trainstats.png', dpi=200)
+plt.close(fig)
+print('written experiments/fig_trainstats.png')

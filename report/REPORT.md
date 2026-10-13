@@ -147,7 +147,11 @@ Conclusion for Break I: the training curves are noisy and vary from run to run, 
 | static_s5 | static | 192k | 0.503 | 0.050 | 0.966 | 0 | 1 | 0.113 |
 | static_s6 | static | not reached | 0.456 | 0.119 | 0.987 | 1 | 2 | 0.048 |
 
-*"Late win rate" is the mean over steps ≥333k. "Steps to 55%" uses the 9-point rolling mean of logged win rates; most static runs never held 55% under this smoothing (static_s5 reached it at 192k). Figure 3(c) plots the explained-variance and win-rate SD columns for all runs.*
+*"Late win rate" is the mean over steps ≥333k. "Steps to 55%" uses the 9-point rolling mean of logged win rates; most static runs never held 55% under this smoothing (static_s5 reached it at 192k). Figure 5 plots the explained-variance and win-rate SD columns for all runs.*
+
+![Figure 5](../experiments/fig_trainstats.png)
+
+*Figure 5. Training statistics per run: mean value-function explained variance after 150k steps against the standard deviation of the rolling win rate after 150k steps. Each point is one run, coloured by configuration; the large marker is the group mean. The static-board runs (grey) cluster at high explained variance and low win-rate SD, but those runs are degenerate (§4.2).*
 
 ## 5. Break II — Reward Shaping and the Step Penalty
 
@@ -177,7 +181,7 @@ The heuristic opponent, playing against itself on the duel layout with Black mov
 
 ### 6.2 Fairness varies with the training run
 
-Duel self-play White win rates (300 games per run; Wilson 95% intervals) for all twenty-nine runs are plotted in Figure 3(a), and listed here:
+Duel self-play White win rates (300 games per run; Wilson 95% intervals) for all twenty-nine runs are plotted in Figure 3, and listed here:
 
 - **shaped-configuration runs:** main 46.3%; abl_shaped 32.7%; abl_sparse (same reward as shaped) 22.0%; shaped_s2 26.3%; shaped_s3 **76.0%** [70.9, 80.5]; shaped_s4 41.7%; shaped_s5 47.0%; shaped_s6 13.7%; shaped_s7 25.3%; shaped_s8 **84.0%** [79.4, 87.7]; shaped_s9 39.7%; shaped_s10 44.7%; shaped_s11 31.3%.
 - **sparse runs:** sparse_s1 17.3%; sparse_s2 44.7%; sparse_s3 56.7%; sparse_s4 **8.7%** [6.0, 12.4]; sparse_s5 **62.7%** [57.1, 67.9]; sparse_s6 48.0%; sparse_s7 24.0%; sparse_s8 25.7%; sparse_s9 37.0%; sparse_s10 36.0%.
@@ -185,13 +189,17 @@ Duel self-play White win rates (300 games per run; Wilson 95% intervals) for all
 
 Runs with identical settings disagree by more than the effects v1 claimed. The dynamic-terrain runs range from 9% to 84% with identical rules, and the same policy evaluated twice moved by about four points. Duel self-play therefore cannot certify the layout's balance on its own: the answer depends on which training run is used. The static-board results show that the frozen terrain changes the game in a way that is not comparable with the dynamic one.
 
-![Figure 3](../experiments/fig_replicates.png)
+![Figure 3](../experiments/fig_selfplay.png)
 
-*Figure 3. Replicate study. (a) Duel self-play White win rate for each of the twenty-nine training runs, with 95% Wilson intervals; colour marks the configuration. (b) Round-robin win rates among the twenty-three dynamic-terrain runs (row model's win rate against each column; draws excluded from the win rate, shown separately in the data file). (c) Training statistics per run: explained variance after 150k steps against the standard deviation of the rolling win rate after 150k steps.*
+*Figure 3. White win rate in duel self-play for each of the twenty-nine training runs (300 games per run; bars are 95% Wilson intervals; the dashed line marks 50%). Colour marks the configuration. Static-board runs with a high draw rate are annotated with it. Runs with the same configuration differ by far more than their intervals.*
 
 ### 6.3 Strength and balance
 
-Figure 3(b) gives the round-robin matrix over all twenty-three dynamic runs. Averaged over its twenty-two opponents, the win rates are: sparse_s8 57.3%, sparse_s5 56.1%, shaped_s10 55.0%, sparse_s4 54.1%, abl_shaped 53.9%, shaped_s5 53.4%, sparse_s3 50.8%, sparse_s2 48.9%, shaped_s9 48.2%, shaped_s8 45.6%, sparse_s6 44.8%, shaped_s4 44.5%, shaped_s7 42.8%, shaped_s6 42.0%, shaped_s11 39.0%, sparse_s7 38.8%, main 38.1%, sparse_s1 38.0%, sparse_s9 37.7%, shaped_s3 35.8%, sparse_s10 34.6%, shaped_s2 27.1%, abl_sparse 27.0%. The full values are in `experiments/roundrobin_summary.json`.
+Figure 4 gives the round-robin results over all twenty-three dynamic runs. Averaged over its twenty-two opponents, the win rates are: sparse_s8 57.3%, sparse_s5 56.1%, shaped_s10 55.0%, sparse_s4 54.1%, abl_shaped 53.9%, shaped_s5 53.4%, sparse_s3 50.8%, sparse_s2 48.9%, shaped_s9 48.2%, shaped_s8 45.6%, sparse_s6 44.8%, shaped_s4 44.5%, shaped_s7 42.8%, shaped_s6 42.0%, shaped_s11 39.0%, sparse_s7 38.8%, main 38.1%, sparse_s1 38.0%, sparse_s9 37.7%, shaped_s3 35.8%, sparse_s10 34.6%, shaped_s2 27.1%, abl_sparse 27.0%. The full values are in `experiments/roundrobin_summary.json`.
+
+![Figure 4](../experiments/fig_roundrobin.png)
+
+*Figure 4. Round robin among the twenty-three dynamic-terrain runs (100 games per colour per pair). Top: each run's mean win rate against the other twenty-two runs (draws are not counted as wins). Bottom: the win rate of the row run against the column run; runs are in the same order on both axes, and the per-pair numbers are in `experiments/replicate_eval.json`. Colour of the labels and bars marks the configuration.*
 
 Two things follow. First, round-robin strength is only weakly related to White's win rate on the duel layout (Spearman ρ = 0.23 over twenty-three runs). Earlier estimates on thirteen runs (ρ = 0.32) and eight runs (ρ = 0.57) did not hold as the sample grew, so I do not claim any monotone relation. Second, the round robin is not transitive: of the 1,771 triples of runs, 181 (about 10%) form a cycle in which each beats the next. The v1 ranking (main first, shaped second, sparse third) was not stable: main ranks eighteenth of twenty-three in v2.
 

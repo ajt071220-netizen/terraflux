@@ -21,7 +21,7 @@ What the replicates currently support:
 2. **Step-penalty effect not established.** Ten sparse and thirteen penalised runs do not differ significantly in learning speed (p ≈ 0.43) or in late-stage win rate against each run's own pool (p ≈ 0.34).
 3. **Duel balance is not certifiable from one policy.** The White win rate across runs with identical settings ranges from 9% to 84%; round-robin strength is only weakly related to it (Spearman ρ = 0.23, twenty-three runs).
 
-![Replicate study](experiments/fig_replicates.png)
+![White win rate by training run](experiments/fig_selfplay.png)
 
 Scripts: `python/run_robustness.ps1` (training batch), `python/analyze_robustness.py`, `python/replicate_eval.py`, `python/fig_replicates.py`. Data: `experiments/robustness_training.json`, `experiments/replicate_eval.json`.
 

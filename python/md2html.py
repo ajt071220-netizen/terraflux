@@ -27,9 +27,11 @@ em { color: inherit; }
 h1 + p em, h1 + p + p em { color: #444; }
 table {
   border-collapse: collapse; width: 100%; margin: 10pt 0 4pt;
-  font-size: 9.5pt; page-break-inside: avoid;
+  font-size: 8.4pt; table-layout: auto;
 }
-th, td { border: 1px solid #bbb; padding: 4.5pt 7pt; text-align: left; }
+th, td { border: 1px solid #bbb; padding: 2.8pt 4.5pt; text-align: left; }
+tr { page-break-inside: avoid; }
+thead { display: table-header-group; }
 th { background: #f0ede8; }
 tr:nth-child(even) td { background: #faf9f7; }
 /* 表格标题（表上方的粗体行）不断页 */
