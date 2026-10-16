@@ -1,0 +1,3577 @@
+{
+ "gap": 3,
+ "games_per_color": 10,
+ "by_kind": {
+  "model_vs_model": {
+   "pairs": 190,
+   "games": 3800,
+   "reasons": {
+    "escape": 2704,
+    "capture": 617,
+    "max-moves": 122,
+    "repetition": 338,
+    "stalemate": 16,
+    "border-capture": 3
+   }
+  },
+  "vs_heuristic": {
+   "pairs": 20,
+   "games": 400,
+   "reasons": {
+    "capture": 146,
+    "escape": 235,
+    "repetition": 19
+   }
+  },
+  "self": {
+   "pairs": 20,
+   "games": 400,
+   "reasons": {
+    "capture": 215,
+    "escape": 149,
+    "repetition": 19,
+    "stalemate": 12,
+    "border-capture": 5
+   }
+  }
+ },
+ "matches_fairness_pop": false,
+ "mismatched_pairs": [
+  [
+   "shaped_s3",
+   "shaped_s11"
+  ],
+  [
+   "shaped_s3",
+   "sparse_s1"
+  ],
+  [
+   "shaped_s3",
+   "heuristic"
+  ],
+  [
+   "shaped_s4",
+   "shaped_s9"
+  ],
+  [
+   "shaped_s4",
+   "shaped_s7"
+  ],
+  [
+   "shaped_s4",
+   "shaped_s8"
+  ],
+  [
+   "shaped_s4",
+   "sparse_s2"
+  ],
+  [
+   "shaped_s4",
+   "sparse_s4"
+  ],
+  [
+   "shaped_s4",
+   "sparse_s1"
+  ],
+  [
+   "shaped_s4",
+   "heuristic"
+  ],
+  [
+   "shaped_s4",
+   "sparse_s8"
+  ],
+  [
+   "shaped_s5",
+   "shaped_s7"
+  ],
+  [
+   "shaped_s5",
+   "shaped_s11"
+  ],
+  [
+   "shaped_s4",
+   "sparse_s7"
+  ],
+  [
+   "shaped_s5",
+   "sparse_s3"
+  ],
+  [
+   "shaped_s5",
+   "sparse_s2"
+  ],
+  [
+   "shaped_s5",
+   "sparse_s1"
+  ],
+  [
+   "shaped_s5",
+   "sparse_s4"
+  ],
+  [
+   "shaped_s5",
+   "heuristic"
+  ],
+  [
+   "shaped_s5",
+   "sparse_s7"
+  ],
+  [
+   "shaped_s5",
+   "sparse_s10"
+  ],
+  [
+   "shaped_s6",
+   "shaped_s8"
+  ],
+  [
+   "shaped_s6",
+   "shaped_s7"
+  ],
+  [
+   "shaped_s6",
+   "sparse_s2"
+  ],
+  [
+   "shaped_s6",
+   "shaped_s11"
+  ],
+  [
+   "shaped_s6",
+   "heuristic"
+  ],
+  [
+   "shaped_s6",
+   "sparse_s8"
+  ],
+  [
+   "shaped_s7",
+   "shaped_s8"
+  ],
+  [
+   "shaped_s7",
+   "shaped_s9"
+  ],
+  [
+   "shaped_s7",
+   "sparse_s2"
+  ],
+  [
+   "shaped_s7",
+   "sparse_s3"
+  ],
+  [
+   "shaped_s7",
+   "shaped_s10"
+  ],
+  [
+   "shaped_s7",
+   "sparse_s1"
+  ],
+  [
+   "shaped_s7",
+   "heuristic"
+  ],
+  [
+   "shaped_s7",
+   "sparse_s6"
+  ],
+  [
+   "shaped_s7",
+   "sparse_s10"
+  ],
+  [
+   "shaped_s8",
+   "shaped_s11"
+  ],
+  [
+   "shaped_s8",
+   "sparse_s3"
+  ],
+  [
+   "shaped_s8",
+   "sparse_s4"
+  ],
+  [
+   "shaped_s8",
+   "heuristic"
+  ],
+  [
+   "shaped_s8",
+   "sparse_s6"
+  ],
+  [
+   "shaped_s8",
+   "sparse_s8"
+  ],
+  [
+   "shaped_s8",
+   "sparse_s7"
+  ],
+  [
+   "shaped_s8",
+   "sparse_s10"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s3"
+  ],
+  [
+   "shaped_s9",
+   "shaped_s11"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s5"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s6"
+  ],
+  [
+   "shaped_s9",
+   "heuristic"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s4"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s8"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s2"
+  ],
+  [
+   "shaped_s10",
+   "sparse_s4"
+  ],
+  [
+   "shaped_s10",
+   "sparse_s2"
+  ],
+  [
+   "shaped_s10",
+   "sparse_s1"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s10"
+  ],
+  [
+   "shaped_s9",
+   "sparse_s9"
+  ],
+  [
+   "shaped_s10",
+   "heuristic"
+  ],
+  [
+   "shaped_s10",
+   "shaped_s11"
+  ],
+  [
+   "shaped_s10",
+   "sparse_s10"
+  ],
+  [
+   "shaped_s10",
+   "sparse_s6"
+  ],
+  [
+   "shaped_s10",
+   "sparse_s7"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s3"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s1"
+  ],
+  [
+   "shaped_s11",
+   "heuristic"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s4"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s6"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s8"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s5"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s2"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s4"
+  ],
+  [
+   "shaped_s11",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s1",
+   "heuristic"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s7"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s5"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s3"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s8"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s4"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s2",
+   "heuristic"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s6"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s7"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s6"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s3",
+   "sparse_s4"
+  ],
+  [
+   "sparse_s3",
+   "sparse_s8"
+  ],
+  [
+   "sparse_s3",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s8"
+  ],
+  [
+   "sparse_s3",
+   "sparse_s7"
+  ],
+  [
+   "sparse_s3",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s4",
+   "sparse_s7"
+  ],
+  [
+   "sparse_s4",
+   "sparse_s5"
+  ],
+  [
+   "sparse_s4",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s4",
+   "sparse_s6"
+  ],
+  [
+   "sparse_s5",
+   "heuristic"
+  ],
+  [
+   "sparse_s5",
+   "sparse_s8"
+  ],
+  [
+   "sparse_s4",
+   "sparse_s8"
+  ],
+  [
+   "sparse_s4",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s5",
+   "sparse_s6"
+  ],
+  [
+   "sparse_s5",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s5",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s6",
+   "heuristic"
+  ],
+  [
+   "sparse_s7",
+   "heuristic"
+  ],
+  [
+   "sparse_s6",
+   "sparse_s8"
+  ],
+  [
+   "sparse_s6",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s7",
+   "sparse_s8"
+  ],
+  [
+   "sparse_s6",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s8",
+   "heuristic"
+  ],
+  [
+   "sparse_s7",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s8",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s9",
+   "heuristic"
+  ],
+  [
+   "sparse_s6",
+   "sparse_s7"
+  ],
+  [
+   "sparse_s10",
+   "heuristic"
+  ],
+  [
+   "sparse_s8",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s9",
+   "sparse_s10"
+  ],
+  [
+   "shaped_s5",
+   "shaped_s5"
+  ],
+  [
+   "shaped_s3",
+   "shaped_s3"
+  ],
+  [
+   "shaped_s2",
+   "shaped_s2"
+  ],
+  [
+   "shaped_s4",
+   "shaped_s4"
+  ],
+  [
+   "shaped_s10",
+   "shaped_s10"
+  ],
+  [
+   "shaped_s6",
+   "shaped_s6"
+  ],
+  [
+   "shaped_s7",
+   "shaped_s7"
+  ],
+  [
+   "shaped_s9",
+   "shaped_s9"
+  ],
+  [
+   "shaped_s11",
+   "shaped_s11"
+  ],
+  [
+   "sparse_s6",
+   "sparse_s6"
+  ],
+  [
+   "sparse_s3",
+   "sparse_s3"
+  ],
+  [
+   "sparse_s2",
+   "sparse_s2"
+  ],
+  [
+   "sparse_s4",
+   "sparse_s4"
+  ],
+  [
+   "sparse_s1",
+   "sparse_s1"
+  ],
+  [
+   "sparse_s9",
+   "sparse_s9"
+  ],
+  [
+   "sparse_s10",
+   "sparse_s10"
+  ],
+  [
+   "sparse_s8",
+   "sparse_s8"
+  ]
+ ],
+ "pairs": [
+  {
+   "a": "shaped_s10",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 16,
+    "capture": 3,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 10,
+   "reasons": {
+    "escape": 7,
+    "capture": 10,
+    "repetition": 2,
+    "border-capture": 1
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 14,
+    "repetition": 4,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 15,
+    "capture": 3,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 16,
+    "capture": 3,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 6,
+   "black_wins": 13,
+   "reasons": {
+    "capture": 13,
+    "escape": 5,
+    "stalemate": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 19,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 6,
+   "reasons": {
+    "capture": 6,
+    "escape": 10,
+    "repetition": 2,
+    "max-moves": 2
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 13,
+    "max-moves": 2,
+    "capture": 4,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 15,
+    "capture": 3,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 16,
+    "capture": 2,
+    "max-moves": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 3,
+   "reasons": {
+    "capture": 3,
+    "max-moves": 1,
+    "escape": 16
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 6,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 6,
+    "capture": 3,
+    "repetition": 11
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 14,
+    "repetition": 3,
+    "capture": 3
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 13,
+    "repetition": 5,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 15,
+    "repetition": 2,
+    "capture": 3
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 3,
+   "reasons": {
+    "repetition": 3,
+    "capture": 3,
+    "escape": 12,
+    "max-moves": 2
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 17,
+    "capture": 2,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 6,
+   "reasons": {
+    "capture": 6,
+    "escape": 10,
+    "repetition": 4
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 15,
+    "capture": 4,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 1,
+   "reasons": {
+    "repetition": 2,
+    "escape": 17,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 12,
+    "repetition": 4,
+    "capture": 3,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 3,
+   "black_wins": 13,
+   "reasons": {
+    "capture": 13,
+    "escape": 3,
+    "repetition": 3,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 15,
+    "max-moves": 1,
+    "capture": 2,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 1,
+   "reasons": {
+    "capture": 1,
+    "escape": 15,
+    "max-moves": 2,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 14,
+    "capture": 5,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 1,
+   "reasons": {
+    "repetition": 4,
+    "escape": 14,
+    "max-moves": 1,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "capture": 1,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 17,
+    "max-moves": 1,
+    "capture": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 14,
+    "capture": 5,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 12,
+    "capture": 8
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 2,
+   "reasons": {
+    "capture": 2,
+    "max-moves": 2,
+    "repetition": 6,
+    "escape": 10
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 14,
+    "repetition": 4,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 16,
+    "max-moves": 1,
+    "repetition": 2,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 7,
+   "reasons": {
+    "capture": 7,
+    "repetition": 3,
+    "escape": 10
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "capture": 1,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 8,
+   "reasons": {
+    "capture": 8,
+    "escape": 9,
+    "stalemate": 1,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 5,
+   "reasons": {
+    "repetition": 3,
+    "capture": 5,
+    "escape": 11,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 19,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 1,
+   "reasons": {
+    "repetition": 7,
+    "escape": 12,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 14,
+    "repetition": 5,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 15,
+    "max-moves": 1,
+    "repetition": 2,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 4,
+   "reasons": {
+    "capture": 4,
+    "max-moves": 2,
+    "escape": 13,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 7,
+   "reasons": {
+    "escape": 13,
+    "capture": 7
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "capture": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 9,
+    "repetition": 3,
+    "capture": 6,
+    "max-moves": 2
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 15,
+    "repetition": 2,
+    "max-moves": 1,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 16,
+    "capture": 2,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 8,
+   "black_wins": 6,
+   "reasons": {
+    "capture": 6,
+    "max-moves": 3,
+    "repetition": 3,
+    "escape": 8
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 16,
+    "capture": 4
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 1,
+   "reasons": {
+    "repetition": 7,
+    "escape": 12,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 14,
+    "max-moves": 3,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 15,
+    "repetition": 1,
+    "capture": 4
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 7,
+   "reasons": {
+    "capture": 7,
+    "repetition": 2,
+    "escape": 11
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 7,
+   "reasons": {
+    "capture": 7,
+    "max-moves": 2,
+    "escape": 11
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 8,
+   "reasons": {
+    "capture": 8,
+    "max-moves": 1,
+    "escape": 11
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 13,
+    "capture": 2,
+    "repetition": 4,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 3,
+   "reasons": {
+    "repetition": 4,
+    "capture": 3,
+    "max-moves": 4,
+    "escape": 9
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 17,
+    "capture": 3
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 18,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 14,
+    "max-moves": 5,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 4,
+   "reasons": {
+    "max-moves": 3,
+    "escape": 11,
+    "capture": 4,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 13,
+    "max-moves": 1,
+    "capture": 3,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "capture": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 5,
+   "reasons": {
+    "capture": 5,
+    "escape": 10,
+    "max-moves": 2,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 8,
+   "black_wins": 9,
+   "reasons": {
+    "capture": 9,
+    "escape": 8,
+    "max-moves": 2,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 0,
+   "reasons": {
+    "max-moves": 1,
+    "escape": 17,
+    "stalemate": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 19,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 14,
+    "capture": 4,
+    "repetition": 1,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 16,
+    "repetition": 2,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 6,
+   "black_wins": 5,
+   "reasons": {
+    "capture": 5,
+    "escape": 6,
+    "repetition": 5,
+    "max-moves": 4
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 7,
+   "reasons": {
+    "escape": 11,
+    "capture": 7,
+    "max-moves": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 13,
+    "capture": 5,
+    "max-moves": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 9,
+   "reasons": {
+    "escape": 11,
+    "capture": 9
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 7,
+   "reasons": {
+    "escape": 13,
+    "capture": 7
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "shaped_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "shaped_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 12,
+    "max-moves": 1,
+    "capture": 5,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "shaped_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 15,
+    "capture": 5
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "shaped_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 14,
+    "capture": 5,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 16,
+    "capture": 3,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 17,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 19,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 19,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 18,
+    "repetition": 1,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 17,
+    "capture": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 19,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "capture": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 2,
+   "reasons": {
+    "repetition": 3,
+    "escape": 14,
+    "capture": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 14,
+    "capture": 3,
+    "max-moves": 1,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "shaped_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 6,
+   "reasons": {
+    "capture": 6,
+    "escape": 13,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "shaped_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 2,
+   "reasons": {
+    "capture": 2,
+    "repetition": 2,
+    "escape": 16
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "shaped_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 13,
+    "max-moves": 2,
+    "repetition": 3,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 13,
+    "capture": 5,
+    "max-moves": 2
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 8,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 8,
+    "repetition": 5,
+    "capture": 6,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 6,
+   "reasons": {
+    "capture": 6,
+    "escape": 12,
+    "stalemate": 2
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 8,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 8,
+    "capture": 8,
+    "max-moves": 1,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 13,
+    "repetition": 1,
+    "max-moves": 2,
+    "capture": 4
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 17,
+    "capture": 3
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 8,
+   "reasons": {
+    "capture": 8,
+    "repetition": 2,
+    "escape": 10
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 3,
+   "reasons": {
+    "capture": 3,
+    "escape": 16,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 13,
+    "repetition": 5,
+    "max-moves": 1,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 4,
+   "reasons": {
+    "capture": 4,
+    "repetition": 1,
+    "max-moves": 3,
+    "escape": 12
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 8,
+   "black_wins": 8,
+   "reasons": {
+    "capture": 8,
+    "escape": 8,
+    "max-moves": 3,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "shaped_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 17,
+    "capture": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "shaped_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 3,
+   "reasons": {
+    "max-moves": 1,
+    "capture": 3,
+    "escape": 14,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "max-moves": 1,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 11,
+    "repetition": 7,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 8,
+   "reasons": {
+    "capture": 8,
+    "repetition": 1,
+    "escape": 10,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 14,
+    "capture": 5,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 18,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 12,
+    "capture": 4,
+    "repetition": 3,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 2,
+   "reasons": {
+    "repetition": 5,
+    "capture": 2,
+    "escape": 13
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 14,
+    "capture": 4,
+    "repetition": 1,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 15,
+    "repetition": 3,
+    "capture": 1,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 13,
+    "repetition": 2,
+    "capture": 4,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 18,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 15,
+    "capture": 3,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "shaped_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 17,
+    "capture": 3
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 15,
+    "capture": 3,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 20,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 20
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 4,
+   "reasons": {
+    "capture": 4,
+    "escape": 16
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 15,
+    "capture": 2,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 19,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 16,
+    "repetition": 1,
+    "capture": 2,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 12,
+    "capture": 6,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 16,
+    "capture": 4
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 17,
+    "capture": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "shaped_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 13,
+    "capture": 5,
+    "max-moves": 1,
+    "border-capture": 1
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "shaped_s11",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 15,
+    "capture": 3,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s1",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 14,
+    "capture": 6
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 15,
+    "repetition": 4,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 7,
+   "reasons": {
+    "repetition": 2,
+    "escape": 9,
+    "max-moves": 2,
+    "capture": 7
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 7,
+   "reasons": {
+    "capture": 7,
+    "escape": 13
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 9,
+   "reasons": {
+    "capture": 9,
+    "repetition": 3,
+    "max-moves": 1,
+    "stalemate": 1,
+    "escape": 6
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 19,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 19,
+    "capture": 1
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 17,
+    "capture": 1,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 4,
+   "reasons": {
+    "capture": 4,
+    "repetition": 1,
+    "escape": 15
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 14,
+    "repetition": 3,
+    "capture": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 1,
+   "reasons": {
+    "repetition": 7,
+    "escape": 9,
+    "max-moves": 3,
+    "capture": 1
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s2",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 17,
+    "stalemate": 1,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 7,
+   "reasons": {
+    "capture": 7,
+    "escape": 12,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 10,
+   "reasons": {
+    "capture": 10,
+    "escape": 9,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 15,
+    "max-moves": 2,
+    "capture": 1,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 16,
+    "max-moves": 4
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 9,
+    "max-moves": 1,
+    "capture": 8,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 6,
+   "reasons": {
+    "capture": 6,
+    "repetition": 6,
+    "escape": 7,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 16,
+    "repetition": 4
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 7,
+   "reasons": {
+    "capture": 7,
+    "escape": 5,
+    "max-moves": 3,
+    "stalemate": 2,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s3",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 15,
+    "capture": 4,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 17,
+    "capture": 2,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 5,
+   "reasons": {
+    "capture": 5,
+    "escape": 14,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 17,
+    "capture": 1,
+    "repetition": 1,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 14,
+    "repetition": 6
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 14,
+    "repetition": 3,
+    "capture": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 13,
+    "capture": 5,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 19,
+    "capture": 1
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s4",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 2,
+   "reasons": {
+    "capture": 2,
+    "escape": 16,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 2,
+   "reasons": {
+    "repetition": 1,
+    "escape": 17,
+    "capture": 2
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 17,
+    "repetition": 2,
+    "capture": 1
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 13,
+    "capture": 4,
+    "repetition": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 15,
+    "capture": 4,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 16,
+    "capture": 4
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 11,
+    "repetition": 8,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s5",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 16,
+    "capture": 4
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 18,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 12,
+    "capture": 8
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 12,
+    "repetition": 5,
+    "capture": 2,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "capture": 1,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s5",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 7,
+   "reasons": {
+    "escape": 12,
+    "capture": 7,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s5",
+   "b": "sparse_s6",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 17,
+    "capture": 3
+   }
+  },
+  {
+   "a": "sparse_s5",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 18,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 18,
+    "capture": 1,
+    "max-moves": 1
+   }
+  },
+  {
+   "a": "sparse_s5",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 17,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 17,
+    "capture": 3
+   }
+  },
+  {
+   "a": "sparse_s5",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 19,
+    "capture": 1
+   }
+  },
+  {
+   "a": "sparse_s6",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 8,
+    "border-capture": 1,
+    "capture": 5,
+    "repetition": 4,
+    "max-moves": 1,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "sparse_s6",
+   "b": "sparse_s7",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 13,
+    "max-moves": 2,
+    "repetition": 5
+   }
+  },
+  {
+   "a": "sparse_s6",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 16,
+    "capture": 1,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "sparse_s6",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 16,
+    "capture": 4
+   }
+  },
+  {
+   "a": "sparse_s7",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 19,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s7",
+   "b": "sparse_s8",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 19,
+   "black_wins": 0,
+   "reasons": {
+    "escape": 19,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s7",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 3,
+   "reasons": {
+    "escape": 14,
+    "repetition": 3,
+    "capture": 3
+   }
+  },
+  {
+   "a": "sparse_s8",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 13,
+    "capture": 5,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s8",
+   "b": "sparse_s9",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 16,
+    "repetition": 2,
+    "capture": 2
+   }
+  },
+  {
+   "a": "sparse_s9",
+   "b": "sparse_s10",
+   "kind": "model_vs_model",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 2,
+   "reasons": {
+    "escape": 14,
+    "repetition": 4,
+    "capture": 2
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "shaped_s10",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 8,
+   "black_wins": 12,
+   "reasons": {
+    "capture": 12,
+    "escape": 6,
+    "stalemate": 2
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "shaped_s11",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 13,
+   "reasons": {
+    "escape": 4,
+    "capture": 13,
+    "stalemate": 3
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "shaped_s2",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 9,
+   "reasons": {
+    "escape": 9,
+    "capture": 9,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "shaped_s3",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 7,
+   "reasons": {
+    "capture": 7,
+    "escape": 13
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "shaped_s4",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 3,
+   "reasons": {
+    "capture": 3,
+    "escape": 12,
+    "repetition": 2,
+    "stalemate": 1,
+    "border-capture": 2
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "shaped_s5",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 6,
+   "black_wins": 14,
+   "reasons": {
+    "capture": 14,
+    "escape": 6
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "shaped_s6",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 4,
+   "black_wins": 16,
+   "reasons": {
+    "escape": 4,
+    "capture": 16
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "shaped_s7",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 3,
+   "black_wins": 16,
+   "reasons": {
+    "repetition": 1,
+    "capture": 16,
+    "escape": 3
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "shaped_s8",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 5,
+   "reasons": {
+    "capture": 5,
+    "escape": 15
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "shaped_s9",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 12,
+   "reasons": {
+    "escape": 6,
+    "border-capture": 1,
+    "capture": 12,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "sparse_s1",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 3,
+   "black_wins": 13,
+   "reasons": {
+    "capture": 13,
+    "border-capture": 1,
+    "escape": 2,
+    "repetition": 3,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "sparse_s10",
+   "b": "sparse_s10",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 6,
+   "black_wins": 13,
+   "reasons": {
+    "escape": 6,
+    "capture": 13,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "sparse_s2",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 8,
+    "repetition": 4,
+    "capture": 5,
+    "stalemate": 2,
+    "border-capture": 1
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "sparse_s3",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 15,
+    "capture": 5
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "sparse_s4",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 1,
+   "black_wins": 17,
+   "reasons": {
+    "stalemate": 1,
+    "capture": 17,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "sparse_s5",
+   "b": "sparse_s5",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 12,
+    "capture": 8
+   }
+  },
+  {
+   "a": "sparse_s6",
+   "b": "sparse_s6",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 10,
+   "reasons": {
+    "capture": 10,
+    "escape": 10
+   }
+  },
+  {
+   "a": "sparse_s7",
+   "b": "sparse_s7",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 6,
+   "black_wins": 14,
+   "reasons": {
+    "capture": 14,
+    "escape": 6
+   }
+  },
+  {
+   "a": "sparse_s8",
+   "b": "sparse_s8",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 6,
+   "black_wins": 11,
+   "reasons": {
+    "capture": 11,
+    "repetition": 3,
+    "escape": 5,
+    "stalemate": 1
+   }
+  },
+  {
+   "a": "sparse_s9",
+   "b": "sparse_s9",
+   "kind": "self",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 12,
+   "reasons": {
+    "capture": 12,
+    "escape": 7,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s10",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 9,
+   "reasons": {
+    "escape": 11,
+    "capture": 9
+   }
+  },
+  {
+   "a": "shaped_s11",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 13,
+   "reasons": {
+    "capture": 13,
+    "escape": 7
+   }
+  },
+  {
+   "a": "shaped_s2",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 6,
+   "reasons": {
+    "capture": 6,
+    "escape": 14
+   }
+  },
+  {
+   "a": "shaped_s3",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 12,
+    "capture": 6,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s4",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 14,
+    "capture": 5,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "shaped_s5",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 12,
+    "capture": 8
+   }
+  },
+  {
+   "a": "shaped_s6",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 12,
+    "capture": 6,
+    "repetition": 2
+   }
+  },
+  {
+   "a": "shaped_s7",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 8,
+   "reasons": {
+    "capture": 8,
+    "escape": 9,
+    "repetition": 3
+   }
+  },
+  {
+   "a": "shaped_s8",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 12,
+    "capture": 8
+   }
+  },
+  {
+   "a": "shaped_s9",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 7,
+   "black_wins": 13,
+   "reasons": {
+    "capture": 13,
+    "escape": 7
+   }
+  },
+  {
+   "a": "sparse_s1",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 15,
+   "black_wins": 4,
+   "reasons": {
+    "escape": 15,
+    "capture": 4,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s10",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 13,
+    "capture": 6,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s2",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 10,
+   "black_wins": 9,
+   "reasons": {
+    "escape": 10,
+    "repetition": 1,
+    "capture": 9
+   }
+  },
+  {
+   "a": "sparse_s3",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 11,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 11,
+    "repetition": 1,
+    "capture": 8
+   }
+  },
+  {
+   "a": "sparse_s4",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 16,
+   "black_wins": 1,
+   "reasons": {
+    "escape": 16,
+    "repetition": 3,
+    "capture": 1
+   }
+  },
+  {
+   "a": "sparse_s5",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 7,
+   "reasons": {
+    "escape": 12,
+    "capture": 7,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s6",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 14,
+   "black_wins": 5,
+   "reasons": {
+    "escape": 14,
+    "capture": 5,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s7",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 9,
+   "black_wins": 10,
+   "reasons": {
+    "escape": 9,
+    "capture": 10,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s8",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 13,
+   "black_wins": 6,
+   "reasons": {
+    "escape": 13,
+    "capture": 6,
+    "repetition": 1
+   }
+  },
+  {
+   "a": "sparse_s9",
+   "b": "heuristic",
+   "kind": "vs_heuristic",
+   "games": 20,
+   "white_wins": 12,
+   "black_wins": 8,
+   "reasons": {
+    "escape": 12,
+    "capture": 8
+   }
+  }
+ ]
+}

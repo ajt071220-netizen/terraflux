@@ -1,0 +1,214 @@
+{
+ "criterion": "black-first, minimise |white_wr-0.5|, ties -> smaller gap",
+ "selected_gap": 8,
+ "results": {
+  "1": {
+   "black": {
+    "games": 300,
+    "white_wins": 0,
+    "black_wins": 300,
+    "draws": 0,
+    "white_wr": 0.0,
+    "white_wr_ci95": [
+     0.0,
+     0.012643429997735661
+    ],
+    "avg_len": 10.04
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 0,
+    "black_wins": 300,
+    "draws": 0,
+    "white_wr": 0.0,
+    "white_wr_ci95": [
+     0.0,
+     0.012643429997735661
+    ],
+    "avg_len": 2.0
+   }
+  },
+  "2": {
+   "black": {
+    "games": 300,
+    "white_wins": 1,
+    "black_wins": 299,
+    "draws": 0,
+    "white_wr": 0.0033333333333333335,
+    "white_wr_ci95": [
+     0.0005886425761407379,
+     0.018637164554943353
+    ],
+    "avg_len": 10.256666666666666
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 0,
+    "black_wins": 295,
+    "draws": 5,
+    "white_wr": 0.0,
+    "white_wr_ci95": [
+     0.0,
+     0.012643429997735661
+    ],
+    "avg_len": 23.89
+   }
+  },
+  "3": {
+   "black": {
+    "games": 300,
+    "white_wins": 0,
+    "black_wins": 300,
+    "draws": 0,
+    "white_wr": 0.0,
+    "white_wr_ci95": [
+     0.0,
+     0.012643429997735661
+    ],
+    "avg_len": 10.086666666666666
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 62,
+    "black_wins": 234,
+    "draws": 4,
+    "white_wr": 0.20666666666666667,
+    "white_wr_ci95": [
+     0.16469482669421182,
+     0.25605598557112647
+    ],
+    "avg_len": 22.183333333333334
+   }
+  },
+  "4": {
+   "black": {
+    "games": 300,
+    "white_wins": 24,
+    "black_wins": 276,
+    "draws": 0,
+    "white_wr": 0.08,
+    "white_wr_ci95": [
+     0.05434646978454494,
+     0.11627401141355304
+    ],
+    "avg_len": 16.86
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 20,
+    "black_wins": 276,
+    "draws": 4,
+    "white_wr": 0.06666666666666667,
+    "white_wr_ci95": [
+     0.04356717679698387,
+     0.10072379586772039
+    ],
+    "avg_len": 17.60333333333333
+   }
+  },
+  "5": {
+   "black": {
+    "games": 300,
+    "white_wins": 10,
+    "black_wins": 290,
+    "draws": 0,
+    "white_wr": 0.03333333333333333,
+    "white_wr_ci95": [
+     0.018204749873650852,
+     0.0602624514575691
+    ],
+    "avg_len": 14.26
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 169,
+    "black_wins": 125,
+    "draws": 6,
+    "white_wr": 0.5633333333333334,
+    "white_wr_ci95": [
+     0.5067581755681922,
+     0.6183069899654279
+    ],
+    "avg_len": 48.68
+   }
+  },
+  "6": {
+   "black": {
+    "games": 300,
+    "white_wins": 206,
+    "black_wins": 93,
+    "draws": 1,
+    "white_wr": 0.6866666666666666,
+    "white_wr_ci95": [
+     0.6320966534895827,
+     0.7365164659779293
+    ],
+    "avg_len": 49.18333333333333
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 30,
+    "black_wins": 258,
+    "draws": 12,
+    "white_wr": 0.1,
+    "white_wr_ci95": [
+     0.07094746564722294,
+     0.1391672783509656
+    ],
+    "avg_len": 28.633333333333333
+   }
+  },
+  "7": {
+   "black": {
+    "games": 300,
+    "white_wins": 56,
+    "black_wins": 243,
+    "draws": 1,
+    "white_wr": 0.18666666666666668,
+    "white_wr_ci95": [
+     0.14663682127589442,
+     0.23461972818935325
+    ],
+    "avg_len": 25.476666666666667
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 155,
+    "black_wins": 141,
+    "draws": 4,
+    "white_wr": 0.5166666666666667,
+    "white_wr_ci95": [
+     0.46026528666991656,
+     0.5726465989968257
+    ],
+    "avg_len": 50.413333333333334
+   }
+  },
+  "8": {
+   "black": {
+    "games": 300,
+    "white_wins": 193,
+    "black_wins": 106,
+    "draws": 1,
+    "white_wr": 0.6433333333333333,
+    "white_wr_ci95": [
+     0.5876287210234448,
+     0.6954134957105376
+    ],
+    "avg_len": 53.32333333333333
+   },
+   "white": {
+    "games": 300,
+    "white_wins": 30,
+    "black_wins": 264,
+    "draws": 6,
+    "white_wr": 0.1,
+    "white_wr_ci95": [
+     0.07094746564722294,
+     0.1391672783509656
+    ],
+    "avg_len": 25.38
+   }
+  }
+ }
+}

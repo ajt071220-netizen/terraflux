@@ -1,5 +1,7 @@
 """md2html.py —— 把 report/REPORT.md 转成打印用 HTML（供浏览器 printToPDF）"""
 import pathlib
+import re
+
 import markdown
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -31,6 +33,8 @@ table {
 }
 th, td { border: 1px solid #bbb; padding: 2.8pt 4.5pt; text-align: left; }
 tr { page-break-inside: avoid; }
+table.keep { page-break-inside: avoid; }
+code { word-break: break-all; }
 thead { display: table-header-group; }
 th { background: #f0ede8; }
 tr:nth-child(even) td { background: #faf9f7; }
@@ -47,6 +51,18 @@ html_body = markdown.markdown(
     md_path.read_text(encoding='utf-8'),
     extensions=['tables', 'fenced_code'],
 )
+
+
+def _keep_short_tables(match):
+    # 只让短表不跨页；长表（如总结表、Table 3）强行不断页会留下大片空白
+    table = match.group(0)
+    text_len = len(re.sub(r'<[^>]+>', '', table))
+    if table.count('<tr>') <= 12 and text_len <= 1500:
+        return table.replace('<table>', '<table class="keep">', 1)
+    return table
+
+
+html_body = re.sub(r'<table>.*?</table>', _keep_short_tables, html_body, flags=re.S)
 
 html = f"""<!doctype html>
 <html lang="en">

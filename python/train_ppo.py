@@ -31,6 +31,8 @@ def main():
     ap.add_argument('--snapshot-every', type=int, default=100_000)
     ap.add_argument('--heuristic-ratio', type=float, default=0.5,
                     help='对手用启发式的比例（其余用历史快照）')
+    ap.add_argument('--pool-window', type=int, default=5,
+                    help='快照对手从最近 N 个快照中采样；0 表示全部快照均匀采样（震荡消融用）')
     ap.add_argument('--out', type=str, default='ppo_terrain.zip')
     ap.add_argument('--resume', type=str, default=None,
                     help='从已有模型继续训练（填 .zip 路径）')
@@ -70,7 +72,8 @@ def main():
         def opponent(state, color, rng):
             if snapshots and rng.random() > args.heuristic_ratio:
                 try:
-                    model = get_model(rng.choice(snapshots[-5:]))
+                    pool = snapshots[-args.pool_window:] if args.pool_window > 0 else snapshots
+                    model = get_model(rng.choice(pool))
                     obs = env_obs_for(state, color)
                     if USE_MASK:
                         act, _ = model.predict(obs, action_masks=np.array([action_mask(state, color)]), deterministic=False)

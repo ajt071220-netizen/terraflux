@@ -16,10 +16,10 @@ export const DEFAULT_CONFIG = {
   size: 25,               // 棋盘边长（21 或 25）
   goalEdges: ['S'],       // 胜利边：'N' 'S' 'E' 'W' 任意子集
   captureRule: 'gt',      // 'gte' 同高即捕（≥） | 'gt' 须严格高于（>）
-  firstPlayer: 'black',   // 先手方（duel gap3 下黑先实测 49:50）
+  firstPlayer: 'black',   // 先手方（黑先。群体评估：duel gap3 下白胜率约 71%，偏向白方）
   phaseMode: 'sync',      // 'off' 恒定十字 | 'sync' 双方同步 十字/X 交替 | 'all8' 每步八向
-  startLayout: 'duel',    // 'duel' 黑镇中央+白正北对峙（实测最平衡）| 'blockade' 黑镇中央白三选一 | 'classic' 白中央黑八选一
-  gap: 3,                 // 开局间距（切比雪夫距离，3 = 中间隔两格；duel 实测 49:50）
+  startLayout: 'duel',    // 'duel' 黑镇中央+白正北对峙（偏向白方，见上）| 'blockade' 黑镇中央白三选一 | 'classic' 白中央黑八选一
+  gap: 3,                 // 开局间距（切比雪夫距离，3 = 中间隔两格；duel 群体评估偏向白方）
   passAllowed: false,     // 是否允许停步
   stalemateLoses: true,   // 无合法步的一方判负
   repetitionDraw: true,   // 同一局面出现三次判和
