@@ -27,5 +27,6 @@ manuscript_extracted.txt
 
 # Python
 .venv-py312/
+python/.venv/
 __pycache__/
 *.pyc
