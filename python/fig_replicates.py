@@ -1,10 +1,10 @@
-﻿"""fig_replicates.py —— 实验④ 数据驱动的三张独立图（按 A4 版心宽度设计，字号以印刷为准）
+"""fig_replicates.py —— 实验④ 数据驱动的三张独立图（按 A4 版心宽度设计，字号以印刷为准）
 
 输入：experiments/replicate_eval.json、experiments/robustness_training.json
 输出：
   experiments/fig_curves.png     图3：训练曲线对比（滚动胜率与解释方差随步数变化；细线=单个运行，粗线=组均值）
   experiments/fig_selfplay.png   图4：各训练运行的 duel 自对弈白胜率（水平点图，含 Wilson 95% CI）
-  experiments/fig_roundrobin.png 图5：循环赛——上方为各运行平均胜率，下方为 23×23 对战矩阵（无单元格数字，数值见 JSON）
+  experiments/fig_roundrobin.png 图5：循环赛——上方为各运行平均得分率（胜 1、平 0.5），下方为 23×23 得分矩阵（无单元格数字，数值见 JSON）
 """
 import json
 import os
@@ -90,14 +90,15 @@ print('written experiments/fig_selfplay.png')
 # =============== 图4：循环赛 ===============
 rr = ev['round_robin']
 allm = sorted({x['a'] for x in rr} | {x['b'] for x in rr})
-avg = {n: (sum(x['a_win'] for x in rr if x['a'] == n) + sum(x['b_win'] for x in rr if x['b'] == n))
+avg = {n: (sum(x['a_win'] + 0.5 * x['draw'] for x in rr if x['a'] == n)
+           + sum(x['b_win'] + 0.5 * x['draw'] for x in rr if x['b'] == n))
        / max(1, sum(1 for x in rr if n in (x['a'], x['b']))) for n in allm}
 names = sorted(allm, key=lambda n: -avg[n])
 M = np.full((len(names), len(names)), np.nan)
 for x in rr:
     i, j = names.index(x['a']), names.index(x['b'])
-    M[i, j] = x['a_win'] * 100
-    M[j, i] = x['b_win'] * 100
+    M[i, j] = (x['a_win'] + 0.5 * x['draw']) * 100
+    M[j, i] = (x['b_win'] + 0.5 * x['draw']) * 100
 
 fig = plt.figure(figsize=(6.6, 8.6))
 gs = fig.add_gridspec(2, 2, width_ratios=[40, 1.1], height_ratios=[1.0, 4.6], hspace=0.06, wspace=0.03)
@@ -110,7 +111,7 @@ cols = [GROUP_COLOR[tr['runs'][n]['group']] if n in tr['runs'] else '#999' for n
 axb.bar(range(len(names)), [avg[n] * 100 for n in names], color=cols, width=0.8)
 axb.axhline(50, color='#333', ls='--', lw=0.8)
 axb.set_ylim(0, 70)
-axb.set_ylabel('mean win %\nvs all others')
+axb.set_ylabel('mean score %\nvs all others')
 axb.tick_params(axis='x', labelbottom=False)
 axb.set_title('Round robin among the 23 dynamic-terrain runs (100 games per colour per pair)', loc='left')
 axb.legend(handles=[h for h in legend_handles() if h.get_label().startswith(('shaped', 'sparse'))],
@@ -130,9 +131,9 @@ axh.set_yticks(np.arange(-.5, len(names), 1), minor=True)
 axh.grid(which='minor', color='white', lw=0.6)
 axh.tick_params(which='minor', length=0)
 axh.set_xlabel('opponent (column)')
-axh.set_ylabel('row run: its win rate against the column run')
+axh.set_ylabel('row run: its score against the column run')
 cb = fig.colorbar(im, cax=cax)
-cb.set_label('row run win % (draws not counted)', fontsize=7)
+cb.set_label('row run score % (win 1, draw 0.5)', fontsize=7)
 cb.ax.tick_params(labelsize=7)
 fig.savefig('experiments/fig_roundrobin.png', dpi=200, bbox_inches='tight')
 plt.close(fig)

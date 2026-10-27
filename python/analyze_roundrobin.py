@@ -20,12 +20,16 @@ ev = json.load(open('experiments/replicate_eval.json', encoding='utf-8'))
 sp = {r['model']: r for r in ev['selfplay']}
 rr = ev['round_robin']
 names = sorted({x['a'] for x in rr} | {x['b'] for x in rr})
-W = {}
+# W：得分率（胜 1、平 0.5、负 0）；WIN：只计胜局的胜率（v2 初版口径，保留对照）
+W, WIN = {}, {}
 for x in rr:
-    W[(x['a'], x['b'])] = x['a_win']
-    W[(x['b'], x['a'])] = x['b_win']
+    W[(x['a'], x['b'])] = x['a_win'] + 0.5 * x['draw']
+    W[(x['b'], x['a'])] = x['b_win'] + 0.5 * x['draw']
+    WIN[(x['a'], x['b'])] = x['a_win']
+    WIN[(x['b'], x['a'])] = x['b_win']
 
 avg = {n: sum(W[(n, m)] for m in names if m != n) / (len(names) - 1) for n in names}
+avg_win = {n: sum(WIN[(n, m)] for m in names if m != n) / (len(names) - 1) for n in names}
 cope = {n: sum(1 for m in names if m != n and W[(n, m)] > W[(m, n)]) for n in names}
 
 
@@ -60,14 +64,20 @@ m_same = sum(abs(W[(a, b)] * 100 - 50) for a, b in same) / len(same) if same els
 m_cross = sum(abs(W[(a, b)] * 100 - 50) for a, b in cross) / len(cross) if cross else float('nan')
 
 print(f'动态模型 {len(names)} 个，循环赛 {len(rr)} 对')
-print(f"{'model':12s} {'avgRR':>7s} {'copeland':>9s} {'duelWhite':>10s}")
+rho_win = pearson(ranks([avg_win[n] for n in names]), ranks(ys))
+rank_win = sorted(names, key=lambda n: -avg_win[n])
+
+print(f"{'model':12s} {'score':>7s} {'winonly':>8s} {'oldrk':>6s} {'copeland':>9s} {'duelWhite':>10s}")
 for n in sorted(names, key=lambda n: -avg[n]):
-    print(f"{n:12s} {avg[n]*100:6.1f}% {cope[n]:4d}/{len(names)-1:<4d} {sp[n]['white_rate']*100:9.1f}%")
-print(f'Spearman(avg RR, duel white) = {rho:.2f}  (n={len(names)})')
+    print(f"{n:12s} {avg[n]*100:6.1f}% {avg_win[n]*100:7.1f}% {rank_win.index(n)+1:6d} "
+          f"{cope[n]:4d}/{len(names)-1:<4d} {sp[n]['white_rate']*100:9.1f}%")
+print(f'Spearman(avg RR score, duel white) = {rho:.2f}；只计胜局口径 = {rho_win:.2f}  (n={len(names)})')
 print(f'成环三元组 {cyc} / {len(triples)}')
 print(f'同奖励对 n={len(same)}：mean|win-50| = {m_same:.1f}；跨奖励对 n={len(cross)}：mean|win-50| = {m_cross:.1f}')
 
-out = dict(n_models=len(names), n_pairs=len(rr), spearman_rho=rho, cyclic_triples=cyc, total_triples=len(triples),
+out = dict(scoring='win 1, draw 0.5, loss 0', n_models=len(names), n_pairs=len(rr),
+           spearman_rho=rho, spearman_rho_win_only=rho_win, cyclic_triples=cyc, total_triples=len(triples),
+           avg_rr_win_only={n: avg_win[n] for n in names},
            identical_reward_pairs=len(same), identical_reward_mean_abs_dev=m_same,
            cross_reward_pairs=len(cross), cross_reward_mean_abs_dev=m_cross,
            avg_rr={n: avg[n] for n in names}, copeland={n: cope[n] for n in names},

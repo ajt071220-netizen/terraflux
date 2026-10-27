@@ -1,0 +1,179 @@
+{
+  "scoring": "win = 1, draw = 0.5, loss = 0; mean over 22 opponents, 200 games per pair",
+  "ranking_points": [
+    {
+      "rank": 1,
+      "run": "sparse_s8",
+      "score": 0.6242,
+      "win_rate_excl_draws": 0.5734,
+      "old_rank": 1
+    },
+    {
+      "rank": 2,
+      "run": "shaped_s10",
+      "score": 0.5976,
+      "win_rate_excl_draws": 0.5502,
+      "old_rank": 3
+    },
+    {
+      "rank": 3,
+      "run": "sparse_s5",
+      "score": 0.5936,
+      "win_rate_excl_draws": 0.5609,
+      "old_rank": 2
+    },
+    {
+      "rank": 4,
+      "run": "abl_shaped",
+      "score": 0.5932,
+      "win_rate_excl_draws": 0.5391,
+      "old_rank": 5
+    },
+    {
+      "rank": 5,
+      "run": "sparse_s4",
+      "score": 0.5932,
+      "win_rate_excl_draws": 0.5407,
+      "old_rank": 4
+    },
+    {
+      "rank": 6,
+      "run": "shaped_s5",
+      "score": 0.5625,
+      "win_rate_excl_draws": 0.5341,
+      "old_rank": 6
+    },
+    {
+      "rank": 7,
+      "run": "sparse_s2",
+      "score": 0.5557,
+      "win_rate_excl_draws": 0.4886,
+      "old_rank": 8
+    },
+    {
+      "rank": 8,
+      "run": "sparse_s3",
+      "score": 0.5473,
+      "win_rate_excl_draws": 0.5075,
+      "old_rank": 7
+    },
+    {
+      "rank": 9,
+      "run": "shaped_s9",
+      "score": 0.5241,
+      "win_rate_excl_draws": 0.4818,
+      "old_rank": 9
+    },
+    {
+      "rank": 10,
+      "run": "shaped_s4",
+      "score": 0.5127,
+      "win_rate_excl_draws": 0.4452,
+      "old_rank": 12
+    },
+    {
+      "rank": 11,
+      "run": "shaped_s8",
+      "score": 0.4986,
+      "win_rate_excl_draws": 0.4559,
+      "old_rank": 10
+    },
+    {
+      "rank": 12,
+      "run": "shaped_s7",
+      "score": 0.4982,
+      "win_rate_excl_draws": 0.4275,
+      "old_rank": 13
+    },
+    {
+      "rank": 13,
+      "run": "sparse_s6",
+      "score": 0.4951,
+      "win_rate_excl_draws": 0.4477,
+      "old_rank": 11
+    },
+    {
+      "rank": 14,
+      "run": "shaped_s6",
+      "score": 0.4839,
+      "win_rate_excl_draws": 0.4195,
+      "old_rank": 14
+    },
+    {
+      "rank": 15,
+      "run": "sparse_s7",
+      "score": 0.4567,
+      "win_rate_excl_draws": 0.3877,
+      "old_rank": 16
+    },
+    {
+      "rank": 16,
+      "run": "shaped_s11",
+      "score": 0.4553,
+      "win_rate_excl_draws": 0.3905,
+      "old_rank": 15
+    },
+    {
+      "rank": 17,
+      "run": "sparse_s1",
+      "score": 0.4537,
+      "win_rate_excl_draws": 0.3802,
+      "old_rank": 18
+    },
+    {
+      "rank": 18,
+      "run": "sparse_s10",
+      "score": 0.4433,
+      "win_rate_excl_draws": 0.3457,
+      "old_rank": 21
+    },
+    {
+      "rank": 19,
+      "run": "main",
+      "score": 0.4385,
+      "win_rate_excl_draws": 0.3809,
+      "old_rank": 17
+    },
+    {
+      "rank": 20,
+      "run": "sparse_s9",
+      "score": 0.4331,
+      "win_rate_excl_draws": 0.3768,
+      "old_rank": 19
+    },
+    {
+      "rank": 21,
+      "run": "shaped_s3",
+      "score": 0.4228,
+      "win_rate_excl_draws": 0.3584,
+      "old_rank": 20
+    },
+    {
+      "rank": 22,
+      "run": "shaped_s2",
+      "score": 0.3617,
+      "win_rate_excl_draws": 0.2714,
+      "old_rank": 22
+    },
+    {
+      "rank": 23,
+      "run": "abl_sparse",
+      "score": 0.3549,
+      "win_rate_excl_draws": 0.2698,
+      "old_rank": 23
+    }
+  ],
+  "spearman_points_vs_winrate": 0.9842,
+  "sparse_vs_shaped": {
+    "n_sparse": 10,
+    "n_shaped": 13,
+    "mean_score_sparse": 0.5196,
+    "mean_score_shaped": 0.4849,
+    "diff": 0.0347,
+    "p_perm_diff": 0.2797,
+    "cross_group_sparse_points": 0.5332,
+    "cross_group_pairs": 130,
+    "p_perm_cross": 0.2797,
+    "n_perm": 10000
+  }
+}
