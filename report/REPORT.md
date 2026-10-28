@@ -4,6 +4,7 @@
 
 *AJiTai · August 2026 (v2 revision: October 2026)*
 *Code: [github.com/ajt071220-netizen/terraflux](https://github.com/ajt071220-netizen/terraflux) · Playable demo: [ajt071220-netizen.github.io/terraflux](https://ajt071220-netizen.github.io/terraflux/) · Archive: [doi.org/10.5281/zenodo.16898141](https://doi.org/10.5281/zenodo.16898141)*
+*Most of the code and the text of this report were written by AI tools under the author's direction; see the [Declaration of AI-Assisted Work](#declaration-of-ai-assisted-work).*
 
 > **Revision note (v2) — please read first.** This version supersedes the August 2026 report (v1, kept as `REPORT_v1_superseded.md`). Two problems were found while preparing it.
 >
@@ -307,3 +308,22 @@ The next steps are concrete. Extend the common-opponent evaluation of §6.3 to t
 - All numbers in this report are collected in `experiments/REPORT_DATA.md` (in Chinese; its v1 sections are kept for traceability and marked as superseded).
 - Superseded (invalid) outputs are kept in `experiments/superseded/`: the v1 ablation figure (affected by the reward bug) and the v1 strength figure (hand-coded numbers).
 - The v1 training logs for the original runs are unchanged. Their `abl_sparse` run is invalid as a reward comparison and is retained only as a same-configuration replicate.
+
+## Declaration of AI-Assisted Work
+
+This project was carried out with substantial help from AI tools, mainly Claude (Anthropic), used through the Cursor code editor. The work was divided as follows.
+
+The author:
+
+- designed the game: the terrain that every move rewrites, the rule that the terrain decides height and therefore capture, and the asymmetric pursuit-evasion goals;
+- decided which experiments and ablations to run, and chose the measures used to judge fairness;
+- ran all training and evaluation on their own computer;
+- interpreted the results, and decided which v1 conclusions to withdraw in v2.
+
+The AI tools:
+
+- wrote most of the code, including the rule engine, the 3D web demo, the Python port of the engine, the training environment and PPO training scripts, and the evaluation and analysis scripts;
+- computed the statistics and produced the figures from the raw outputs;
+- drafted and revised the text of this report and the README.
+
+Every number in this report is produced by the scripts listed in §9 and collected in `experiments/REPORT_DATA.md`, so it can be checked against the raw data. The author is responsible for the content of this report, including any errors.

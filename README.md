@@ -26,6 +26,10 @@ What the replicates currently support:
 
 Scripts: `python/run_robustness.ps1` (training batch), `python/analyze_robustness.py`, `python/replicate_eval.py`, `python/fig_replicates.py`; opponent-pool ablation `python/run_ablation2.ps1` and `python/analyze_pool_ablation.py`; layout balance `python/fairness_pop.py` and `python/scan_gap.py`; end-of-game reasons `python/draw_types_pop.py`. Data: `experiments/robustness_training.json`, `experiments/replicate_eval.json`, `experiments/fairness_pop_gap{1..8}.json`, `experiments/gap_scan.json`, `experiments/draw_types_pop_gap3.json`. All numbers are collected in `experiments/REPORT_DATA.md`.
 
+## AI use
+
+Most of the code in this repository and the text of the report and this README were written by AI tools (mainly Claude, used through Cursor) under the author's direction. The author designed the game rules, decided which experiments to run and how to measure fairness, ran all training and evaluation, and interpreted the results. The full division of work is in the report's [Declaration of AI-Assisted Work](report/REPORT.md#declaration-of-ai-assisted-work).
+
 ## Run it
 
 ```bash
@@ -88,5 +92,9 @@ v2 的结论（多种子复现）：动态地形下胜率持续震荡、不会�
 同瞬平局罕见但确实存在，约占动态地形自对弈对局的 0.8%，静态棋盘上从未出现。
 v1 中"公平性随策略强度单调上升"与"稀疏奖励慢约 24%"均因代码 bug 与单次运行而不成立。
 全部数字汇总在 `experiments/REPORT_DATA.md`。
+
+**AI 使用声明**：本仓库的大部分代码，以及报告和本 README 的文字，由 AI 工具（主要是在 Cursor 中使用的 Claude）在作者指导下编写。
+作者设计了游戏规则，决定做哪些实验、用什么指标衡量公平性，在自己的电脑上完成全部训练和评估，并解读结果。
+完整分工见报告末尾的 [Declaration of AI-Assisted Work](report/REPORT.md#declaration-of-ai-assisted-work)。
 
 </details>
