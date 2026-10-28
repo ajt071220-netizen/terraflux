@@ -1,6 +1,6 @@
 # Terraflux · 涌陆
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16898141.svg)](https://doi.org/10.5281/zenodo.16898141)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22035347.svg)](https://doi.org/10.5281/zenodo.22035347)
 
 **A pursuit-evasion board game on a self-modifying board — and a reinforcement-learning study of what "fair rules" even mean.**
 *(formerly "Terrain Chess")*

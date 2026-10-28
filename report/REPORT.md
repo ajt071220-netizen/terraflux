@@ -3,7 +3,7 @@
 **Preliminary findings, revised after replication (v2)**
 
 *AJiTai · August 2026 (v2 revision: October 2026)*
-*Code: [github.com/ajt071220-netizen/terraflux](https://github.com/ajt071220-netizen/terraflux) · Playable demo: [ajt071220-netizen.github.io/terraflux](https://ajt071220-netizen.github.io/terraflux/) · Archive: [doi.org/10.5281/zenodo.16898141](https://doi.org/10.5281/zenodo.16898141)*
+*Code: [github.com/ajt071220-netizen/terraflux](https://github.com/ajt071220-netizen/terraflux) · Playable demo: [ajt071220-netizen.github.io/terraflux](https://ajt071220-netizen.github.io/terraflux/) · Archive: [doi.org/10.5281/zenodo.22035347](https://doi.org/10.5281/zenodo.22035347)*
 *Most of the code and the text of this report were written by AI tools under the author's direction; see the [Declaration of AI-Assisted Work](#declaration-of-ai-assisted-work).*
 
 > **Revision note (v2) — please read first.** This version supersedes the August 2026 report (v1, kept as `REPORT_v1_superseded.md`). Two problems were found while preparing it.
@@ -283,7 +283,7 @@ The next steps are concrete. Extend the common-opponent evaluation of §6.3 to t
 
 ## 8. References and Links
 
-- **Archived release (v1.0.0, citable DOI)**: [10.5281/zenodo.16898141](https://doi.org/10.5281/zenodo.16898141)
+- **Archived releases (Zenodo; this DOI always resolves to the latest version)**: [10.5281/zenodo.22035347](https://doi.org/10.5281/zenodo.22035347)
 - **Code & full experiment data**: [github.com/ajt071220-netizen/terraflux](https://github.com/ajt071220-netizen/terraflux)
 - **Playable 3D demo (bilingual, with narrated tutorial game)**: [ajt071220-netizen.github.io/terraflux](https://ajt071220-netizen.github.io/terraflux/)
 - Browne, C., & Maire, F. (2010). Evolutionary game design. *IEEE Transactions on Computational Intelligence and AI in Games, 2*(1), 1–16. https://doi.org/10.1109/TCIAIG.2010.2041928 *(Added in v2; checked against the publisher listing.)*
