@@ -32,7 +32,6 @@ def rolling(xs, w=7):
     return out
 
 fig, axes = plt.subplots(2, 2, figsize=(11, 7.5))
-fig.suptitle(f'PPO Self-Play Training Dynamics ({rows[-1]["steps"]//1000}k steps, 25×25 duel)', fontsize=13)
 
 panels = [
     ('win_rate', 'Win rate (rolling-100 games)', (0, 1)),
@@ -49,7 +48,7 @@ for ax, (key, title, ylim) in zip(axes.flat, panels):
     if ylim:
         ax.set_ylim(*ylim)
     ax.grid(alpha=0.25)
-fig.tight_layout(rect=(0, 0, 1, 0.96))
+fig.tight_layout()
 fig.savefig(OUT, dpi=140)
 print(f'[图] {OUT}')
 
