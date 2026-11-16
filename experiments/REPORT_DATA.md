@@ -141,7 +141,7 @@
 **设置**：A 组从最近 5 个快照中抽对手（`--pool-window 5`），B 组从全部快照中均匀抽（`--pool-window 0`，训练结束时共 10 个）。
 其余相同：25×25 duel（gap=3、黑先）、50 万步、步罚 0.002、启发式比例 0.65、每 5 万步存一次快照、种子 1–10。
 统计窗口为 300k 步之后的日志行；按种子配对，双侧精确符号翻转检验（n = 10）。
-注意：启发式比例 0.65 来自 v1 的描述（实验①"65% 启发式 + 35% 快照"）。但 26 个有种子的复现运行（`run_robustness.ps1`）没有传 `--heuristic-ratio`，用的是脚本默认值 0.5；3 个无种子的 v1 运行实际用的比例没有记录。所以本消融只做 A、B 两组之间的比较，不和报告 Table 3 对比。
+注意：启发式比例 0.65 来自 v1 的描述（实验①"65% 启发式 + 35% 快照"）。但 26 个有种子的复现运行（`run_robustness.ps1`）没有传 `--heuristic-ratio`，用的是脚本默认值 0.5；3 个无种子的 v1 运行实际用的比例没有记录。所以本消融只做 A、B 两组之间的比较，不和报告 Table 4 对比。
 
 | 组 | 对手池 | 后期胜率均值 | 运行内胜率 SD |
 |---|---|---|---|
@@ -160,7 +160,7 @@
 
 gap 是游戏设定，本实验没有改动它；只评估它的公平性。
 
-**训练模型群体**（shaped_s2..s11、sparse_s1..s10 共 20 个模型 + 启发式；所有无序对，共 230 对；每对每色 10 局，黑先；白胜率为每对的均值，95% CI 为按配对的 cluster bootstrap，10000 次）：
+**训练模型群体**（shaped_s2..s11、sparse_s1..s10 共 20 个模型 + 启发式；21 方两两配对共 210 对，另有 20 个模型自对弈配对单独统计；每对每色 10 局，黑先；白胜率为 210 个非自对弈配对的均值，95% CI 为按配对的 cluster bootstrap，10000 次）：
 
 | gap | 白胜率 | 95% CI |
 |---|---|---|
@@ -223,14 +223,27 @@ gap 是游戏设定，本实验没有改动它；只评估它的公平性。
 
 **结论**：同瞬平局罕见但确实存在；在这些数据中只出现在流动棋盘上，而且主要出现在同一策略自己对自己时。这些数字只说明出现频率，不说明它对哪一方有利。
 
+### 实验①b 循环赛的配对分散度（报告 §5.3）
+
+`python/analyze_roundrobin.py` → `experiments/roundrobin_summary.json`。得分率按胜 1、平 0.5、负 0 计；分散度为每对得分率与 50% 之差的绝对值的平均。
+
+| 配对类型 | 对数 | 平均 \|得分率 − 50\|（百分点） |
+|---|---|---|
+| 同奖励（合计） | 123 | 11.8 |
+| 其中 shaped 配置内 | 78 | 13.3 |
+| 其中 sparse 内 | 45 | 9.2 |
+| 跨奖励（shaped 配置 vs sparse） | 130 | 10.3 |
+
+早期脚本只统计了 shaped 配置内的 78 对，漏掉 sparse 内的 45 对，已修正。结论不变：跨奖励配对并不比同奖励配对更悬殊。
+
 ### v2 产物清单（补充）
 
 | 文件 | 内容 |
 |---|---|
 | `python/run_ablation2.ps1` | 对手池消融训练（A、B 组，种子 1–10） |
 | `python/training_log_abl2_{A,B}_s{1..10}.jsonl` | 对手池消融训练日志 |
-| `python/analyze_pool_ablation.py` | 对手池消融分析（报告 Table 4） |
+| `python/analyze_pool_ablation.py` | 对手池消融分析（报告 Table 5） |
 | `python/run_ablation.ps1`、`python/training_log_abl_{A,B,C}_s{1..10}.jsonl` | 第一批对手池消融（A、B 结果相同，已作废）与 C 组 |
 | `python/scan_gap.py` → `experiments/gap_scan.json` | 启发式 gap 扫描（每 gap 每先手 300 局） |
-| `python/fairness_pop.py` → `experiments/fairness_pop_gap{1..8}.json` | 群体互弈公平性评估（报告 Table 5） |
+| `python/fairness_pop.py` → `experiments/fairness_pop_gap{1..8}.json` | 群体互弈公平性评估（报告 Table 6） |
 | `python/draw_types_pop.py` → `experiments/draw_types_pop_gap3.json` | 群体互弈终局原因统计（含同瞬平局），同时是 gap=3 的独立重复样本 |

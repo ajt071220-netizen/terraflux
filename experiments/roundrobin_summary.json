@@ -31,8 +31,12 @@
   "sparse_s8": 0.5734090909090909,
   "sparse_s9": 0.3768181818181818
  },
- "identical_reward_pairs": 78,
- "identical_reward_mean_abs_dev": 13.314102564102564,
+ "identical_reward_pairs": 123,
+ "identical_reward_mean_abs_dev": 11.808943089430894,
+ "identical_shaped_pairs": 78,
+ "identical_shaped_mean_abs_dev": 13.314102564102564,
+ "identical_sparse_pairs": 45,
+ "identical_sparse_mean_abs_dev": 9.2,
  "cross_reward_pairs": 130,
  "cross_reward_mean_abs_dev": 10.284615384615385,
  "avg_rr": {

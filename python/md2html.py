@@ -26,7 +26,8 @@ strong { font-weight: 700; }
 a { color: #1a1a1a; text-decoration: none; border-bottom: 1px dotted #999; }
 img { max-width: 100%; display: block; margin: 10pt auto 4pt; }
 em { color: inherit; }
-h1 + p em, h1 + p + p em { color: #444; }
+h1 + p em, h1 + p + p em, h1 + p + p + p em { color: #444; }
+h1 + p, h1 + p + p, h1 + p + p + p { text-align: left; }
 table {
   border-collapse: collapse; width: 100%; margin: 10pt 0 4pt;
   font-size: 8.4pt; table-layout: auto;
@@ -48,7 +49,7 @@ li { margin: 3pt 0; }
 """
 
 html_body = markdown.markdown(
-    md_path.read_text(encoding='utf-8'),
+    md_path.read_text(encoding='utf-8-sig'),
     extensions=['tables', 'fenced_code'],
 )
 

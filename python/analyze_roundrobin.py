@@ -4,7 +4,7 @@
   - 每个动态模型的平均循环赛胜率（对所有其它动态模型）与 Copeland 式胜场
   - 自对弈白胜率与平均循环赛胜率的 Spearman 相关
   - 三元组成环（非传递）的数量
-  - 同奖励对 vs 跨奖励对的 |胜率−50| 平均值（同奖励 = shaped 配置内两两；跨奖励 = shaped 配置 vs sparse）
+  - 同奖励对 vs 跨奖励对的 |得分率−50| 平均值（同奖励 = shaped 配置内两两 + sparse 内两两；跨奖励 = shaped 配置 vs sparse）
 输出 JSON：experiments/roundrobin_summary.json
 """
 import itertools
@@ -58,10 +58,12 @@ cyc = sum(1 for a, b, c in triples
 
 sh = [n for n in names if sp[n]['static'] is False and (n.startswith('shaped') or n in ('main', 'abl_shaped', 'abl_sparse'))]
 spr = [n for n in names if n.startswith('sparse')]
-same = list(itertools.combinations(sh, 2))
+same_sh = list(itertools.combinations(sh, 2))
+same_sp = list(itertools.combinations(spr, 2))
+same = same_sh + same_sp
 cross = [(a, b) for a in sh for b in spr]
-m_same = sum(abs(W[(a, b)] * 100 - 50) for a, b in same) / len(same) if same else float('nan')
-m_cross = sum(abs(W[(a, b)] * 100 - 50) for a, b in cross) / len(cross) if cross else float('nan')
+mad = lambda pairs: sum(abs(W[(a, b)] * 100 - 50) for a, b in pairs) / len(pairs) if pairs else float('nan')
+m_same, m_same_sh, m_same_sp, m_cross = mad(same), mad(same_sh), mad(same_sp), mad(cross)
 
 print(f'动态模型 {len(names)} 个，循环赛 {len(rr)} 对')
 rho_win = pearson(ranks([avg_win[n] for n in names]), ranks(ys))
@@ -73,12 +75,16 @@ for n in sorted(names, key=lambda n: -avg[n]):
           f"{cope[n]:4d}/{len(names)-1:<4d} {sp[n]['white_rate']*100:9.1f}%")
 print(f'Spearman(avg RR score, duel white) = {rho:.2f}；只计胜局口径 = {rho_win:.2f}  (n={len(names)})')
 print(f'成环三元组 {cyc} / {len(triples)}')
-print(f'同奖励对 n={len(same)}：mean|win-50| = {m_same:.1f}；跨奖励对 n={len(cross)}：mean|win-50| = {m_cross:.1f}')
+print(f'同奖励对 n={len(same)}：mean|win-50| = {m_same:.1f}'
+      f'（shaped 内 n={len(same_sh)}：{m_same_sh:.1f}；sparse 内 n={len(same_sp)}：{m_same_sp:.1f}）；'
+      f'跨奖励对 n={len(cross)}：mean|win-50| = {m_cross:.1f}')
 
 out = dict(scoring='win 1, draw 0.5, loss 0', n_models=len(names), n_pairs=len(rr),
            spearman_rho=rho, spearman_rho_win_only=rho_win, cyclic_triples=cyc, total_triples=len(triples),
            avg_rr_win_only={n: avg_win[n] for n in names},
            identical_reward_pairs=len(same), identical_reward_mean_abs_dev=m_same,
+           identical_shaped_pairs=len(same_sh), identical_shaped_mean_abs_dev=m_same_sh,
+           identical_sparse_pairs=len(same_sp), identical_sparse_mean_abs_dev=m_same_sp,
            cross_reward_pairs=len(cross), cross_reward_mean_abs_dev=m_cross,
            avg_rr={n: avg[n] for n in names}, copeland={n: cope[n] for n in names},
            duel_white={n: sp[n]['white_rate'] for n in names})
